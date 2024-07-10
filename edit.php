@@ -1,0 +1,72 @@
+<?php 
+   session_start();
+
+   include("php/config.php");
+   if(!isset($_SESSION['valid'])){
+    header("Location: loginpage.php");
+   }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginstyle.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Change Profile</title>
+   
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+            <ul class="myUL">
+                <li><a href="try2.php"><h5>Home</h5></a></li>
+                <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
+                <li><a href="contact.php"><h5>Account</h5></a></li>
+            </ul>
+            </div>
+            <h1>Your Account</h1>
+        </nav>
+    </header>
+    <div class="nav">
+        <div class="logo">
+            <p><a href="contact.php">Logo</a></p>
+        </div>
+
+        <div class="right-links">
+            <a href="#"> Change Profile</a>
+            <a href="php/logout.php"><button class="btn">Log Out</button></a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box form-box">
+
+            <header>Change Profile</header>
+            <form action="" method="post">
+                <div class="field input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" autocomplete="off" required>
+                </div>
+
+                <div class="field input">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" autocomplete="off" required>
+                </div>
+                <div class="field input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" autocomplete="off" required>
+                </div>
+
+                <div class="field">
+                    
+                    <input type="submit" class="btn" name="submit" value="Update" required>
+                </div>
+                
+            </form>
+        </div>
+        
+      </div>
+</body>
+</html>
