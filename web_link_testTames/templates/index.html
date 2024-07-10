@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput">
+        <button type="submit">Upload</button>
+    </form>
+    <div id="result">
+        <h2>Detected Items</h2>
+        <ul id="detectedItems"></ul>
+        <h2>Processed Image</h2>
+        <img id="processedImage" src="" alt="Processed Image">
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const imageUrl = data.image_url;
+
+                document.getElementById('processedImage').src = imageUrl;
+
+                const detectionsResponse = await fetch('/detections');
+                if (detectionsResponse.ok) {
+                    const detections = await detectionsResponse.json();
+                    const detectedItems = document.getElementById('detectedItems');
+                    detectedItems.innerHTML = '';
+                    detections.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        detectedItems.appendChild(listItem);
+                    });
+                }
+            } else {
+                alert('Upload failed');
+            }
+        });
+    </script>
+</body>
+</html>
