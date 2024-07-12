@@ -1,0 +1,16 @@
+train: D:\Document\ml\ML\Food_dataset\new_dataset\images\train
+val: D:\Document\ml\ML\Food_dataset\new_dataset\images\val
+
+
+nc: 49
+
+names: [
+  'background', 'candy', 'egg tart', 'french fries', 'chocolate', 'biscuit', 
+  'popcorn', 'pudding', 'ice cream', 'cheese butter', 'cake', 'wine', 
+  'milkshake', 'coffee', 'juice', 'milk', 'tea', 'almond', 'red beans', 
+  'cashew', 'dried cranberries', 'soy', 'walnut', 'peanut', 'egg', 'Fruit', 
+  'Meat', 'sausage', 'sauce', 'crab', 'fish', 'shellfish', 'shrimp', 'soup', 
+  'bread', 'corn', 'hamburg', 'pizza', 'hanamaki baozi', 'wonton dumplings', 
+  'pasta', 'noodles', 'rice', 'pie', 'tofu', 'Vegetable', 'Mushroom', 'salad', 
+  'other ingredients'
+]
