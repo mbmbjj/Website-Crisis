@@ -1,19 +1,21 @@
 body{
-    background: rgb(255, 255, 255);
+    background: white;
     color: rgb(0, 0, 0);
     font-family: Helvetica Neue, Helvetica, sans-serif;
-    margin:0;
-    padding:0;
 }
 header {
     background: rgb(207, 138, 64);
     padding: 2% 3%;
+    height: 50px;
 }
-
-ul.myUL {
+.top-container{
+    text-align: center;
+}
+ul .myUL {
     padding: 0;
     margin:0;
     list-style: none;
+    text-align: center;
 }
 li{
     display:inline-block;
@@ -77,13 +79,13 @@ div{
 section{
     display: flex;
 }
-div .container{
+/*div .top-container{
     background: gray;
     width: 100%;
     padding: 5%;
     margin:1%;
     text-align: center;
-}
+}*/
 
 footer{
     background: moccasin;

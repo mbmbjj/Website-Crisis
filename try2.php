@@ -14,11 +14,15 @@
             header {
                 background: rgb(207, 138, 64);
                 padding: 2% 3%;
+                height: 75px;
+                
+                align-items: center;
             }
-            div.container{
+            .top-container{
                 text-align: center;
+                width: 100%;
             }
-            ul.myUL {
+            ul .myUL {
                 padding: 0;
                 margin:0;
                 list-style: none;
@@ -100,13 +104,13 @@
             #side-text-left{
                 margin-top:4%;
                 margin-right: 0;
-                font-size: 100%;
+                font-size: 200%;
                 padding:0;
             }
             #side-text-right{
                 margin-top:4%;
                 margin-left: 0;
-                font-size: 100%;
+                font-size: 200%;
                 padding:0;
             }
             #camera-container {
@@ -143,12 +147,12 @@
 
 <body>
     <header>
-        <nav>
-        <div class="container">
+        <nav class="top-bar">
+        <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php"><h5>Home</h5></a></li>
                 <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
-                <li><a href="contact.php"><h5>Contacts</h5></a></li>
+                <li><a href="contact.php"><h5>Account</h5></a></li>
             </ul>
         </div>
         </nav>

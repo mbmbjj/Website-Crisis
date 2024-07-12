@@ -9,9 +9,10 @@
     <title>Register</title>
 </head>
 <body>
+
     <header >
         <nav>
-            <div class="container">
+            <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php"><h5>Home</h5></a></li>
                 <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
@@ -49,7 +50,7 @@
             echo "<div class='message'>
                       <p>Registration successfully!</p>
                   </div> <br>";
-            echo "<a href='oginpage.php'><button class='btn'>Login Now</button>";
+            echo "<a href='loginpage.php'><button class='btn'>Login Now</button>";
          
          }
          }else{
@@ -72,6 +73,7 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
                 </div>
+
 
                 <div class="field">
                     

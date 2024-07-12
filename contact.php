@@ -17,7 +17,7 @@
 <body>
     <header >
         <nav>
-            <div class="container">
+            <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php"><h5>Home</h5></a></li>
                 <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
@@ -35,10 +35,10 @@
         <div class="links">
             <button><a href="loginpage.html">Log In Now</a></button>
         </div>-->
-        <div class="nav">
-            <div class="logo">
+        <div >
+            <!--<div class="logo">
                 <p><a href="home.php">Logo</a></p>
-            </div>
+            </div>-->
 
             <div class="right-links">
                 <?php
@@ -53,14 +53,16 @@
                     }
                     
                     echo "<a href='edit.php?Id=$res_id'>Change Profile</a>";
+                    
                 ?>
+                <a href="php/logout.php" ><button class="btn">Log Out</button></a>
                 
-                <a href="php/logout.php"><button class="btn">Log Out</button></a>
             </div>
         </div>
         <main>
-            <div class="main-box top">
+            <div class="main-box" >
                 <div class="top">
+                <!--<a href="php/logout.php" ><button class="btn">Log Out</button></a>-->
                     <div class="box">
                         <p>Hello <b><?php echo $res_Uname ?></b>, Welcome</p>
                     </div>
@@ -75,7 +77,7 @@
         </main>
     
 
-    <div class="nav">
+    
 
     </div>
     

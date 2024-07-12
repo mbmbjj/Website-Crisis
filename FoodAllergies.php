@@ -2,10 +2,11 @@
 <html>
 <head>
         <title>My Page!</title>
-        <link rel="stylesheet" href="styles.css">
+        <!--<link rel="stylesheet" href="styles.css">-->
+        
         <style>
-            footer{
-                    background: moccasin;
+            /*footer{
+          s          background: moccasin;
                     color: black;
                     padding: 8% 5%
             }
@@ -14,7 +15,41 @@
             }
             h2 {
                 font-family:monospace;
+            }*/
+            body{
+                background: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                font-family: Helvetica Neue, Helvetica, sans-serif;
+                margin:0;
+                padding:0;
             }
+            header {
+                background: rgb(207, 138, 64);
+                padding: 2% 3%;
+                height: 75px;
+                
+                align-items: center;
+                 /*width: 100%;
+                 */
+            }
+            .top-container{
+                text-align: center;
+                width: 100%;
+            }
+            h5 {
+                color: white;
+                font-family: Georgia, Times New Roman, Times, serif;
+            }
+            ul .myUL{
+                list-style:none;
+                padding: 0;
+                margin: 0;
+            }
+            li {
+                display: inline-block;
+                margin-right: 4%;
+            }
+            
             
         </style>
         
@@ -22,8 +57,8 @@
 
 <body>
     <header>
-        <nav>
-            <div class="container">
+        <nav class="top-bar">
+            <div class="top-container">
                 <ul class="myUL">
                 <li><a href="try2.php"><h5>Home</h5></a></li>
                 <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
@@ -36,10 +71,8 @@
         <p>If not ->  <button>Sign Up</button></p>-->
     </header>
    
-    <h2>Food allergies Information</h2>
-    <section>
-
-    </section>
+   
+    
     <footer></footer>
 </body>
 </html>

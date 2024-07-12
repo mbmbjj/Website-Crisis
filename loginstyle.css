@@ -4,9 +4,10 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins',sans-serif;
-}
+}   
 .logbox{
     background: white;
+    text-align: center;
 }
 body{
     background: #e4e9f7;
@@ -76,8 +77,8 @@ body{
 }
 
 
-.nav{
-    background: #fff;
+div .nav{
+    background: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -123,7 +124,7 @@ main{
     color: #000;
 }*/
 .right-links a{
-    padding: 0 10%;
+    padding: 0 10px;
 }
 main{
     display: flex;
@@ -131,20 +132,21 @@ main{
     justify-content: center;
     margin-top: 60px;
 }
-.main-box{
+main .main-box{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     border-radius: 5px;
 }
-.main-box .top{
+main .main-box .top{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
 }
 .bottom{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 20%;
 }
 @media only screen and (max-width:840px){
     .main-box .top{
@@ -163,7 +165,7 @@ main{
     text-align: center;
     background: #f9eded;
     padding: 15px 0px;
-    border:1px solid #699053;
+    border:1px solid purple;
     border-radius: 5px;
     margin-bottom: 10px;
     color: red;

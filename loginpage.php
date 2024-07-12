@@ -5,14 +5,41 @@
 <html>
 <head>
         <title>My Page!</title>
-        <link rel="stylesheet" href="styles.css">
+        <!--<link rel="stylesheet" href="styles.css">-->
         <link rel="stylesheet" href="loginstyle.css">
+        <style>
+            .top-container{
+                text-align: center;
+            }
+            header {
+                background: rgb(207, 138, 64);
+                padding: 2% 3%;
+                height: 75px;
+                align-items: center;
+            }
+            .myUL{
+                text-align: center;
+                list-style: none;
+                
+            }
+            .myUL h5 {
+                color: white;
+                font-family: Georgia, Times New Roman, Times, serif;
+            }
+            li{
+                display:inline-block;
+                margin-right: 4%;
+            }
+            li:last-child {
+                margin-right:0;
+            }
+        </style>
 </head>
 
 <body>
-    <header >
-        <nav>
-            <div class="container">
+    <header>
+        <nav class="top-bar">
+            <div class="top-container" >
             <ul class="myUL">
                 <li><a href="try2.php"><h5>Home</h5></a></li>
                 <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
