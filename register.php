@@ -7,6 +7,41 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="loginstyle.css">
     <title>Register</title>
+    <style>
+        #otherLanguageInput {
+            display: none;
+        }
+
+        .checkbox-label {
+            font-size: 18px; /* Adjust the label size here */
+            display: inline-block; /* Ensure label is inline-block */
+            vertical-align: middle; /* Align label vertically */
+            margin-left: 10px; /* Adjust spacing between checkbox and label */
+        }
+
+        .checkbox-input {
+            width: 20px; /* Adjust the checkbox size here */
+            height: 20px; /* Adjust the checkbox size here */
+            vertical-align: middle; /* Align checkbox vertically */
+            margin-right: 10px;
+        }
+
+        .checkbox-wrapper {
+            margin-bottom: 10px; /* Adjust margin between checkbox rows */
+        }
+
+        .checkbox-label-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+        <script>
+        function toggleOtherLanguageInput() {
+            var otherCheckbox = document.getElementById("otherLanguage");
+            var otherInput = document.getElementById("otherLanguageInput");
+            otherInput.style.display = otherCheckbox.checked ? "block" : "none";
+        }
+    </script>
 </head>
 <body>
 
@@ -33,6 +68,18 @@
                 $email=$_POST['email'];
                 $age=$_POST['age'];
 
+                $allergies = [];
+
+                if(isset($_POST['Egg'])) $allergies[] = 'Egg';
+                if(isset($_POST['Fish'])) $allergies[] = 'Fish';
+                if(isset($_POST['Peanut'])) $allergies[] = 'Peanut';
+                if(isset($_POST['Milk'])) $allergies[] = 'Milk';
+                if(isset($_POST['Seafood'])) $allergies[] = 'Seafood';
+                if(isset($_POST['Soy'])) $allergies[] = 'Soy';
+                if(isset($_POST['Wheat'])) $allergies[] = 'Wheat';
+                if(isset($_POST['Other'])) $allergies[] = $_POST['Other'];
+    
+                $allergiesString = implode(", ", $allergies);
          //verifying the unique email
 
          $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email='$email'");
@@ -69,7 +116,7 @@
                     <label for="age">Age</label>
                     <input type="number" name="age" id="age" autocomplete="off" required>
                 </div>
-                <div class="field input">
+            <div class="field input">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
                 </div>
@@ -77,6 +124,45 @@
                     <label for="food">Any Allergies? </label>
                     <input type="checkbox" name="food[]" value="" autocomplete="off" required>
                 </div>
+
+                <!-- Multiple Choice Selection -->
+            <div class="field input">
+                <label for="languages">Food allergies:</label><br>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Egg" id="eggCheckbox" value="Egg">
+                    <label class="checkbox-label" for="eggCheckbox"><span class="checkbox-label-text">Egg</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Fish" id="fishCheckbox" value="Fish">
+                    <label class="checkbox-label" for="fishCheckbox"><span class="checkbox-label-text">Fish</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Peanut" id="peanutCheckbox" value="Peanut">
+                    <label class="checkbox-label" for="peanutCheckbox"><span class="checkbox-label-text">Peanut</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Milk" id="milkCheckbox" value="Milk">
+                    <label class="checkbox-label" for="milkCheckbox"><span class="checkbox-label-text">Milk</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Seafood" id="seafoodCheckbox" value="Seafood">
+                    <label class="checkbox-label" for="seafoodCheckbox"><span class="checkbox-label-text">Seafood</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Soy" id="soyCheckbox" value="Soy">
+                    <label class="checkbox-label" for="soyCheckbox"><span class="checkbox-label-text">Soy</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" name="Wheat" id="wheatCheckbox" value="Wheat">
+                    <label class="checkbox-label" for="wheatCheckbox"><span class="checkbox-label-text">Wheat</span></label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox-input" id="otherLanguage" name="Other" value="" onclick="toggleOtherLanguageInput()">
+                    <label class="checkbox-label" for="otherLanguage"><span class="checkbox-label-text">Other</span></label>
+                    <input type="text" id="otherLanguageInput" name="Other" placeholder="Please specify">
+                </div>
+            </div>
+
 
                 <div class="field">
                     

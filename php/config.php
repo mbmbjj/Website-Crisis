@@ -1,4 +1,4 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","finalfirst") or die("could not connect")
+$con = mysqli_connect("localhost","root","","test2") or die("could not connect")
 ?>
