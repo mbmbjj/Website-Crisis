@@ -3,3 +3,4 @@ personalize food allergy
 personal data (account) view and edit page
 file upload option
 ระบบเปรียบเทียบอาหารที่แพ้และการเน้นย้ำ
+about us page
