@@ -1,6 +1,7 @@
 login & signin
 personalize food allergy
 personal data (account) view and edit page
-file upload option
-ระบบเปรียบเทียบอาหารที่แพ้และการเน้นย้ำ
+file upload option --จำเป็น
+ระบบเปรียบเทียบอาหารที่แพ้และการเน้นย้ำ --จำเป็น
 about us page
+pop up ข้อมูลการแพ้ + ข้อมูลรายละเอียดของส่วนประกอบ(ไม่จำเป็น)
