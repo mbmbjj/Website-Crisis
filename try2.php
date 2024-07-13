@@ -34,7 +34,6 @@
                         <button id="capture-button" class="capture">Capture Photo</button>
                         <button id="select-file-button" class="modal-button">Select File</button>
                     </div>
-
                     <canvas id="canvas" style="display:none;"></canvas>
                     <img id="captured-photo" alt="Captured Photo">
                     <a id="download-link" style="display:none;" download="captured_photo.png">Download Photo</a>
@@ -62,12 +61,8 @@
         const capturedPhoto = document.getElementById('captured-photo');
         const downloadLink = document.getElementById('download-link');
         const selectFileButton = document.getElementById('select-file-button');
-        const uploadForm = document.getElementById('uploadForm');
         const fileInput = document.getElementById('fileInput');
         const uploadedPhoto = document.getElementById('uploaded-photo');
-        const modal = document.getElementById('modal');
-        const modalCaptureButton = document.getElementById('modal-capture-button');
-        const modalSelectButton = document.getElementById('modal-select-button');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -89,6 +84,9 @@
 
             downloadLink.href = dataUrl;
             downloadLink.style.display = 'block';
+
+            // Show the popup after capturing the photo
+            popupContainer.classList.add('active');
         });
 
         selectFileButton.addEventListener('click', () => {
@@ -108,29 +106,8 @@
             }
         });
 
-        uploadForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-
-            const response = await fetch('/upload', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (response.ok) {
-                console.log('File uploaded successfully');
-            } else {
-                console.error('File upload failed');
-            }
-        });
-
         const popupContainer = document.getElementById('popuppcontainer');
         const closeButton = document.getElementById('close-btn');
-
-        captureButton.addEventListener('click', () => {
-            popupContainer.classList.add('active');
-        });
 
         closeButton.addEventListener('click', () => {
             popupContainer.classList.remove('active');
