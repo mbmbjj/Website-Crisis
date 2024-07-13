@@ -36,14 +36,15 @@
                     </div>
                     <canvas id="canvas" style="display:none;"></canvas>
                     <img id="captured-photo" alt="Captured Photo">
-                    <a id="download-link" style="display:none;" download="captured_photo.png">Download Photo</a>
                     <img id="uploaded-photo" alt="Uploaded Photo" style="display:none;">
-                    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                    <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
+                    <button id="submit-button" class="submit">Submit</button>
+                    <ul id="detectedItems"></ul>
                 </div>
                 <div id="side-text-right">2. Tap the camera icon</div>
             </div>
         </div>
-        <div class="popup-container" id="popuppcontainer">
+        <div class="popup-container" id="popup-container">
             <div class="popup-box">
                 <h1>Hello</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -59,10 +60,11 @@
         const captureButton = document.getElementById('capture-button');
         const canvas = document.getElementById('canvas');
         const capturedPhoto = document.getElementById('captured-photo');
-        const downloadLink = document.getElementById('download-link');
         const selectFileButton = document.getElementById('select-file-button');
         const fileInput = document.getElementById('fileInput');
         const uploadedPhoto = document.getElementById('uploaded-photo');
+        const submitButton = document.getElementById('submit-button');
+        const detectedItems = document.getElementById('detectedItems');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -82,11 +84,9 @@
             capturedPhoto.style.display = 'block';
             uploadedPhoto.style.display = 'none';
 
-            downloadLink.href = dataUrl;
-            downloadLink.style.display = 'block';
-
-            // Show the popup after capturing the photo
-            popupContainer.classList.add('active');
+            const blob = dataURLToBlob(dataUrl);
+            const fileList = createFileList(blob);
+            fileInput.files = fileList;
         });
 
         selectFileButton.addEventListener('click', () => {
@@ -106,12 +106,65 @@
             }
         });
 
-        const popupContainer = document.getElementById('popuppcontainer');
-        const closeButton = document.getElementById('close-btn');
+        submitButton.addEventListener('click', async () => {
+            const formData = new FormData();
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('No file selected.');
+                return;
+            }
 
-        closeButton.addEventListener('click', () => {
-            popupContainer.classList.remove('active');
+            formData.append('file', file);
+
+            const response = await fetch('http://localhost:5000/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const imageUrl = data.image_url;
+
+                uploadedPhoto.src = imageUrl;
+                uploadedPhoto.style.display = 'block';
+
+                const detectionsResponse = await fetch('http://localhost:5000/detections');
+                if (detectionsResponse.ok) {
+                    const detections = await detectionsResponse.json();
+                    console.log('Detections:', detections);  // Debug output
+                    detectedItems.innerHTML = '';
+                    detections.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        detectedItems.appendChild(listItem);
+                    });
+                } else {
+                    console.error('Failed to fetch detections');
+                }
+            } else {
+                alert('Upload failed');
+                console.error('Upload failed');
+            }
         });
+
+        function dataURLToBlob(dataURL) {
+            const parts = dataURL.split(',');
+            const byteString = atob(parts[1]);
+            const mimeString = parts[0].split(':')[1].split(';')[0];
+            const arrayBuffer = new ArrayBuffer(byteString.length);
+            const intArray = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < byteString.length; i++) {
+                intArray[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([arrayBuffer], { type: mimeString });
+        }
+
+        function createFileList(blob) {
+            const file = new File([blob], 'captured_photo.png', { type: blob.type });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            return dataTransfer.files;
+        }
     </script>
 </body>
 </html>

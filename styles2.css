@@ -136,6 +136,19 @@ h5 {
     width: 100%;
     border-radius: 4%;
 }
+#submit-button, #download-link {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: palevioletred;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    align-items: center;
+}
 #capture-button, #select-file-button {
     margin-top: 20px;
     margin-bottom: 20px;
