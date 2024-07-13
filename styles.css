@@ -6,7 +6,13 @@ body{
 header {
     background: rgb(207, 138, 64);
     padding: 2% 3%;
-    height: 50px;
+    height: 75px;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 .top-container{
     text-align: center;
