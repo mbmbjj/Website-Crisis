@@ -17,9 +17,11 @@
             </div>
         </nav>
     </header>
-
-    <section class="first">
+    <section class="first" id="about-us">
         <h1>About Our Company</h1>
+    </section>
+    <section>
+        
         <p class="about-text">
             Welcome to our Food Scanning Programme for Food Allergies. We are dedicated to helping individuals manage their food allergies with ease and confidence. Our innovative scanning technology allows users to quickly identify potential allergens in their meals, ensuring a safer dining experience.
         </p>
