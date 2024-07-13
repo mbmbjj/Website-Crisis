@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
-from flask_cors import CORS  # Import CORS
+from flask_cors import CORS
 import os
 from ultralytics import YOLO
 import shutil
@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+CORS(app)
 
 # Load model here
 model = YOLO('run14_best.pt')

@@ -36,7 +36,7 @@
                     </div>
                     <canvas id="canvas" style="display:none;"></canvas>
                     <img id="captured-photo" alt="Captured Photo">
-                    <img id="uploaded-photo" alt="Uploaded Photo" style="display:none;">
+                    <img id="uploaded-photo" alt="Uploaded Photo" style="display:block;"> <!-- Ensure this image is visible -->
                     <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
                     <button id="submit-button" class="submit">Submit</button>
                     <ul id="detectedItems"></ul>
@@ -125,7 +125,8 @@
                 const data = await response.json();
                 const imageUrl = data.image_url;
 
-                uploadedPhoto.src = imageUrl;
+                console.log('Image URL:', imageUrl);  // Debug output
+                uploadedPhoto.src = `http://localhost:5000${imageUrl}`;  // Ensure the correct URL is used
                 uploadedPhoto.style.display = 'block';
 
                 const detectionsResponse = await fetch('http://localhost:5000/detections');
@@ -134,6 +135,7 @@
                     console.log('Detections:', detections);  // Debug output
                     detectedItems.innerHTML = '';
                     detections.forEach(item => {
+                        console.log('Adding item:', item);  // Debug output for each item
                         const listItem = document.createElement('li');
                         listItem.textContent = item;
                         detectedItems.appendChild(listItem);
