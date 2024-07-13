@@ -1,0 +1,1 @@
+please update you apache in xampp config file by config.config file
