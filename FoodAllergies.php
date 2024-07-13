@@ -16,7 +16,7 @@
             h2 {
                 font-family:monospace;
             }*/
-            body{
+            /*body{
                 background: rgb(255, 255, 255);
                 color: rgb(0, 0, 0);
                 font-family: Helvetica Neue, Helvetica, sans-serif;
@@ -26,15 +26,17 @@
             header {
                 background: rgb(207, 138, 64);
                 padding: 2% 3%;
-                height: 75px;
-                
+                height: 50px;
                 align-items: center;
                  /*width: 100%;
-                 */
+                 
             }
             .top-container{
                 text-align: center;
                 width: 100%;
+                padding: 0;
+                margin-top: 0;
+                
             }
             h5 {
                 color: white;
@@ -49,8 +51,63 @@
                 display: inline-block;
                 margin-right: 4%;
             }
-            
-            
+            li:last-child {
+                margin-right: 0;
+            }
+            section div{
+                    
+                    width: 100%;
+                    padding: 0;
+                    margin:0;
+                    /*font-family:monospace;
+            }*/
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins',sans-serif;
+            }   
+            body{
+                background: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                /*font-family: Helvetica Neue, Helvetica, sans-serif;*/
+                margin: 0;
+                padding: 0;
+            }
+            header {
+                background: rgb(207, 138, 64);
+                padding: 2% 3%;
+                height: 75px;
+                
+                align-items: center;
+            }
+            .top-container{
+                text-align: center;
+                width: 100%;
+            }
+            ul .myUL {
+                padding: 0;
+                margin:0;
+                list-style: none;
+            }
+            li{
+                display:inline-block;
+                margin-right: 4%;
+            }
+            li:last-child {
+                margin-right:0;
+            }
+            section{
+                    display: flex;
+            }
+            section {
+                width: 100%;
+                height: 100%;
+            }
+            h5 {
+                color: white;
+            }
         </style>
         
 </head>

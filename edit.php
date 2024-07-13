@@ -13,14 +13,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="loginstyle.css">
-    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="styles.css">-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins',sans-serif;
+            }   
+            body{
+                background: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                /*font-family: Helvetica Neue, Helvetica, sans-serif;*/
+                margin: 0;
+                padding: 0;
+            }
+            header {
+                background: rgb(207, 138, 64);
+                padding: 2% 3%;
+                height: 75px;
+                
+                align-items: center;
+            }
+            .top-container{
+                text-align: center;
+                width: 100%;
+            }
+            ul .myUL {
+                padding: 0;
+                margin:0;
+                list-style: none;
+            }
+            li{
+                display:inline-block;
+                margin-right: 4%;
+            }
+            li:last-child {
+                margin-right:0;
+            }
+            section{
+                    display: flex;
+            }
+            section {
+                width: 100%;
+                height: 100%;
+            }
+            h5 {
+                color: white;
+            }
+    </style>
     <title>Change Profile</title>
    
 </head>
 <body>
     <header>
         <nav>
-            <div class="container">
+            <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php"><h5>Home</h5></a></li>
                 <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
@@ -31,16 +80,13 @@
         </nav>
     </header>
     <div class="nav">
-        <div class="logo">
-            <p><a href="contact.php">Logo</a></p>
-        </div>
 
         <div class="right-links">
             <a href="#"> Change Profile</a>
             <a href="php/logout.php"><button class="btn">Log Out</button></a>
         </div>
     </div>
-    <div class="container">
+    <div class="bigcontainer">
         <div class="box form-box">
 
             <?php 
@@ -71,7 +117,7 @@
                         $res_Age = $result['Age'];
                     }
             ?>
-            <header>Change Profile</header>
+            <header class="logbox">Change Profile</header>
             <form action="" method="post">
                 <div class="field input">
                     <label for="username">Username</label>

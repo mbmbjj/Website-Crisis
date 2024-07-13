@@ -8,23 +8,35 @@
         <!--<link rel="stylesheet" href="styles.css">-->
         <link rel="stylesheet" href="loginstyle.css">
         <style>
-            .top-container{
-                text-align: center;
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins',sans-serif;
+            }   
+            body{
+                background: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                /*font-family: Helvetica Neue, Helvetica, sans-serif;*/
+                margin: 0;
+                padding: 0;
             }
             header {
                 background: rgb(207, 138, 64);
                 padding: 2% 3%;
                 height: 75px;
+                
                 align-items: center;
             }
-            .myUL{
+            .top-container{
                 text-align: center;
-                list-style: none;
-                
+                width: 100%;
             }
-            .myUL h5 {
-                color: white;
-                font-family: Georgia, Times New Roman, Times, serif;
+            ul .myUL {
+                padding: 0;
+                margin:0;
+                list-style: none;
             }
             li{
                 display:inline-block;
@@ -32,6 +44,16 @@
             }
             li:last-child {
                 margin-right:0;
+            }
+            section{
+                    display: flex;
+            }
+            section {
+                width: 100%;
+                height: 100%;
+            }
+            h5 {
+                color: white;
             }
         </style>
 </head>
@@ -105,6 +127,8 @@
                     <div class="links">
                         Don't have account? <a href="register.php">Sign Up Now</a>
                     </div>
+
+                    
                 </form>
             </div>
             <?php } ?>

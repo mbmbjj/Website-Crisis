@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('canvas');
     const captureButton = document.getElementById('capture-button');
     const capturedPhoto = document.getElementById('captured-photo');
+    const popupContainer = document.getElementById('popup-box');
+    const closeBtn = document.queryselector('.close-btn');
 
     // Request access to the camera
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -18,8 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('getUserMedia is not supported in this browser.');
     }
 
+    closebtn.addEventListener('click', () => {
+        popupContainer.classList.remove('active');
+    });
     // Capture a photo when the button is clicked
     captureButton.addEventListener('click', () => {
+        popupContainer.classList.add('active');
+
         const context = canvas.getContext('2d');
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
