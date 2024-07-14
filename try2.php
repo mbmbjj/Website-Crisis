@@ -166,9 +166,9 @@
                 } else {
                     detections.forEach(item => {
                         console.log('Adding item:', item);  // Debug output for each item
-                        const listItem = document.createElement('li');
+                        if(item != 'other ingredients'){const listItem = document.createElement('li');
                         listItem.textContent = item;
-                        detectedItemsList.appendChild(listItem);
+                        detectedItemsList.appendChild(listItem);}
                     });
                 }
 
@@ -306,28 +306,44 @@
         detectedAller.innerHTML = ''; // Clear previous allergens
 
         if (resultSet.has(1)) {
-            detectedAller.appendChild(document.createTextNode("Soy "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Soy"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(2)) {
-            detectedAller.appendChild(document.createTextNode("Cow milk "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Cow milk"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(3)) {
-            detectedAller.appendChild(document.createTextNode("Wheat "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Wheat"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(4)) {
-            detectedAller.appendChild(document.createTextNode("Egg "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Egg"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(5)) {
-            detectedAller.appendChild(document.createTextNode("Fish "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Fish"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(6)) {
-            detectedAller.appendChild(document.createTextNode("Seafood "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Seafood"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(7)) {
-            detectedAller.appendChild(document.createTextNode("Peanut "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Peanut"
+            detectedAller.appendChild(listItem);
         }
         if (resultSet.has(8)) {
-            detectedAller.appendChild(document.createTextNode("Shelled nut "));
+            listItem = document.createElement('li');
+            listItem.textContent = "Shelled nut"
+            detectedAller.appendChild(listItem);
         }
     }
 </script>
