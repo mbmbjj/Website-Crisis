@@ -17,7 +17,8 @@
 </header>
     <section>
         <div class='column' id='title'>
-            <h1 class="Topic"><em>Food Scanning Programme<br><br><br> For Food Allergies</em></h1>
+            <h1 class="Topic"><em>Food Scanning Programme<br><br> For Food Allergies</em></h1>
+            <p class='describtion'>"Add Description here Lorem ipsum donor bra/\/\"</p>
             <a href="#scan"><button id="jump-button" class="jump">Try now</button></a>  
             
         </div>
@@ -38,7 +39,7 @@
                     </div>
                     <canvas id="canvas" style="display:none;"></canvas>
                     <img id="captured-photo" alt="Captured Photo">
-                    <img id="uploaded-photo" alt="Uploaded Photo" style="display:block;"> <!-- Ensure this image is visible -->
+                    <img id="uploaded-photo" alt="No Image uploaded" style="display:block;"> <!-- Ensure this image is visible -->
                     <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
                     <button id="submit-button" class="submit">Submit</button>
                     <ul id="detectedItems"></ul>
@@ -137,12 +138,19 @@
                     const detections = await detectionsResponse.json();
                     console.log('Detections:', detections);  // Debug output
                     detectedItems.innerHTML = '';
-                    detections.forEach(item => {
-                        console.log('Adding item:', item);  // Debug output for each item
-                        const listItem = document.createElement('li');
-                        listItem.textContent = item;
-                        detectedItems.appendChild(listItem);
-                    });
+                    if (detections.length === 0) {
+                        const messageItem = document.createElement('li');
+                        messageItem.textContent = "Cannot detect any ingredient";
+                        detectedItems.appendChild(messageItem);
+                    } else {
+                        detections.forEach(item => {
+                            console.log('Adding item:', item);  // Debug output for each item
+                            const listItem = document.createElement('li');
+                            listItem.textContent = item;
+                            detectedItems.appendChild(listItem);
+                        });
+                    }
+                    
                 } else {
                     console.error('Failed to fetch detections');
                 }
