@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
     <link rel="stylesheet" href="loginstyle.css">
     <title>Register</title>
     <style>
@@ -78,28 +78,44 @@
                 if(isset($_POST['Soy'])) $allergies[] = 'Soy';
                 if(isset($_POST['Wheat'])) $allergies[] = 'Wheat';
                 if(isset($_POST['Other'])) $allergies[] = $_POST['Other'];
-    
+                
+                if(isset($_POST['Other']) && !empty($_POST['otherLanguageInput'])) {
+                    $allergies[] = $_POST['otherLanguageInput'];
+                }
                 $allergiesString = implode(", ", $allergies);
-         //verifying the unique email
+                //$allergies = isset($_POST['allergies']) ? implode(", ", $_POST['allergies']) : "";
 
-         $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email='$email'");
+                /*$allergies = isset($_POST['allergies']) ? $_POST['allergies'] : [];
+                if (in_array("Other", $allergies)) {
+                    if (isset($_POST['otherLanguageInput'])) {
+                        $otherAllergy = $_POST['otherLanguageInput'];
+                        if (!empty($otherAllergy)) {
+                            $allergies = array_diff($allergies, ["Other"]);
+                            $allergies[] = $otherAllergy;
+                        }
+                    }
+                }
+                $allergiesString = implode(", ", $allergies);*/
+                //verifying the unique email
 
-         if(mysqli_num_rows($verify_query) !=0 ){
-            echo "<div class='message'>
-                      <p>This email is used, Try another One Please!</p>
-                  </div> <br>";
-            echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-         }
-         else{
+                $verify_query = mysqli_query($con,"SELECT Email FROM users WHERE Email='$email'");
 
-            mysqli_query($con,"INSERT INTO users(Username,Email,Age,Password) VALUES('$username','$email','$age','$password')") or die("Error Occured");
+                if(mysqli_num_rows($verify_query) !=0 ){
+                    echo "<div class='message'>
+                            <p>This email is used, Try another One Please!</p>
+                        </div> <br>";
+                    echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
+                }
+                else{
 
-            echo "<div class='message'>
-                      <p>Registration successfully!</p>
-                  </div> <br>";
-            echo "<a href='loginpage.php'><button class='btn'>Login Now</button>";
-         
-         }
+                    mysqli_query($con,"INSERT INTO users(Username,Email,Age,Password, Allergies) VALUES('$username','$email','$age','$password', '$allergiesString')") or die("Error Occured");
+
+                    echo "<div class='message'>
+                            <p>Registration successfully!</p>
+                        </div> <br>";
+                    echo "<a href='loginpage.php'><button class='btn'>Login Now</button>";
+                
+                }
          }else{
         ?>
             <header>Sign Up</header>
@@ -120,44 +136,41 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
                 </div>
-                <div class="field input">
-                    <label for="food">Any Allergies? </label>
-                    <input type="checkbox" name="food[]" value="" autocomplete="off" required>
-                </div>
+            
 
                 <!-- Multiple Choice Selection -->
             <div class="field input">
                 <label for="languages">Food allergies:</label><br>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Egg" id="eggCheckbox" value="Egg">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="eggCheckbox" value="Egg">
                     <label class="checkbox-label" for="eggCheckbox"><span class="checkbox-label-text">Egg</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Fish" id="fishCheckbox" value="Fish">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="fishCheckbox" value="Fish">
                     <label class="checkbox-label" for="fishCheckbox"><span class="checkbox-label-text">Fish</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Peanut" id="peanutCheckbox" value="Peanut">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="peanutCheckbox" value="Peanut">
                     <label class="checkbox-label" for="peanutCheckbox"><span class="checkbox-label-text">Peanut</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Milk" id="milkCheckbox" value="Milk">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="milkCheckbox" value="Milk">
                     <label class="checkbox-label" for="milkCheckbox"><span class="checkbox-label-text">Milk</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Seafood" id="seafoodCheckbox" value="Seafood">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="seafoodCheckbox" value="Seafood">
                     <label class="checkbox-label" for="seafoodCheckbox"><span class="checkbox-label-text">Seafood</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Soy" id="soyCheckbox" value="Soy">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="soyCheckbox" value="Soy">
                     <label class="checkbox-label" for="soyCheckbox"><span class="checkbox-label-text">Soy</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="Wheat" id="wheatCheckbox" value="Wheat">
+                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="wheatCheckbox" value="Wheat">
                     <label class="checkbox-label" for="wheatCheckbox"><span class="checkbox-label-text">Wheat</span></label>
                 </div>
                 <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" id="otherLanguage" name="Other" value="" onclick="toggleOtherLanguageInput()">
+                    <input type="checkbox" class="checkbox-input" id="otherLanguage" name="allergies[]" value="Other" onclick="toggleOtherLanguageInput()">
                     <label class="checkbox-label" for="otherLanguage"><span class="checkbox-label-text">Other</span></label>
                     <input type="text" id="otherLanguageInput" name="Other" placeholder="Please specify">
                 </div>
