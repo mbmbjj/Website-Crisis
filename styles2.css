@@ -53,7 +53,7 @@ h1{
     padding: 10px; /* Optional: Add padding for spacing */
     box-sizing: border-box; /* Ensure padding is included in width */
 }
-.column-white:first-child {
+#left-column {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,11 +119,21 @@ li:last-child {
     margin-right: 0;
 }
 .allerinfo ul {
-    list-style-type: circle;
+    font-size: 0.47cm !important;
+    text-align: left !important;       /* Align text to the left inside paragraphs */
+    background-color: moccasin !important; /* Optional: Background color for visibility */
+    padding: 20px !important;          /* Padding inside the text container */
+    border-radius: 5px !important;     /* Rounded corners for the text container */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1) !important; /* Optional: Subtle shadow for text container */
   }
+  
   .allerinfo li {
-    margin-left: 10%;
+    margin-left: 10% !important;
+    list-style-type: circle !important;  /* Ensures the list item marker is a circle */
+    list-style-position: outside !important; /* Ensures the list item marker is outside the margin */
+    display: list-item !important; /* Ensures the list items are displayed correctly */
   }
+  
 #info0 , #info1{
     flex: 1;                /* Each column takes up equal space */
     padding: 20px;          /* Optional: padding inside each column */
