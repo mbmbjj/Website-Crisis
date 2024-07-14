@@ -68,8 +68,8 @@
         const fileInput = document.getElementById('fileInput');
         const uploadedPhoto = document.getElementById('uploaded-photo');
         const submitButton = document.getElementById('submit-button');
-        const detectedItems = document.getElementById('detectedItems');
-        const detectedAller = document.getElementById('detectedItems').querySelectorAll('li');
+        const detectedItems = document.getElementById('detectedItems').querySelectorAll('li');
+        const detectedAller = document.getElementById('detectedItems');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
