@@ -68,6 +68,7 @@
         const uploadedPhoto = document.getElementById('uploaded-photo');
         const submitButton = document.getElementById('submit-button');
         const detectedItems = document.getElementById('detectedItems');
+        const detectedAller = document.getElementById('detectedAller');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -170,6 +171,153 @@
             dataTransfer.items.add(file);
             return dataTransfer.files;
         }
+
+// ====================================Hash map==================================================
+        const allergenMap = {
+    'No': 0,
+    'Soy': 1,
+    'cow\'s milk': 2,
+    'wheat': 3,
+    'egg': 4,
+    'fish': 5,
+    'sea food': 6,
+    'peanut': 7,
+    'shelled nut': 8
+};
+
+const data = [
+    ['background', 'No'],
+    ['candy', 'cow\'s milk'],
+    ['egg tart', 'cow\'s milk+wheat+egg'],
+    ['french fries', 'No'],
+    ['chocolate', 'cow\'s milk'],
+    ['biscuit', 'cow\'s milk+wheat'],
+    ['popcorn', 'cow\'s milk'],
+    ['pudding', 'cow\'s milk+wheat'],
+    ['ice cream', 'cow\'s milk+egg'],
+    ['cheese butter', 'cow\'s milk'],
+    ['cake', 'cow\'s milk+wheat+egg'],
+    ['wine', 'No'],
+    ['milkshake', 'cow\'s milk+egg'],
+    ['coffee', 'No'],
+    ['juice', 'No'],
+    ['milk', 'cow\'s milk+Soy'],
+    ['tea', 'No'],
+    ['almond', 'peanut'],
+    ['red beans', 'shelled nut'],
+    ['cashew', 'peanut'],
+    ['dried cranberries', 'No'],
+    ['soy', 'Soy'],
+    ['walnut', 'peanut'],
+    ['peanut', 'peanut'],
+    ['egg', 'egg'],
+    ['Fruit', 'No'],
+    ['Meat', 'No'],
+    ['sausage', 'cow\'s milk+wheat'],
+    ['sauce', 'No'],
+    ['crab', 'sea food'],
+    ['fish', 'fish'],
+    ['shellfish', 'sea food'],
+    ['shrimp', 'sea food'],
+    ['soup', 'cow\'s milk+wheat'],
+    ['bread', 'wheat+cow\'s milk'],
+    ['corn', 'No'],
+    ['hamburg', 'cow\'s milk+wheat+egg'],
+    ['pizza', 'wheat+cow\'s milk'],
+    ['hanamaki baozi', 'wheat'],
+    ['wonton dumplings', 'wheat+egg'],
+    ['pasta', 'cow\'s milk+wheat+egg'],
+    ['noodles', 'wheat+egg'],
+    ['rice', 'No'],
+    ['pie', 'cow\'s milk+wheat+egg'],
+    ['tofu', 'Soy'],
+    ['Vegetable', 'No'],
+    ['Mushroom', 'No'],
+    ['salad', 'No'],
+    ['other ingredients', 'No']
+];
+
+function createMultiValueMap(data, allergenMap) {
+    const multiValueMap = new Map();
+
+    data.forEach(([key, valueString]) => {
+        const values = valueString.split('+').map(value => allergenMap[value.trim().toLowerCase()]);
+        multiValueMap.set(key, values);
+    });
+
+    return multiValueMap;
+}
+
+const multiValueMap = createMultiValueMap(data, allergenMap);
+
+// // Example usage
+// console.log(multiValueMap.get('egg tart')); // Output: [2, 3, 4]
+// console.log(multiValueMap.get('pizza'));    // Output: [3, 2]
+// console.log(multiValueMap.get('soy'));      // Output: [1]
+
+// ==================================Replacing vegetable and fruit===========================
+const fruits = ['apple', 'avocado', 'banana', 'blueberry', 'cherry', 'date', 'fig', 'grape', 'kiwi', 'lemon', 'mango', 'melon', 'olives', 'orange', 'peach', 'pear', 'pineapple', 'raspberry', 'strawberry', 'watermelon'];
+const vegetables = ['French beans', 'asparagus', 'bamboo shoots', 'bean sprouts', 'broccoli', 'cabbage', 'carrot', 'cauliflower', 'celery stick', 'cilantro mint', 'cucumber', 'eggplant', 'garlic', 'ginger', 'green beans', 'kelp', 'lettuce', 'okra', 'onion', 'pepper', 'potato', 'pumpkin', 'rape', 'seaweed', 'snow peas', 'spring onion', 'tomato', 'white radish'];
+
+const specificNames = {};
+
+fruits.forEach(fruit => specificNames[fruit.toLowerCase()] = 'fruit');
+vegetables.forEach(vegetable => specificNames[vegetable.toLowerCase()] = 'vegetable');
+
+// function replaceItems(detectedItem, specificNames) {
+//     return detectedItem.map(item => specificNames[item.toLowerCase()] || item);
+// }
+
+// const detectedItem = ['apple', 'banana', 'carrot', 'chocolate', 'milk', 'egg', 'blueberry', 'cucumber'];
+// const updatedDetectedItem = replaceItems(detectedItem, specificNames);
+
+// console.log(updatedDetectedItem); // Output: ['fruit', 'fruit', 'vegetable', 'chocolate', 'milk', 'egg', 'fruit', 'vegetable']
+
+//==========================================Collect data into set=============================================================
+const resultSet = new Set();
+
+// Iterate over detectedItems and store results in resultSet
+detectedItems.forEach(item => {
+    const values = multiValueMap.get(item.toLowerCase());
+    if (values) {
+        values.forEach(value => resultSet.add(value));
+    } else {
+        console.log(`${item} not found in multiValueMap`);
+    }
+});
+
+//================================================Display Aller======================================================
+// Display Allergens based on resultSet
+if (resultSet.has(1)) {
+    detectedItems.appendChild(document.createTextNode("Soy"));
+}
+if (resultSet.has(2)) {
+    detectedItems.appendChild(document.createTextNode("Cow milk"));
+}
+if (resultSet.has(3)) {
+    detectedItems.appendChild(document.createTextNode("Wheat"));
+}
+if (resultSet.has(4)) {
+    detectedItems.appendChild(document.createTextNode("Egg"));
+}
+if (resultSet.has(5)) {
+    detectedItems.appendChild(document.createTextNode("Fish"));
+}
+if (resultSet.has(6)) {
+    detectedItems.appendChild(document.createTextNode("Seafood"));
+}
+if (resultSet.has(7)) {
+    detectedItems.appendChild(document.createTextNode("Peanut"));
+}
+if (resultSet.has(8)) {
+    detectedItems.appendChild(document.createTextNode("Shelled nut"));
+}
+
+
+
+// ================================================Hashing Part End===========================================================
+
+
     </script>
 </body>
 </html>
