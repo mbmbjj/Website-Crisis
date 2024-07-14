@@ -70,14 +70,25 @@
 
                 $allergies = [];
 
-                if(isset($_POST['Egg'])) $allergies[] = 'Egg';
-                if(isset($_POST['Fish'])) $allergies[] = 'Fish';
-                if(isset($_POST['Peanut'])) $allergies[] = 'Peanut';
-                if(isset($_POST['Milk'])) $allergies[] = 'Milk';
-                if(isset($_POST['Seafood'])) $allergies[] = 'Seafood';
-                if(isset($_POST['Soy'])) $allergies[] = 'Soy';
-                if(isset($_POST['Wheat'])) $allergies[] = 'Wheat';
-                if(isset($_POST['Other'])) $allergies[] = $_POST['Other'];
+// Define a mapping of allergies to integer values
+$allergyMap = [
+    'Egg' => 1,
+    'Fish' => 2,
+    'Peanut' => 3,
+    'Milk' => 4,
+    'Seafood' => 5,
+    'Soy' => 6,
+    'Wheat' => 7,
+    'Other' => 8 // Adjust as needed or use a dynamic value assignment
+];
+
+if(isset($_POST['Egg'])) $allergies[] = $allergyMap['Egg'];
+if(isset($_POST['Fish'])) $allergies[] = $allergyMap['Fish'];
+if(isset($_POST['Peanut'])) $allergies[] = $allergyMap['Peanut'];
+if(isset($_POST['Milk'])) $allergies[] = $allergyMap['Milk'];
+if(isset($_POST['Seafood'])) $allergies[] = $allergyMap['Seafood'];
+if(isset($_POST['Soy'])) $allergies[] = $allergyMap['Soy'];
+if(isset($_POST['Wheat'])) $allergies[] = $allergyMap['Wheat'];
                 
                 if(isset($_POST['Other']) && !empty($_POST['otherLanguageInput'])) {
                     $allergies[] = $_POST['otherLanguageInput'];
