@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask_cors import CORS
 import os
 from ultralytics import YOLO
 import shutil
@@ -6,6 +7,8 @@ import cv2
 import numpy as np
 
 app = Flask(__name__)
+CORS(app)
+
 # Load model here
 model = YOLO('run14_best.pt')
 model_cls_vegetable = YOLO('run12_cls_best_vegetable.pt')
@@ -15,7 +18,6 @@ UPLOAD_FOLDER = 'uploads'
 PROCESSED_FOLDER = 'processed'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
-print(model_cls_meat.names)
 
 detected_class = set()
 
@@ -26,18 +28,22 @@ def index():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
+        print('No file part')
         return jsonify({'error': 'No file part'})
     file = request.files['file']
     if file.filename == '':
+        print('No selected file')
         return jsonify({'error': 'No selected file'})
     if file:
         filepath = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(filepath)
         processed_image_path = process_image(filepath)
+        print({'image_url': f'/processed/{os.path.basename(processed_image_path)}'})
         return jsonify({'image_url': f'/processed/{os.path.basename(processed_image_path)}'})
 
 @app.route('/detections', methods=['GET'])
 def get_detections():
+    print(f'Detected items to send: {detected_class}')  # Debug output
     return jsonify(list(detected_class))
 
 @app.route('/processed/<filename>')
@@ -84,6 +90,7 @@ def process_image(image_path):
                     label = cls_names_fruit[r.probs.top1]
             
             detected_class.add(label)
+            print(f'Detected: {label}')  # Debug output for detected labels
             
             # Generate a random color for each box
             color = tuple(np.random.randint(0, 255, size=3).tolist())
@@ -92,6 +99,7 @@ def process_image(image_path):
             cv2.rectangle(img, (x1, y1), (x2, y2), (0,255,0), 2)
             cv2.putText(img, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,255,0), 2)
     
+    print(f'Final detected_class set: {detected_class}')  # Debug output for final detected set
     processed_image_path = os.path.join(PROCESSED_FOLDER, os.path.basename(image_path))
     cv2.imwrite(processed_image_path, img)
     

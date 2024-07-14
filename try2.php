@@ -34,17 +34,17 @@
                         <button id="capture-button" class="capture">Capture Photo</button>
                         <button id="select-file-button" class="modal-button">Select File</button>
                     </div>
-
                     <canvas id="canvas" style="display:none;"></canvas>
                     <img id="captured-photo" alt="Captured Photo">
-                    <a id="download-link" style="display:none;" download="captured_photo.png">Download Photo</a>
-                    <img id="uploaded-photo" alt="Uploaded Photo" style="display:none;">
-                    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                    <img id="uploaded-photo" alt="Uploaded Photo" style="display:block;"> <!-- Ensure this image is visible -->
+                    <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
+                    <button id="submit-button" class="submit">Submit</button>
+                    <ul id="detectedItems"></ul>
                 </div>
                 <div id="side-text-right">2. Tap the camera icon</div>
             </div>
         </div>
-        <div class="popup-container" id="popuppcontainer">
+        <div class="popup-container" id="popup-container">
             <div class="popup-box">
                 <h1>Hello</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -60,14 +60,11 @@
         const captureButton = document.getElementById('capture-button');
         const canvas = document.getElementById('canvas');
         const capturedPhoto = document.getElementById('captured-photo');
-        const downloadLink = document.getElementById('download-link');
         const selectFileButton = document.getElementById('select-file-button');
-        const uploadForm = document.getElementById('uploadForm');
         const fileInput = document.getElementById('fileInput');
         const uploadedPhoto = document.getElementById('uploaded-photo');
-        const modal = document.getElementById('modal');
-        const modalCaptureButton = document.getElementById('modal-capture-button');
-        const modalSelectButton = document.getElementById('modal-select-button');
+        const submitButton = document.getElementById('submit-button');
+        const detectedItems = document.getElementById('detectedItems');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -87,8 +84,9 @@
             capturedPhoto.style.display = 'block';
             uploadedPhoto.style.display = 'none';
 
-            downloadLink.href = dataUrl;
-            downloadLink.style.display = 'block';
+            const blob = dataURLToBlob(dataUrl);
+            const fileList = createFileList(blob);
+            fileInput.files = fileList;
         });
 
         selectFileButton.addEventListener('click', () => {
@@ -108,33 +106,67 @@
             }
         });
 
-        uploadForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+        submitButton.addEventListener('click', async () => {
             const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('No file selected.');
+                return;
+            }
 
-            const response = await fetch('/upload', {
+            formData.append('file', file);
+
+            const response = await fetch('http://localhost:5000/upload', {
                 method: 'POST',
                 body: formData
             });
 
             if (response.ok) {
-                console.log('File uploaded successfully');
+                const data = await response.json();
+                const imageUrl = data.image_url;
+
+                console.log('Image URL:', imageUrl);  // Debug output
+                uploadedPhoto.src = `http://localhost:5000${imageUrl}`;  // Ensure the correct URL is used
+                uploadedPhoto.style.display = 'block';
+
+                const detectionsResponse = await fetch('http://localhost:5000/detections');
+                if (detectionsResponse.ok) {
+                    const detections = await detectionsResponse.json();
+                    console.log('Detections:', detections);  // Debug output
+                    detectedItems.innerHTML = '';
+                    detections.forEach(item => {
+                        console.log('Adding item:', item);  // Debug output for each item
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        detectedItems.appendChild(listItem);
+                    });
+                } else {
+                    console.error('Failed to fetch detections');
+                }
             } else {
-                console.error('File upload failed');
+                alert('Upload failed');
+                console.error('Upload failed');
             }
         });
 
-        const popupContainer = document.getElementById('popuppcontainer');
-        const closeButton = document.getElementById('close-btn');
+        function dataURLToBlob(dataURL) {
+            const parts = dataURL.split(',');
+            const byteString = atob(parts[1]);
+            const mimeString = parts[0].split(':')[1].split(';')[0];
+            const arrayBuffer = new ArrayBuffer(byteString.length);
+            const intArray = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < byteString.length; i++) {
+                intArray[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([arrayBuffer], { type: mimeString });
+        }
 
-        captureButton.addEventListener('click', () => {
-            popupContainer.classList.add('active');
-        });
-
-        closeButton.addEventListener('click', () => {
-            popupContainer.classList.remove('active');
-        });
+        function createFileList(blob) {
+            const file = new File([blob], 'captured_photo.png', { type: blob.type });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            return dataTransfer.files;
+        }
     </script>
 </body>
 </html>
