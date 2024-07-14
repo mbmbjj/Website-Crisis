@@ -45,6 +45,18 @@
             </p>
         </div>
     </section>
+    <section class="banner">
+        <h1>Advisor</h1>
+    </section>
+    <section class="flex-hori">
+        <img src="images/OIP (1).jpg" alt="Advisor image">
+        <div class="column">
+            <h2>ธนกฤต ดำดวน</h2>
+            <p class="about-text">
+                We believe that everyone deserves to enjoy their meals without the fear of allergic reactions. That’s why we’ve created a user-friendly application that is accessible to everyone. Whether you’re at home, in a restaurant, or traveling, our Food Scanning Programme is designed to be your trusted companion.
+            </p>
+        </div>
+    </section>
 
     <footer>
         <h2>contact us</h2>

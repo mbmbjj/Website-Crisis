@@ -38,6 +38,9 @@ div.column img{
     margin: 0 auto; /* Center the image horizontally */
     margin-bottom: 5%;
 }
+#about-us h1, section.banner h1{
+    font-size: 2em;
+}
 div.column {
     flex: 1;
     margin: 0 10px; /* Margin between columns */
@@ -88,8 +91,16 @@ section {
     display: flex;
     padding: 50px; /* Adjust based on the header height */
 }
+section.flex-hori{
+    flex-direction: row;
+}
 section.two {
     background: moccasin;
+}
+.banner {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 #highlight {
     margin-top: 0;
