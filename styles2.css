@@ -13,7 +13,7 @@ body {
 }
 header {
     background: rgb(207, 138, 64);
-    padding: 2% 3%;
+    padding: 0% 3%;
     height: 75px;
     align-items: center;
     position: fixed;
@@ -27,8 +27,10 @@ h1{
 }
 
 .column {
-    
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 div.column img{
     
@@ -42,6 +44,7 @@ div.column img{
     font-size: 2em;
 }
 div.column {
+    align-items: center;
     flex: 1;
     margin: 0 10px; /* Margin between columns */
     background-color: #f0f0f0; /* Background color for visualization */
@@ -108,6 +111,10 @@ section.two {
     padding: 3cqh;
     border-radius: 0%;
 }
+a{
+    padding: 2%;
+    text-decoration: none;
+}
 footer {
     background: rgb(158, 130, 84);
     color: rgb(58, 44, 21);
@@ -146,8 +153,13 @@ h5 {
     align-items: center;
     justify-content: center;
 }
-
-
+#title{
+    flex: 1;
+    background-color: white;
+    margin: 2% 10px; /* Background color for visualization */
+    padding: 20px; /* Padding for content */
+    box-sizing: border-box;
+}
 #side-text-left {
     margin-top: 4%;
     margin-right: 0;
@@ -196,7 +208,7 @@ h5 {
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     align-items: center;
 }
-#capture-button, #select-file-button {
+#capture-button, #select-file-button , #jump-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;
@@ -207,6 +219,19 @@ h5 {
     border-radius: 5px;
     color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+#jump-button{
+    align-self: center !important; 
+    display: flex;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background: palevioletred;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 #captured-photo, #uploaded-photo {
     margin-top: 4%;

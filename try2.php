@@ -5,31 +5,31 @@
     <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
-    <header>
-        <nav class="top-bar">
-            <div class="top-container">
-                <ul class="myUL">
-                    <li><a href="try2.php"><h5>Home</h5></a></li>
-                    <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
-                    <li><a href="contact.php"><h5>Account</h5></a></li>
-                    <li><a href="aboutus.php"><h5>About Us</h5></a></li>
-                    <li><a href="allerinfo.php"><h5>Learn more</h5></a></li>
-                    
-                </ul>
-            </div>
-        </nav>
-    </header>
+<header>
+        <div class="top-container">
+            <ul class="myUL">
+                <li><a href="try2.php"><h5>Home</h5></a></li>
+                <li><a href="contact.php"><h5>Account</h5></a></li>
+                <li><a href="aboutus.php"><h5>About Us</h5></a></li>
+                <li><a href="allerinfo.php"><h5>Learn more</h5></a></li>
+            </ul>
+        </div>
+</header>
     <section>
-        <h1 class="Topic"><em>Food Scanning Programme<br><br><br> For Food Allergies</em></h1>
+        <div class='column' id='title'>
+            <h1 class="Topic"><em>Food Scanning Programme<br><br><br> For Food Allergies</em></h1>
+            <a href="#scan"><button id="jump-button" class="jump">Try now</button></a>  
+            
+        </div>
         <div class="imgcontainer">
             <img src="https://i0.wp.com/www.croissantsandcaviar.com/wp-content/uploads/2021/04/croissantsandcaviar_food_photographer-10.jpg?fit=1080%2C1350&ssl=1" class="resize" />
         </div>
     </section>
-    <section class="two">
+    <section class="two" id='scan'>
         <div class="container">
             <h1 id="highlight"><em>FEATURES</em></h1>
             <div class="camera-row">
-                <div id="side-text-left">1. Create an Account</div>
+                <div id="side-text-left">1. Create an Account (optional)</div>
                 <div id="camera-container">
                     <video id="video" autoplay></video>
                     <div class="button-row">

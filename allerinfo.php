@@ -9,7 +9,6 @@
             <div class="top-container">
                 <ul class="myUL">
                     <li><a href="try2.php"><h5>Home</h5></a></li>
-                    <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
                     <li><a href="contact.php"><h5>Account</h5></a></li>
                     <li><a href="aboutus.php"><h5>About Us</h5></a></li>
                     <li><a href="allerinfo.php"><h5>Learn more</h5></a></li>
