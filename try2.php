@@ -15,6 +15,7 @@
             </ul>
         </div>
 </header>
+<section></section>
     <section>
         <div class='column' id='title'>
             <h1 class="Topic"><em>Food Scanning Programme<br><br> For Food Allergies</em></h1>
@@ -23,7 +24,7 @@
             
         </div>
         <div class="imgcontainer">
-            <img src="https://i0.wp.com/www.croissantsandcaviar.com/wp-content/uploads/2021/04/croissantsandcaviar_food_photographer-10.jpg?fit=1080%2C1350&ssl=1" class="resize" />
+            <img src="images\croissantsandcaviar_food_photographer-10.png" class="resize" />
         </div>
     </section>
     <section class="two" id='scan'>

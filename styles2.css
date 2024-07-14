@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 body {
-    background: rgb(255, 255, 255);
+    background: #fff8eb;
     color: rgb(0, 0, 0);
     margin: 0;
     padding: 0;
@@ -26,10 +26,10 @@ h1{
     text-align: center;
 }
 #top{
-    background-color: white;
+    background-color: #fff8eb;
 }
 .column-white {
-    background-color: white;
+    background-color: #fff8eb;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,6 +39,7 @@ h1{
     box-sizing: border-box;   /* Center text inside columns if needed */
 }
 .column {
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,7 +80,7 @@ div.column {
     align-items: center;
     flex: 1;
     margin: 0 10px; /* Margin between columns */
-    background-color: #f0f0f0; /* Background color for visualization */
+    background-color: moccasin; /* Background color for visualization */
     padding: 20px; /* Padding for content */
     box-sizing: border-box; /* Include padding and border in width */
 }
@@ -130,6 +131,7 @@ li:last-child {
     text-align: center;
 }
 section {
+    background-color: #fff8eb;
     width: 100%;
     height: 100%;
     display: flex;
@@ -183,8 +185,9 @@ h5 {
 }
 
 .infotxt {
+    font-size: 0.47cm;
     text-align: left;       /* Align text to the left inside paragraphs */
-    background-color: #f0f0f0; /* Optional: Background color for visibility */
+    background-color: moccasin; /* Optional: Background color for visibility */
     padding: 20px;          /* Padding inside the text container */
     border-radius: 5px;     /* Rounded corners for the text container */
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: Subtle shadow for text container */
@@ -193,6 +196,12 @@ h5 {
 p.describtion {
     font-size: small;
     color: #4e4e4e;
+}
+#left-column{
+    flex:2;
+}
+#right-column{
+    flex:3;
 }
 .imgcontainer {
     max-width: 50%;
@@ -220,11 +229,12 @@ p.describtion {
 }
 #title{
     flex: 1;
-    background-color: white;
+    background-color: #fff8eb;
     margin: 2% 10px; /* Background color for visualization */
     padding: 20px; /* Padding for content */
     box-sizing: border-box;
 }
+
 #side-text-left {
     margin-top: 4%;
     margin-right: 0;
@@ -369,7 +379,7 @@ p.describtion {
     cursor: pointer;
     background: palevioletred;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
