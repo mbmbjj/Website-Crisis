@@ -18,22 +18,30 @@
         </nav>
     </header>
     <section class="first" id="about-us">
-        <h1>About Our Company</h1>
+        <h1>Our Team</h1>
     </section>
     <section>
-        
-        <p class="about-text">
-            Welcome to our Food Scanning Programme for Food Allergies. We are dedicated to helping individuals manage their food allergies with ease and confidence. Our innovative scanning technology allows users to quickly identify potential allergens in their meals, ensuring a safer dining experience.
-        </p>
-        <p class="about-text">
-            Our team consists of experts in the fields of nutrition, technology, and healthcare. We are passionate about providing accurate and reliable information to help our users make informed decisions about their food choices. Our mission is to enhance the quality of life for those with food allergies by leveraging cutting-edge technology and providing unparalleled support.
-        </p>
-        <p class="about-text">
-            We believe that everyone deserves to enjoy their meals without the fear of allergic reactions. That’s why we’ve created a user-friendly application that is accessible to everyone. Whether you’re at home, in a restaurant, or traveling, our Food Scanning Programme is designed to be your trusted companion.
-        </p>
-        <p class="about-text">
-            Thank you for choosing our service. Together, we can make the world a safer place for people with food allergies.
-        </p>
+        <div class="column">
+            <img src="images/OIP (1).jpg" alt="Image of First member">
+            <h2>ธนกฤต ดำดวน</h2>
+            <p class="about-text">
+                Welcome to our Food Scanning Programme for Food Allergies. We are dedicated to helping individuals manage their food allergies with ease and confidence. Our innovative scanning technology allows users to quickly identify potential allergens in their meals, ensuring a safer dining experience.
+            </p>
+        </div>
+        <div class="column">
+            <img src="images/OIP (1).jpg" alt="Image of Second member">
+            <h2>ธนกฤต ดำดวน</h2>
+            <p class="about-text">
+                Our team consists of experts in the fields of nutrition, technology, and healthcare. We are passionate about providing accurate and reliable information to help our users make informed decisions about their food choices. Our mission is to enhance the quality of life for those with food allergies by leveraging cutting-edge technology and providing unparalleled support.
+            </p>
+        </div>
+        <div class="column">
+            <img src="images/OIP (1).jpg" alt="Image of Third member">
+            <h2>ธนกฤต ดำดวน</h2>
+            <p class="about-text">
+                We believe that everyone deserves to enjoy their meals without the fear of allergic reactions. That’s why we’ve created a user-friendly application that is accessible to everyone. Whether you’re at home, in a restaurant, or traveling, our Food Scanning Programme is designed to be your trusted companion.
+            </p>
+        </div>
     </section>
 
     <footer>
