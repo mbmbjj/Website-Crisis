@@ -18,7 +18,9 @@ UPLOAD_FOLDER = 'uploads'
 PROCESSED_FOLDER = 'processed'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
-
+print(model.names)
+print(model_cls_fruit.names)
+print(model_cls_vegetable.names)
 detected_class = set()
 
 @app.route('/')
@@ -80,10 +82,10 @@ def process_image(image_path):
                 cls_result = model_cls_vegetable.predict(source=detected_region)
                 for r in cls_result:
                     label = cls_names_vegetable[r.probs.top1]
-            elif label == 'Meat':
-                cls_result = model_cls_meat.predict(source=detected_region)
-                for r in cls_result:
-                    label = cls_names_meat[r.probs.top1]
+            # elif label == 'Meat':
+            #     cls_result = model_cls_meat.predict(source=detected_region)
+            #     for r in cls_result:
+            #         label = cls_names_meat[r.probs.top1]
             elif label == 'Fruit':
                 cls_result = model_cls_fruit.predict(source=detected_region)
                 for r in cls_result:
