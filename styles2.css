@@ -25,17 +25,44 @@ header {
 h1{
     text-align: center;
 }
-
+#top{
+    background-color: white;
+}
+.column-white {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;                /* Each column takes up equal space */
+    padding: 10px;          /* Optional: padding inside each column */
+    box-sizing: border-box;   /* Center text inside columns if needed */
+}
 .column {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    flex: 1;                /* Each column takes up equal space */
+    padding: 10px;          /* Optional: padding inside each column */
+    box-sizing: border-box;   /* Center text inside columns if needed */
 }
 #side-text-left, #side-text-right{
     flex: 1; /* Distribute space equally */
     padding: 10px; /* Optional: Add padding for spacing */
     box-sizing: border-box; /* Ensure padding is included in width */
+}
+.column-white:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.column-white > * {
+    margin-bottom: 20px;    /* Add space between each item */
+}
+
+.column-white > *:last-child {
+    margin-bottom: 0;       /* Remove bottom margin for the last item */
 }
 div.column img{
     
@@ -65,10 +92,13 @@ div.column h2{
     text-align: center;
 }
 .first {
-    padding: 20px;
-    padding-top: 150px;
-    text-align: center;
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    padding-top: 150px; /* Adjust the height as needed */
+    text-align: center; /* Centers the text */
 }
+
 .top-container {
     text-align: center;
     width: 100%;
@@ -93,6 +123,12 @@ li:last-child {
   .allerinfo li {
     margin-left: 10%;
   }
+#info0 , #info1{
+    flex: 1;                /* Each column takes up equal space */
+    padding: 20px;          /* Optional: padding inside each column */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    text-align: center;
+}
 section {
     width: 100%;
     height: 100%;
@@ -131,12 +167,29 @@ h5 {
 .headd {
     color: black;
 }
-.Topic {
-    margin-top: 3%;
-    margin-left: 2%;
-    font-size: 180%;
-    padding: 3%;
+#info-1 {
+    display: flex;          /* Use flexbox for layout */
+    justify-content: space-between; /* Space between the columns */
+    padding: 20px;
 }
+
+
+
+.Topic {
+    margin: 1%;
+    font-size: 250%;
+    padding: 3%;
+    /* Optional: Adjust padding or margin as needed */
+}
+
+.infotxt {
+    text-align: left;       /* Align text to the left inside paragraphs */
+    background-color: #f0f0f0; /* Optional: Background color for visibility */
+    padding: 20px;          /* Padding inside the text container */
+    border-radius: 5px;     /* Rounded corners for the text container */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: Subtle shadow for text container */
+}
+
 p.describtion {
     font-size: small;
     color: #4e4e4e;
