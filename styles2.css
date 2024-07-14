@@ -195,6 +195,7 @@ h5 {
 }
 
 p.describtion {
+    margin-top:2%;
     font-size: small;
     color: #4e4e4e;
 }
@@ -203,6 +204,10 @@ p.describtion {
 }
 #right-column{
     flex:3;
+}
+#detectedAller{
+    font-weight: bold;
+    color: rgb(235, 67, 67);
 }
 .imgcontainer {
     max-width: 50%;
@@ -240,7 +245,14 @@ p.describtion {
 #first-section{
     padding-bottom: 0%;
 }
-
+.output{
+    margin-top:4%;
+    margin-bottom: 1%;
+    font-size: larger;
+}
+#soutput{
+    margin-top: 6%;
+}
 #side-text-left {
     margin-top: 4%;
     margin-right: 0;
