@@ -209,6 +209,9 @@ p.describtion {
     font-weight: bold;
     color: rgb(235, 67, 67);
 }
+h4.topic-small{
+    font-size: 0.55cm;
+}
 .imgcontainer {
     max-width: 50%;
     margin-right: 0;
