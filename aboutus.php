@@ -13,6 +13,8 @@
                     <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
                     <li><a href="contact.php"><h5>Account</h5></a></li>
                     <li><a href="aboutus.php"><h5>About Us</h5></a></li>
+                    <li><a href="allerinfo.php"><h5>Learn more</h5></a></li>
+                    
                 </ul>
             </div>
         </nav>
