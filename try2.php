@@ -69,7 +69,7 @@
         const uploadedPhoto = document.getElementById('uploaded-photo');
         const submitButton = document.getElementById('submit-button');
         const detectedItems = document.getElementById('detectedItems');
-        const detectedItems = document.getElementById('detectedItems').querySelectorAll('li');
+        const detectedAller = document.getElementById('detectedItems').querySelectorAll('li');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -298,28 +298,28 @@ detectedItems.forEach(itemElement => {
 //================================================Display Aller======================================================
 // Display Allergens based on resultSet
 if (resultSet.has(1)) {
-    detectedItems.appendChild(document.createTextNode("Soy"));
+    detectedAller.appendChild(document.createTextNode("Soy"));
 }
 if (resultSet.has(2)) {
-    detectedItems.appendChild(document.createTextNode("Cow milk"));
+    detectedAller.appendChild(document.createTextNode("Cow milk"));
 }
 if (resultSet.has(3)) {
-    detectedItems.appendChild(document.createTextNode("Wheat"));
+    detectedAller.appendChild(document.createTextNode("Wheat"));
 }
 if (resultSet.has(4)) {
-    detectedItems.appendChild(document.createTextNode("Egg"));
+    detectedAller.appendChild(document.createTextNode("Egg"));
 }
 if (resultSet.has(5)) {
-    detectedItems.appendChild(document.createTextNode("Fish"));
+    detectedAller.appendChild(document.createTextNode("Fish"));
 }
 if (resultSet.has(6)) {
-    detectedItems.appendChild(document.createTextNode("Seafood"));
+    detectedAller.appendChild(document.createTextNode("Seafood"));
 }
 if (resultSet.has(7)) {
-    detectedItems.appendChild(document.createTextNode("Peanut"));
+    detectedAller.appendChild(document.createTextNode("Peanut"));
 }
 if (resultSet.has(8)) {
-    detectedItems.appendChild(document.createTextNode("Shelled nut"));
+    detectedAller.appendChild(document.createTextNode("Shelled nut"));
 }
 
 
