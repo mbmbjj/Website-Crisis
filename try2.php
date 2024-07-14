@@ -69,7 +69,7 @@
         const uploadedPhoto = document.getElementById('uploaded-photo');
         const submitButton = document.getElementById('submit-button');
         const detectedItems = document.getElementById('detectedItems');
-        const detectedAller = document.getElementById('detectedAller');
+        const detectedItems = document.getElementById('detectedItems').querySelectorAll('li');
 
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
@@ -285,7 +285,8 @@ vegetables.forEach(vegetable => specificNames[vegetable.toLowerCase()] = 'vegeta
 const resultSet = new Set();
 
 // Iterate over detectedItems and store results in resultSet
-detectedItems.forEach(item => {
+detectedItems.forEach(itemElement => {
+    const item = itemElement.textContent.trim();  // Get the text content of the list item
     const values = multiValueMap.get(item.toLowerCase());
     if (values) {
         values.forEach(value => resultSet.add(value));
