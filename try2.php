@@ -43,6 +43,8 @@
                     <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
                     <button id="submit-button" class="submit">Submit</button>
                     <ul id="detectedItems"></ul>
+                    <p class='describtion'>"Add Disclaimer here Lorem ipsum donor bra/\/\"</p>
+                    
                 </div>
                 <div id="side-text-right">2. Tap the camera icon</div>
             </div>
