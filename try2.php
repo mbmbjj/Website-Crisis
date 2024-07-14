@@ -55,7 +55,8 @@
         </div>
     </section>
     <footer>
-        <h1>footer</h1>
+        <h2>contact us</h2>
+        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0123456789</p>
     </footer>
     <script>
         const video = document.getElementById('video');

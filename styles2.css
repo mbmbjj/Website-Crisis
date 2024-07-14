@@ -99,8 +99,8 @@ section.two {
 }
 footer {
     background: rgb(158, 130, 84);
-    color: black;
-    padding: 8% 5%;
+    color: rgb(58, 44, 21);
+    padding: 3% 5%;
 }
 h5 {
     color: white;
@@ -135,6 +135,8 @@ h5 {
     align-items: center;
     justify-content: center;
 }
+
+
 #side-text-left {
     margin-top: 4%;
     margin-right: 0;
