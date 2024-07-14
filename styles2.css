@@ -153,6 +153,7 @@ section.two {
     background: rgb(207, 138, 64);
     padding: 3cqh;
     border-radius: 0%;
+    color: white;
 }
 a{
     padding: 2%;
@@ -208,6 +209,7 @@ p.describtion {
     margin-right: 0;
     text-align: right;
     margin: 50px;
+    flex: 1.2;
 }
 .resize {
     width: 100%;
@@ -233,6 +235,10 @@ p.describtion {
     margin: 2% 10px; /* Background color for visualization */
     padding: 20px; /* Padding for content */
     box-sizing: border-box;
+    margin-top: 100px;
+}
+#first-section{
+    padding-bottom: 0%;
 }
 
 #side-text-left {

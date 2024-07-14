@@ -15,8 +15,7 @@
             </ul>
         </div>
 </header>
-<section></section>
-    <section>
+    <section id='first-section'>
         <div class='column' id='title'>
             <h1 class="Topic"><em>Food Scanning Programme<br><br> For Food Allergies</em></h1>
             <p class='describtion'>"Add Description here Lorem ipsum donor bra/\/\"</p>
