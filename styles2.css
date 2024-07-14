@@ -32,7 +32,7 @@ h1{
     align-items: center;
     text-align: center;
 }
-#side-text-left, #side-text-right, #camera-container {
+#side-text-left, #side-text-right{
     flex: 1; /* Distribute space equally */
     padding: 10px; /* Optional: Add padding for spacing */
     box-sizing: border-box; /* Ensure padding is included in width */
