@@ -4,6 +4,7 @@
 <head>
     <title>My Page!</title>
     <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -47,7 +48,10 @@
                 <div id="camera-container">
                     <video id="video" autoplay></video>
                     <div class="button-row">
+                        
                         <button id="capture-button" class="capture">Capture Photo</button>
+                        <button id="change-camera-button" class="capture"><i
+                                class="fa-solid fa-camera-rotate"></i></button>
                         <button id="select-file-button" class="modal-button">Select File</button>
                     </div>
                     <canvas id="canvas" style="display:none;"></canvas>
@@ -107,33 +111,48 @@
     const detectedAller = document.getElementById('detectedAller');
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
-    
+    const changeCameraButton = document.getElementById('change-camera-button');
+
+    let currentStream;
+    let currentDeviceIndex = 0;
+    let videoDevices = [];
+
     async function fetchData() {
-    try {
-        const testresponse = await fetch('http://localhost:5000/test');
-        if (testresponse.ok) {
-            const jsonResponse = await testresponse.json();
-            console.log(jsonResponse);
-        } else {
-            console.error('HTTP error', testresponse.status);
+        try {
+            const testresponse = await fetch('http://localhost:5000/test');
+            if (testresponse.ok) {
+                const jsonResponse = await testresponse.json();
+                console.log(jsonResponse);
+            } else {
+                console.error('HTTP error', testresponse.status);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
         }
-    } catch (error) {
-        console.error('Fetch error:', error);
     }
-}
 
-// Call the async function
-fetchData();
+    // Call the async function
+    fetchData();
 
-    navigator.mediaDevices.getUserMedia({
-            video: true
-        })
-        .then(stream => {
-            video.srcObject = stream;
-        })
-        .catch(error => {
-            console.error('Error accessing the camera', error);
+    async function getVideoDevices() {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        videoDevices = devices.filter(device => device.kind === 'videoinput');
+    }
+
+    async function startStream(deviceId) {
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+        }
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: deviceId ? {
+                    exact: deviceId
+                } : undefined
+            }
         });
+        currentStream = stream;
+        video.srcObject = stream;
+    }
 
     captureButton.addEventListener('click', () => {
         canvas.width = video.videoWidth;
@@ -141,7 +160,7 @@ fetchData();
         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
         const dataUrl = canvas.toDataURL('image/png');
-        uploadedPhoto.src =dataUrl;
+        uploadedPhoto.src = dataUrl;
         uploadedPhoto.style.display = 'block';
 
         const blob = dataURLToBlob(dataUrl);
@@ -191,8 +210,8 @@ fetchData();
 
             const detectionsResponse = await fetch('http://localhost:5000/detections');
             if (detectionsResponse.ok) {
-                foutput.textContent = "Detected Items"
-                soutput.textContent = "Allergy Group"
+                foutput.textContent = "Detected Items";
+                soutput.textContent = "Allergy Group";
                 const detections = await detectionsResponse.json();
                 console.log('Detections:', detections); // Debug output
                 detectedItemsList.innerHTML = '';
@@ -213,48 +232,67 @@ fetchData();
 
                 displayAllergens(detections);
                 fetch('http://localhost:5000/delete_all', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ folder: 'processed' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    console.log(data.message);
-                } else {
-                    alert(data.error);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-            fetch('http://localhost:5000/delete_all', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ folder: 'uploads' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    console.log(data.message);
-                } else {
-                    alert(data.error);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-            
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            folder: 'processed'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            console.log(data.message);
+                        } else {
+                            alert(data.error);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                fetch('http://localhost:5000/delete_all', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            folder: 'uploads'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            console.log(data.message);
+                        } else {
+                            alert(data.error);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+
             } else {
                 console.error('Failed to fetch detections');
             }
-            
-            
         } else {
             alert('Upload failed');
             console.error('Upload failed');
         }
     });
+
+    changeCameraButton.addEventListener('click', () => {
+        if (videoDevices.length > 1) {
+            currentDeviceIndex = (currentDeviceIndex + 1) % videoDevices.length;
+            startStream(videoDevices[currentDeviceIndex].deviceId);
+        }
+    });
+
+    // Initialize video stream and devices
+    getVideoDevices().then(() => {
+        if (videoDevices.length > 0) {
+            startStream(videoDevices[currentDeviceIndex].deviceId);
+        } else {
+            console.error('No video devices found');
+        }
+    });
+
 
     function dataURLToBlob(dataURL) {
         const parts = dataURL.split(',');

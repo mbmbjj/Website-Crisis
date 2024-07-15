@@ -203,7 +203,7 @@ h5 {
 }
 footer p{
     margin-top: 1%;
-    font-size: 80%;
+    font-size: small;
 }
 footer h2{
     font-size: large;
@@ -339,7 +339,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button, #select-file-button ,#submit-button, #download-link , #jump-button{
+#capture-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;
