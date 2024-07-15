@@ -136,6 +136,9 @@ li {
 li:last-child {
     margin-right: 0;
 }
+.round-border{
+    border-radius: 5px;
+}
 .allerinfo ul {
     font-size: 0.47cm !important;
     text-align: left !important;       /* Align text to the left inside paragraphs */

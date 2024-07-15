@@ -32,7 +32,7 @@
     <section>
         <div class="column">
             <div class="member">
-                <img src="images/S__18669690.jpg" alt="Image of First member">
+                <img src="images/S__18669690.jpg" alt="Image of First member" class="round-border">
                 <h2>อดุลย์วิชญ์ ขจิตตานนท์</h2>
                 <p class="about-text">
                     <span class="tab-space"></span>"ผม อดุลย์วิชญ์ ขจิตตานนท์ ชื่อเล่นชื่อพัตเตอร์ครับ ตอนนี้อยู่ชั้น
@@ -50,7 +50,7 @@
         <div class="column">
 
             <div class="member">
-                <img src="images/138281.jpg" alt="Image of First member">
+                <img src="images/138281.jpg" alt="Image of First member" class="round-border">
                 <h2>ธนกฤต ดำดวน</h2>
                 <p class="about-text">
                     <span class="tab-space"></span>"ผม ธนกฤต ดำดวน สามารถเรียกผมว่าเตมส์ ก็ได้ครับ
@@ -67,7 +67,7 @@
         </div>
         <div class="column">
             <div class="member">
-                <img src="images/138281.jpg" alt="Image of First member">
+                <img src="images/138281.jpg" alt="Image of First member" class="round-border">
                 <h2>ธนกฤต ดำดวน</h2>
                 <p class="about-text">
                     <span class="tab-space"></span>"ผม ธนกฤต ดำดวน สามารถเรียกผมว่าเตมส์ ก็ได้ครับ
@@ -89,7 +89,7 @@
         <h1>Advisor</h1>
     </section>
     <section class="flex-hori">
-        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image"></div>
+        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border"></div>
         <div class="column" id="advisor-text">
             <h2 id="advisor-name">ธนกฤต ดำดวน</h2>
             <p class="about-text" id="advisor-dess">
