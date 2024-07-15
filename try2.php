@@ -159,7 +159,7 @@
 
         formData.append('file', file);
 
-        const response = await fetch('http://localhost:5000/upload', {
+        const response = await fetch('https://app.kvis.ac.th/foodallergies/flask_app/upload', {
             method: 'POST',
             body: formData
         });
@@ -169,10 +169,10 @@
             const imageUrl = data.image_url;
 
             console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src = `http://localhost:5000${imageUrl}`; // Ensure the correct URL is used
+            uploadedPhoto.src = `https://app.kvis.ac.th/foodallergies/flask_app${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
-            const detectionsResponse = await fetch('http://localhost:5000/detections');
+            const detectionsResponse = await fetch('https://app.kvis.ac.th/foodallergies/flask_app/detections');
             if (detectionsResponse.ok) {
                 foutput.textContent = "Detected Items"
                 soutput.textContent = "Allergy Group"
@@ -195,7 +195,7 @@
                 }
 
                 displayAllergens(detections);
-                fetch('http://localhost:5000/delete_all', {
+                fetch('https://app.kvis.ac.th/foodallergies/flask_app/delete_all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -211,7 +211,7 @@
                 }
             })
             .catch(error => console.error('Error:', error));
-            fetch('http://localhost:5000/delete_all', {
+            fetch('https://app.kvis.ac.th/foodallergies/flask_app/delete_all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
