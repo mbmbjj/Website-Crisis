@@ -6,26 +6,26 @@
 </head>
 
 <body>
-    <header>
-        <nav class="top-bar">
-            <div class="top-container">
-                <ul class="myUL">
-                    <li><a href="try2.php">
-                            <h5>Home</h5>
-                        </a></li>
-                    <li><a href="contact.php">
-                            <h5>Account</h5>
-                        </a></li>
-                    <li><a href="aboutus.php">
-                            <h5>About Us</h5>
-                        </a></li>
-                    <li><a href="allerinfo.php">
-                            <h5>Learn more</h5>
-                        </a></li>
-
-                </ul>
-            </div>
-        </nav>
+<header>
+        <div class="top-container">
+            <ul class="myUL">
+                <li><a href="try2.php">
+                        <h5>Home</h5>
+                    </a></li>
+                <li><a href="contact.php">
+                        <h5>Account</h5>
+                    </a></li>
+                <li><a href="aboutus.php">
+                        <h5>About Us</h5>
+                    </a></li>
+                <li><a href="allerinfo.php">
+                        <h5>Learn more</h5>
+                    </a></li>
+                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+                        <h5>Paper</h5>
+                    </a></li>
+            </ul>
+        </div>
     </header>
 
     <section></section>

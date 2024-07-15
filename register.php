@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,59 +9,77 @@
     <link rel="stylesheet" href="loginstyle.css">
     <title>Register</title>
     <style>
-        #otherLanguageInput {
-            display: none;
-        }
+    #otherLanguageInput {
+        display: none;
+    }
 
-        .checkbox-label {
-            font-size: 18px; /* Adjust the label size here */
-            display: inline-block; /* Ensure label is inline-block */
-            vertical-align: middle; /* Align label vertically */
-            margin-left: 10px; /* Adjust spacing between checkbox and label */
-        }
+    .checkbox-label {
+        font-size: 18px;
+        /* Adjust the label size here */
+        display: inline-block;
+        /* Ensure label is inline-block */
+        vertical-align: middle;
+        /* Align label vertically */
+        margin-left: 10px;
+        /* Adjust spacing between checkbox and label */
+    }
 
-        .checkbox-input {
-            width: 20px; /* Adjust the checkbox size here */
-            height: 20px; /* Adjust the checkbox size here */
-            vertical-align: middle; /* Align checkbox vertically */
-            margin-right: 10px;
-        }
+    .checkbox-input {
+        width: 20px;
+        /* Adjust the checkbox size here */
+        height: 20px;
+        /* Adjust the checkbox size here */
+        vertical-align: middle;
+        /* Align checkbox vertically */
+        margin-right: 10px;
+    }
 
-        .checkbox-wrapper {
-            margin-bottom: 10px; /* Adjust margin between checkbox rows */
-        }
+    .checkbox-wrapper {
+        margin-bottom: 10px;
+        /* Adjust margin between checkbox rows */
+    }
 
-        .checkbox-label-text {
-            display: inline-block;
-            vertical-align: middle;
-        }
+    .checkbox-label-text {
+        display: inline-block;
+        vertical-align: middle;
+    }
     </style>
-        <script>
-        function toggleOtherLanguageInput() {
-            var otherCheckbox = document.getElementById("otherLanguage");
-            var otherInput = document.getElementById("otherLanguageInput");
-            otherInput.style.display = otherCheckbox.checked ? "block" : "none";
-        }
+    <script>
+    function toggleOtherLanguageInput() {
+        var otherCheckbox = document.getElementById("otherLanguage");
+        var otherInput = document.getElementById("otherLanguageInput");
+        otherInput.style.display = otherCheckbox.checked ? "block" : "none";
+    }
     </script>
 </head>
+
 <body>
 
-    <header >
-        <nav>
-            <div class="top-container">
+    <header>
+        <div class="top-container">
             <ul class="myUL">
-                <li><a href="try2.php"><h5>Home</h5></a></li>
-                <li><a href="FoodAllergies.php"><h5>Camera</h5></a></li>
-                <li><a href="contact.php"><h5>Account</h5></a></li>
+                <li><a href="try2.php">
+                        <h5>Home</h5>
+                    </a></li>
+                <li><a href="contact.php">
+                        <h5>Account</h5>
+                    </a></li>
+                <li><a href="aboutus.php">
+                        <h5>About Us</h5>
+                    </a></li>
+                <li><a href="allerinfo.php">
+                        <h5>Learn more</h5>
+                    </a></li>
+                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+                        <h5>Paper</h5>
+                    </a></li>
             </ul>
-            </div>
-            <h1>Your Account</h1>
-        </nav>
+        </div>
     </header>
 
-      <div class="container">
+    <div class="container">
         <div class="box form-box">
-        <?php
+            <?php
             include("php/config.php");
             if(isset($_POST['submit'])){
                 $username=$_POST['username'];
@@ -143,53 +162,65 @@ if(isset($_POST['Wheat'])) $allergies[] = $allergyMap['Wheat'];
                     <label for="age">Age</label>
                     <input type="number" name="age" id="age" autocomplete="off" required>
                 </div>
-            <div class="field input">
+                <div class="field input">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
                 </div>
-            
+
 
                 <!-- Multiple Choice Selection -->
-            <div class="field input">
-                <label for="languages">Food allergies:</label><br>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="eggCheckbox" value="Egg">
-                    <label class="checkbox-label" for="eggCheckbox"><span class="checkbox-label-text">Egg</span></label>
+                <div class="field input">
+                    <label for="languages">Food allergies:</label><br>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="eggCheckbox" value="Egg">
+                        <label class="checkbox-label" for="eggCheckbox"><span
+                                class="checkbox-label-text">Egg</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="fishCheckbox" value="Fish">
+                        <label class="checkbox-label" for="fishCheckbox"><span
+                                class="checkbox-label-text">Fish</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="peanutCheckbox"
+                            value="Peanut">
+                        <label class="checkbox-label" for="peanutCheckbox"><span
+                                class="checkbox-label-text">Peanut</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="milkCheckbox" value="Milk">
+                        <label class="checkbox-label" for="milkCheckbox"><span
+                                class="checkbox-label-text">Milk</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="seafoodCheckbox"
+                            value="Seafood">
+                        <label class="checkbox-label" for="seafoodCheckbox"><span
+                                class="checkbox-label-text">Seafood</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="soyCheckbox" value="Soy">
+                        <label class="checkbox-label" for="soyCheckbox"><span
+                                class="checkbox-label-text">Soy</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" name="allergies[]" id="wheatCheckbox"
+                            value="Wheat">
+                        <label class="checkbox-label" for="wheatCheckbox"><span
+                                class="checkbox-label-text">Wheat</span></label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="checkbox-input" id="otherLanguage" name="allergies[]"
+                            value="Other" onclick="toggleOtherLanguageInput()">
+                        <label class="checkbox-label" for="otherLanguage"><span
+                                class="checkbox-label-text">Other</span></label>
+                        <input type="text" id="otherLanguageInput" name="Other" placeholder="Please specify">
+                    </div>
                 </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="fishCheckbox" value="Fish">
-                    <label class="checkbox-label" for="fishCheckbox"><span class="checkbox-label-text">Fish</span></label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="peanutCheckbox" value="Peanut">
-                    <label class="checkbox-label" for="peanutCheckbox"><span class="checkbox-label-text">Peanut</span></label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="milkCheckbox" value="Milk">
-                    <label class="checkbox-label" for="milkCheckbox"><span class="checkbox-label-text">Milk</span></label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="seafoodCheckbox" value="Seafood">
-                    <label class="checkbox-label" for="seafoodCheckbox"><span class="checkbox-label-text">Seafood</span></label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="soyCheckbox" value="Soy">
-                    <label class="checkbox-label" for="soyCheckbox"><span class="checkbox-label-text">Soy</span></label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" name="allergies[]" id="wheatCheckbox" value="Wheat">
-                    <label class="checkbox-label" for="wheatCheckbox"><span class="checkbox-label-text">Wheat</span></label>
-                </div>
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" id="otherLanguage" name="allergies[]" value="Other" onclick="toggleOtherLanguageInput()">
-                    <label class="checkbox-label" for="otherLanguage"><span class="checkbox-label-text">Other</span></label>
-                    <input type="text" id="otherLanguageInput" name="Other" placeholder="Please specify">
-                </div>
-            </div>
 
 
                 <div class="field">
-                    
+
                     <input type="submit" class="btn" name="submit" value="Register" required>
                 </div>
                 <div class="links">
@@ -198,6 +229,7 @@ if(isset($_POST['Wheat'])) $allergies[] = $allergyMap['Wheat'];
             </form>
         </div>
         <?php } ?>
-      </div>
+    </div>
 </body>
+
 </html>
