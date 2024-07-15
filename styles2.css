@@ -195,6 +195,16 @@ footer {
 h5 {
     color: white;
 }
+#disclaimer{
+    margin-top: 2%;
+}
+footer p{
+    margin-top: 1%;
+    font-size: smaller;
+}
+footer h2{
+    font-size: large;
+}
 .headd {
     color: black;
 }
