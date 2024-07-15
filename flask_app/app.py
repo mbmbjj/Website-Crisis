@@ -25,6 +25,10 @@ detected_class = set()
 def index():
     return render_template('index.html')
 
+@app.route('/test', methods=['GET'])
+def test_route():
+    return jsonify({'message': 'Test route reached'}), 200
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:

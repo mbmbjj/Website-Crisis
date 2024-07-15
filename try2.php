@@ -107,6 +107,23 @@
     const detectedAller = document.getElementById('detectedAller');
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
+    
+    async function fetchData() {
+    try {
+        const testresponse = await fetch('http://localhost:5000/test');
+        if (testresponse.ok) {
+            const jsonResponse = await testresponse.json();
+            console.log(jsonResponse);
+        } else {
+            console.error('HTTP error', testresponse.status);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
+// Call the async function
+fetchData();
 
     navigator.mediaDevices.getUserMedia({
             video: true
@@ -159,7 +176,7 @@
 
         formData.append('file', file);
 
-        const response = await fetch('https://app.kvis.ac.th/foodallergies/flask_app/upload', {
+        const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: formData
         });
@@ -169,10 +186,10 @@
             const imageUrl = data.image_url;
 
             console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src = `https://app.kvis.ac.th/foodallergies/flask_app${imageUrl}`; // Ensure the correct URL is used
+            uploadedPhoto.src = `http://localhost:5000${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
-            const detectionsResponse = await fetch('https://app.kvis.ac.th/foodallergies/flask_app/detections');
+            const detectionsResponse = await fetch('http://localhost:5000/detections');
             if (detectionsResponse.ok) {
                 foutput.textContent = "Detected Items"
                 soutput.textContent = "Allergy Group"
@@ -195,7 +212,7 @@
                 }
 
                 displayAllergens(detections);
-                fetch('https://app.kvis.ac.th/foodallergies/flask_app/delete_all', {
+                fetch('http://localhost:5000/delete_all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -211,7 +228,7 @@
                 }
             })
             .catch(error => console.error('Error:', error));
-            fetch('https://app.kvis.ac.th/foodallergies/flask_app/delete_all', {
+            fetch('http://localhost:5000/delete_all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
