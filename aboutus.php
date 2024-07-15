@@ -30,14 +30,21 @@
         <h1>Our Team</h1>
     </section>
     <section>
+        
         <div class="column">
             <div class="member">
                 <img src="images/138281.jpg" alt="Image of First member">
                 <h2>ธนกฤต ดำดวน</h2>
                 <p class="about-text">
-                    Welcome to our Food Scanning Programme for Food Allergies. We are dedicated to helping individuals
-                    manage their food allergies with ease and confidence. Our innovative scanning technology allows
-                    users to quickly identify potential allergens in their meals, ensuring a safer dining experience.
+                    <span class="tab-space"></span>"สวัสดีครับผม ธนกฤต ดำดวน สามารถเรียกผมว่าเตมส์ ก็ได้ครับ
+                    ผมเป็นนักเรียน ม.5 โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้านคอมพิวเตอร์ และฟิสิกส์
+                    ในด้านคอมพิวเตอร์ผมมีความสนใจด้าน การพัฒนา machine learning algorithm เป็นพิเศษ
+                    เคยได้ผ่านการอบรมค่าย สอวน.คอมพิวเตอร์ ค่าย 2 ศูนย์สามเสน
+                    เป็นผู้แทนศูนย์โรงเรียนมหิดลวิทยานุสรณ์วิชาฟิสิกส์เข้าร่วมการแข่งขันฟิสิกส์โอลิมปิกระดับชาติได้รับรางวัลเหรียญเงินคับ
+                    นอกจากทางด้านวิชาการแล้วผมยังมีความสนใจทางด้านการถ่ายภาพอีกด้วยครับ"
+                    <br><br>IG: dd_ttnk<br>
+                    Email: Thanakrit.dam64@gmail.com<br>
+                    Tel: 0843292183
                 </p>
             </div>
         </div>
@@ -63,12 +70,19 @@
                 <img src="images/138281.jpg" alt="Image of First member">
                 <h2>ธนกฤต ดำดวน</h2>
                 <p class="about-text">
-                    Welcome to our Food Scanning Programme for Food Allergies. We are dedicated to helping individuals
-                    manage their food allergies with ease and confidence. Our innovative scanning technology allows
-                    users to quickly identify potential allergens in their meals, ensuring a safer dining experience.
+                    <span class="tab-space"></span>"สวัสดีครับผม ธนกฤต ดำดวน สามารถเรียกผมว่าเตมส์ ก็ได้ครับ
+                    ผมเป็นนักเรียน ม.5 โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้านคอมพิวเตอร์ และฟิสิกส์
+                    ในด้านคอมพิวเตอร์ผมมีความสนใจด้าน การพัฒนา machine learning algorithm เป็นพิเศษ
+                    เคยได้ผ่านการอบรมค่าย สอวน.คอมพิวเตอร์ ค่าย 2 ศูนย์สามเสน
+                    เป็นผู้แทนศูนย์โรงเรียนมหิดลวิทยานุสรณ์วิชาฟิสิกส์เข้าร่วมการแข่งขันฟิสิกส์โอลิมปิกระดับชาติได้รับรางวัลเหรียญเงินคับ
+                    นอกจากทางด้านวิชาการแล้วผมยังมีความสนใจทางด้านการถ่ายภาพอีกด้วยครับ"
+                    <br><br>IG: dd_ttnk<br>
+                    Email: Thanakrit.dam64@gmail.com<br>
+                    Tel: 0843292183
                 </p>
             </div>
         </div>
+        
     </section>
     <section class="banner">
         <h1>Advisor</h1>
