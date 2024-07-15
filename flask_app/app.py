@@ -5,6 +5,7 @@ from ultralytics import YOLO
 import shutil
 import cv2
 import numpy as np
+import uuid
 
 app = Flask(__name__)
 CORS(app)
@@ -18,9 +19,6 @@ UPLOAD_FOLDER = 'uploads'
 PROCESSED_FOLDER = 'processed'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
-# print(model.names)
-# print(model_cls_fruit.names)
-# print(model_cls_vegetable.names)
 detected_class = set()
 
 @app.route('/')
@@ -37,11 +35,37 @@ def upload_file():
         print('No selected file')
         return jsonify({'error': 'No selected file'})
     if file:
-        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        unique_filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+        filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
         file.save(filepath)
         processed_image_path = process_image(filepath)
         print({'image_url': f'/processed/{os.path.basename(processed_image_path)}'})
         return jsonify({'image_url': f'/processed/{os.path.basename(processed_image_path)}'})
+
+@app.route('/delete_all', methods=['POST'])
+def delete_all_files():
+    folder = request.json.get('folder')
+    if not folder:
+        return jsonify({'error': 'No folder specified'}), 400
+    
+    if folder == 'uploads':
+        folder_path = UPLOAD_FOLDER
+    elif folder == 'processed':
+        folder_path = PROCESSED_FOLDER
+    else:
+        return jsonify({'error': 'Invalid folder specified'}), 400
+
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            return jsonify({'error': f'Failed to delete {file_path}. Reason: {e}'}), 500
+    
+    return jsonify({'message': 'All files deleted successfully'}), 200
 
 @app.route('/detections', methods=['GET'])
 def get_detections():
@@ -82,10 +106,6 @@ def process_image(image_path):
                 cls_result = model_cls_vegetable.predict(source=detected_region)
                 for r in cls_result:
                     label = cls_names_vegetable[r.probs.top1]
-            # elif label == 'Meat':
-            #     cls_result = model_cls_meat.predict(source=detected_region)
-            #     for r in cls_result:
-            #         label = cls_names_meat[r.probs.top1]
             elif label == 'Fruit':
                 cls_result = model_cls_fruit.predict(source=detected_region)
                 for r in cls_result:
@@ -102,7 +122,10 @@ def process_image(image_path):
             cv2.putText(img, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,255,0), 2)
     
     print(f'Final detected_class set: {detected_class}')  # Debug output for final detected set
-    processed_image_path = os.path.join(PROCESSED_FOLDER, os.path.basename(image_path))
+    
+    # Save processed image with a unique filename
+    unique_processed_filename = str(uuid.uuid4()) + os.path.splitext(image_path)[1]
+    processed_image_path = os.path.join(PROCESSED_FOLDER, unique_processed_filename)
     cv2.imwrite(processed_image_path, img)
     
     return processed_image_path

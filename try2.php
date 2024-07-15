@@ -124,9 +124,8 @@
         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
         const dataUrl = canvas.toDataURL('image/png');
-        capturedPhoto.src = dataUrl;
-        capturedPhoto.style.display = 'block';
-        uploadedPhoto.style.display = 'none';
+        uploadedPhoto.src =dataUrl;
+        uploadedPhoto.style.display = 'block';
 
         const blob = dataURLToBlob(dataUrl);
         const fileList = createFileList(blob);
@@ -196,9 +195,44 @@
                 }
 
                 displayAllergens(detections);
+                fetch('http://localhost:5000/delete_all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ folder: 'processed' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+            fetch('http://localhost:5000/delete_all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ folder: 'uploads' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+            
             } else {
                 console.error('Failed to fetch detections');
             }
+            
+            
         } else {
             alert('Upload failed');
             console.error('Upload failed');
