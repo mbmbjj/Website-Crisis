@@ -13,7 +13,6 @@ CORS(app)
 # Load model here
 model = YOLO('run14_best.pt')
 model_cls_vegetable = YOLO('run12_cls_best_vegetable.pt')
-model_cls_meat = YOLO('run2_cls_best_meat.pt')
 model_cls_fruit = YOLO('run10_cls_best_fruit.pt')
 UPLOAD_FOLDER = 'uploads'
 PROCESSED_FOLDER = 'processed'
@@ -95,7 +94,6 @@ def process_image(image_path):
     os.makedirs(save_dir, exist_ok=True)
     names = model.names
     cls_names_vegetable = model_cls_vegetable.names
-    cls_names_meat = model_cls_meat.names
     cls_names_fruit = model_cls_fruit.names
     
     img = cv2.imread(image_path)
@@ -135,4 +133,5 @@ def process_image(image_path):
     return processed_image_path
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
+
