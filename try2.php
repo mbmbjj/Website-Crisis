@@ -22,6 +22,9 @@
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
                     </a></li>
+                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+                        <h5>Paper</h5>
+                    </a></li>
             </ul>
         </div>
     </header>
@@ -55,7 +58,7 @@
                     <button id="submit-button" class="submit">Submit</button>
                     <p class='output' id='foutput'></p>
                     <ul id="detectedItems"></ul>
-                    <p class='output'id='soutput'></p>
+                    <p class='output' id='soutput'></p>
                     <ul id="detectedAller"></ul>
                     <p class='describtion'>"Add Disclaimer here Lorem ipsum donor bra/\/\"</p>
 
@@ -76,9 +79,19 @@
         <p>Email: nscprojectstorage@gmail.com<br>Tel: 0123456789</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
-            <p>Agreement 
-This software is a work developed by Adulvitch Kajittanon, Thanakrit Damduan and Phakthada Pitavaratorn from Kamnoetvidya Science Academy (KVIS) under the provision of Dr.Kanes Sumetpipat under Program for food allergy warning in food allergy which has been supported by the National Science and Technology Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills in developing software. Therefore, the intellectual property of this software shall belong to the developer and the developer gives  
-NSTDA a permission to distribute this software as an “as is” and non-modified software for a temporary and non-exclusive use without remuneration to anyone for his or her own purpose or academic purpose, which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user for taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall not be liable for any error, software efficiency and damages in connection with or arising out of the use of the software.</p>
+            <p>Agreement
+                This software is a work developed by Adulvitch Kajittanon, Thanakrit Damduan and Phakthada Pitavaratorn
+                from Kamnoetvidya Science Academy (KVIS) under the provision of Dr.Kanes Sumetpipat under Program for
+                food allergy warning in food allergy which has been supported by the National Science and Technology
+                Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills
+                in developing software. Therefore, the intellectual property of this software shall belong to the
+                developer and the developer gives
+                NSTDA a permission to distribute this software as an “as is” and non-modified software for a temporary
+                and non-exclusive use without remuneration to anyone for his or her own purpose or academic purpose,
+                which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user for
+                taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall
+                not be liable for any error, software efficiency and damages in connection with or arising out of the
+                use of the software.</p>
         </div>
     </footer>
     <script>
@@ -93,9 +106,11 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
     const detectedItemsList = document.getElementById('detectedItems');
     const detectedAller = document.getElementById('detectedAller');
     const foutput = document.getElementById("foutput");
-    const soutput =document.getElementById("soutput");
+    const soutput = document.getElementById("soutput");
 
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({
+            video: true
+        })
         .then(stream => {
             video.srcObject = stream;
         })
@@ -154,8 +169,8 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
             const data = await response.json();
             const imageUrl = data.image_url;
 
-            console.log('Image URL:', imageUrl);  // Debug output
-            uploadedPhoto.src = `http://localhost:5000${imageUrl}`;  // Ensure the correct URL is used
+            console.log('Image URL:', imageUrl); // Debug output
+            uploadedPhoto.src = `http://localhost:5000${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
             const detectionsResponse = await fetch('http://localhost:5000/detections');
@@ -163,7 +178,7 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
                 foutput.textContent = "Detected Items"
                 soutput.textContent = "Allergy Group"
                 const detections = await detectionsResponse.json();
-                console.log('Detections:', detections);  // Debug output
+                console.log('Detections:', detections); // Debug output
                 detectedItemsList.innerHTML = '';
                 if (detections.length === 0) {
                     const messageItem = document.createElement('li');
@@ -171,10 +186,12 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
                     detectedItemsList.appendChild(messageItem);
                 } else {
                     detections.forEach(item => {
-                        console.log('Adding item:', item);  // Debug output for each item
-                        if(item != 'other ingredients'){const listItem = document.createElement('li');
-                        listItem.textContent = item;
-                        detectedItemsList.appendChild(listItem);}
+                        console.log('Adding item:', item); // Debug output for each item
+                        if (item != 'other ingredients') {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = item;
+                            detectedItemsList.appendChild(listItem);
+                        }
                     });
                 }
 
@@ -197,11 +214,15 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
         for (let i = 0; i < byteString.length; i++) {
             intArray[i] = byteString.charCodeAt(i);
         }
-        return new Blob([arrayBuffer], { type: mimeString });
+        return new Blob([arrayBuffer], {
+            type: mimeString
+        });
     }
 
     function createFileList(blob) {
-        const file = new File([blob], 'captured_photo.png', { type: blob.type });
+        const file = new File([blob], 'captured_photo.png', {
+            type: blob.type
+        });
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         return dataTransfer.files;
@@ -284,8 +305,14 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
 
     const multiValueMap = createMultiValueMap(data, allergenMap);
 
-    const fruits = ['apple', 'avocado', 'banana', 'blueberry', 'cherry', 'date', 'fig', 'grape', 'kiwi', 'lemon', 'mango', 'melon', 'olives', 'orange', 'peach', 'pear', 'pineapple', 'raspberry', 'strawberry', 'watermelon'];
-    const vegetables = ['French beans', 'asparagus', 'bamboo shoots', 'bean sprouts', 'broccoli', 'cabbage', 'carrot', 'cauliflower', 'celery stick', 'cilantro mint', 'cucumber', 'eggplant', 'garlic', 'ginger', 'green beans', 'kelp', 'lettuce', 'okra', 'onion', 'pepper', 'potato', 'pumpkin', 'rape', 'seaweed', 'snow peas', 'spring onion', 'tomato', 'white radish'];
+    const fruits = ['apple', 'avocado', 'banana', 'blueberry', 'cherry', 'date', 'fig', 'grape', 'kiwi', 'lemon',
+        'mango', 'melon', 'olives', 'orange', 'peach', 'pear', 'pineapple', 'raspberry', 'strawberry', 'watermelon'
+    ];
+    const vegetables = ['French beans', 'asparagus', 'bamboo shoots', 'bean sprouts', 'broccoli', 'cabbage', 'carrot',
+        'cauliflower', 'celery stick', 'cilantro mint', 'cucumber', 'eggplant', 'garlic', 'ginger', 'green beans',
+        'kelp', 'lettuce', 'okra', 'onion', 'pepper', 'potato', 'pumpkin', 'rape', 'seaweed', 'snow peas',
+        'spring onion', 'tomato', 'white radish'
+    ];
 
     const specificNames = {};
 
@@ -352,7 +379,7 @@ NSTDA a permission to distribute this software as an “as is” and non-modifie
             detectedAller.appendChild(listItem);
         }
     }
-</script>
+    </script>
 
 
 </body>
