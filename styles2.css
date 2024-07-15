@@ -53,10 +53,13 @@ h1{
     padding: 10px; /* Optional: Add padding for spacing */
     box-sizing: border-box; /* Ensure padding is included in width */
 }
-#left-column {
+#left-column, #advisor-text {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#advisor-name , #advisor-dess{
+    text-align: left;
 }
 .column-white > * {
     margin-bottom: 20px;    /* Add space between each item */
@@ -65,7 +68,22 @@ h1{
 .column-white > *:last-child {
     margin-bottom: 0;       /* Remove bottom margin for the last item */
 }
+.allerinfo p, .allerinfo ul{
+    margin-bottom: 10%;
+}
+
+#advisor{
+    padding: 0%;
+}
 div.column img{
+    
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+    margin-bottom: 5%;
+}
+div.column-white img{
     
     max-width: 100%;
     height: auto;
@@ -272,6 +290,12 @@ h4.topic-small{
     font-size: 150%;
     font-weight: 500;
     padding: 50px;
+}
+.member{
+    padding: 5%;
+}
+.advisor{
+    flex:1;
 }
 #side-text-right {
     margin-top: 4%;
