@@ -416,6 +416,10 @@ h4.topic-small{
 }
 .about-text {
     padding: 20px;
+    text-align: left !important;
+}
+span.tab-space{
+    padding-left: 1em;
 }
 #modal {
     display: none;
