@@ -119,7 +119,7 @@
 
     async function fetchData() {
         try {
-            const testresponse = await fetch('http://localhost:5000/test');
+            const testresponse = await fetch('https://10.205.240.138:5000/test');
             if (testresponse.ok) {
                 const jsonResponse = await testresponse.json();
                 console.log(jsonResponse);
@@ -195,7 +195,7 @@
 
         formData.append('file', file);
 
-        const response = await fetch('http://localhost:5000/upload', {
+        const response = await fetch('https://10.205.240.138:5000/upload', {
             method: 'POST',
             body: formData
         });
@@ -205,10 +205,10 @@
             const imageUrl = data.image_url;
 
             console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src = `http://localhost:5000${imageUrl}`; // Ensure the correct URL is used
+            uploadedPhoto.src = `https://10.205.240.138:5000${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
-            const detectionsResponse = await fetch('http://localhost:5000/detections');
+            const detectionsResponse = await fetch('https://10.205.240.138:5000/detections');
             if (detectionsResponse.ok) {
                 foutput.textContent = "Detected Items";
                 soutput.textContent = "Allergy Group";
@@ -231,42 +231,42 @@
                 }
 
                 displayAllergens(detections);
-                fetch('http://localhost:5000/delete_all', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            folder: 'processed'
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) {
-                            console.log(data.message);
-                        } else {
-                            alert(data.error);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-                fetch('http://localhost:5000/delete_all', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            folder: 'uploads'
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) {
-                            console.log(data.message);
-                        } else {
-                            alert(data.error);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+                // fetch('https://10.205.240.138:5000/delete_all', {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json'
+                //         },
+                //         body: JSON.stringify({
+                //             folder: 'processed'
+                //         })
+                //     })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         if (data.message) {
+                //             console.log(data.message);
+                //         } else {
+                //             alert(data.error);
+                //         }
+                //     })
+                //     .catch(error => console.error('Error:', error));
+                // fetch('https://10.205.240.138:5000/delete_all', {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json'
+                //         },
+                //         body: JSON.stringify({
+                //             folder: 'uploads'
+                //         })
+                //     })
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         if (data.message) {
+                //             console.log(data.message);
+                //         } else {
+                //             alert(data.error);
+                //         }
+                //     })
+                //     .catch(error => console.error('Error:', error));
 
             } else {
                 console.error('Failed to fetch detections');
