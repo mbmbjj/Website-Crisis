@@ -1,0 +1,14 @@
+[Unit]
+Description=ML Model API Service
+After=network.target
+
+[Service]
+User=your_username
+Group=your_groupname
+WorkingDirectory=/path/to/your/app.py
+ExecStart=/usr/bin/python3 /path/to/your/app.py
+Restart=always
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
