@@ -134,12 +134,19 @@ section#login{
     display: flex; /* Enables flexbox layout */
     justify-content: center; /* Horizontally centers the content */
     align-items: center; /* Vertically centers the content */
-    
+    flex-direction: column;
     text-align: center; /* Centers the text */
 }
 .top-container {
     text-align: center;
     width: 100%;
+}
+.input-form{
+    background-color: moccasin;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
 }
 ul.myUL {
     padding: 0;
@@ -147,6 +154,20 @@ ul.myUL {
     list-style: none;
     display: flex;
     justify-content: center;
+}
+.register-link:hover {
+    text-decoration: underline;
+    
+}
+.register-link{
+    color: black;
+}
+.input-text{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: calc(100% - 22px); /* Adjust width to account for padding */
 }
 li {
     display: inline-block;
@@ -386,7 +407,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
+#capture-button,#login-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;

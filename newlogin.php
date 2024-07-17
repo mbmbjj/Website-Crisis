@@ -53,17 +53,19 @@
             </ul>
         </div>
     </header>
-    <section class="first-section" id="login"><h1 class="Topic">Login</h1></section>
-    
+    <section class="first-section" id="login"><h1 class="Topic">Login</h1>
+    <div class="input-form">
     <form onsubmit="checkLogin(); return false;">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <input type="text" id="username" name="username" class="input-text" required><br><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <input type="password" id="password" name="password" class="input-text" required><br><br>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="login-button">Login</button>
     </form>
-    <a href="newregist.php"><h5>New user?Register</h5></a>
+    <a href="newregist.php"><h5 class="register-link">New user? Register</h5></a>
+    </section>
+    </div>
 </body>
 </html>
