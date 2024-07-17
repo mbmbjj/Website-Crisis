@@ -225,82 +225,84 @@
     });
 
     async function fetchDetections(imageId, retryCount = 5, delay = 1000) {
-    while (retryCount > 0) {
-        try {
-            const detectionsResponse = await fetch(`https://tameszaza.pythonanywhere.com/detections/${imageId}`);
-            if (detectionsResponse.ok) {
-                const detections = await detectionsResponse.json();
-                return detections;
-            } else if (detectionsResponse.status === 404) {
-                console.log(`Detections not found yet, retrying in ${delay}ms...`);
-                await new Promise(resolve => setTimeout(resolve, delay));
+        while (retryCount > 0) {
+            try {
+                const detectionsResponse = await fetch(
+                `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
+                if (detectionsResponse.ok) {
+                    const detections = await detectionsResponse.json();
+                    return detections;
+                } else if (detectionsResponse.status === 404) {
+                    console.log(`Detections not found yet, retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    retryCount--;
+                } else {
+                    throw new Error('Failed to fetch detections');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
                 retryCount--;
-            } else {
-                throw new Error('Failed to fetch detections');
+                await new Promise(resolve => setTimeout(resolve, delay));
             }
-        } catch (error) {
-            console.error('Fetch error:', error);
-            retryCount--;
-            await new Promise(resolve => setTimeout(resolve, delay));
         }
-    }
-    throw new Error('Failed to fetch detections after multiple attempts');
-}
-
-submitButton.addEventListener('click', async () => {
-    const formData = new FormData();
-    const file = fileInput.files[0];
-    if (!file) {
-        alert('No file selected.');
-        return;
+        throw new Error('Failed to fetch detections after multiple attempts');
     }
 
-    formData.append('file', file);
+    submitButton.addEventListener('click', async () => {
+        const formData = new FormData();
+        const file = fileInput.files[0];
+        if (!file) {
+            alert('No file selected.');
+            return;
+        }
 
-    const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
-        method: 'POST',
-        body: formData
+        formData.append('file', file);
+
+        const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const imageUrl = data.image_url;
+            const imageId = data.id; // Capture the unique identifier
+
+            console.log('Image URL:', imageUrl); // Debug output
+            uploadedPhoto.src =
+            `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
+            uploadedPhoto.style.display = 'block';
+
+            try {
+                const detections = await fetchDetections(imageId);
+                foutput.textContent = "Detected Items";
+                soutput.textContent = "Allergy Group";
+                console.log('Detections:', detections); // Debug output
+                detectedItemsList.innerHTML = '';
+                if (detections.length === 0) {
+                    const messageItem = document.createElement('li');
+                    messageItem.textContent = "Cannot detect any ingredient";
+                    detectedItemsList.appendChild(messageItem);
+                } else {
+                    detections.forEach(item => {
+                        console.log('Adding item:', item); // Debug output for each item
+                        if (item != 'other ingredients') {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = item;
+                            detectedItemsList.appendChild(listItem);
+                        }
+                    });
+                }
+
+                displayAllergens(detections);
+            } catch (error) {
+                console.error('Failed to fetch detections:', error);
+            }
+        } else {
+            alert('Upload failed');
+            console.error('Upload failed');
+        }
     });
-
-    if (response.ok) {
-        const data = await response.json();
-        const imageUrl = data.image_url;
-        const imageId = data.id;  // Capture the unique identifier
-
-        console.log('Image URL:', imageUrl); // Debug output
-        uploadedPhoto.src = `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
-        uploadedPhoto.style.display = 'block';
-
-        try {
-            const detections = await fetchDetections(imageId);
-            foutput.textContent = "Detected Items";
-            soutput.textContent = "Allergy Group";
-            console.log('Detections:', detections); // Debug output
-            detectedItemsList.innerHTML = '';
-            if (detections.length === 0) {
-                const messageItem = document.createElement('li');
-                messageItem.textContent = "Cannot detect any ingredient";
-                detectedItemsList.appendChild(messageItem);
-            } else {
-                detections.forEach(item => {
-                    console.log('Adding item:', item); // Debug output for each item
-                    if (item != 'other ingredients') {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = item;
-                        detectedItemsList.appendChild(listItem);
-                    }
-                });
-            }
-
-            displayAllergens(detections);
-        } catch (error) {
-            console.error('Failed to fetch detections:', error);
-        }
-    } else {
-        alert('Upload failed');
-        console.error('Upload failed');
-    }
-});
 
 
     changeCameraButton.addEventListener('click', () => {
