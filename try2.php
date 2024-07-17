@@ -48,7 +48,7 @@
                 <div id="camera-container">
                     <video id="video" autoplay></video>
                     <div class="button-row">
-                        
+
                         <button id="capture-button" class="capture">Capture Photo</button>
                         <button id="change-camera-button" class="capture"><i
                                 class="fa-solid fa-camera-rotate"></i></button>
@@ -156,41 +156,41 @@
     }
     tryNowButton.addEventListener('click', () => {
         fetch('https://tameszaza.pythonanywhere.com/delete_all', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            folder: 'processed'
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) {
-                            console.log(data.message);
-                        } else {
-                            alert(data.error);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-                fetch('https://tameszaza.pythonanywhere.com/delete_all', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            folder: 'uploads'
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) {
-                            console.log(data.message);
-                        } else {
-                            alert(data.error);
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    folder: 'processed'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        fetch('https://tameszaza.pythonanywhere.com/delete_all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    folder: 'uploads'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
     })
 
     captureButton.addEventListener('click', () => {
@@ -224,62 +224,84 @@
         }
     });
 
-    submitButton.addEventListener('click', async () => {
-        const formData = new FormData();
-        const file = fileInput.files[0];
-        if (!file) {
-            alert('No file selected.');
-            return;
-        }
-
-        formData.append('file', file);
-
-        const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            const imageUrl = data.image_url;
-
-            console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src = `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
-            uploadedPhoto.style.display = 'block';
-
-            const detectionsResponse = await fetch('https://tameszaza.pythonanywhere.com/detections');
+    async function fetchDetections(imageId, retryCount = 5, delay = 1000) {
+    while (retryCount > 0) {
+        try {
+            const detectionsResponse = await fetch(`https://tameszaza.pythonanywhere.com/detections/${imageId}`);
             if (detectionsResponse.ok) {
-                foutput.textContent = "Detected Items";
-                soutput.textContent = "Allergy Group";
                 const detections = await detectionsResponse.json();
-                console.log('Detections:', detections); // Debug output
-                detectedItemsList.innerHTML = '';
-                if (detections.length === 0) {
-                    const messageItem = document.createElement('li');
-                    messageItem.textContent = "Cannot detect any ingredient";
-                    detectedItemsList.appendChild(messageItem);
-                } else {
-                    detections.forEach(item => {
-                        console.log('Adding item:', item); // Debug output for each item
-                        if (item != 'other ingredients') {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = item;
-                            detectedItemsList.appendChild(listItem);
-                        }
-                    });
-                }
-
-                displayAllergens(detections);
-                
-
+                return detections;
+            } else if (detectionsResponse.status === 404) {
+                console.log(`Detections not found yet, retrying in ${delay}ms...`);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                retryCount--;
             } else {
-                console.error('Failed to fetch detections');
+                throw new Error('Failed to fetch detections');
             }
-        } else {
-            alert('Upload failed');
-            console.error('Upload failed');
+        } catch (error) {
+            console.error('Fetch error:', error);
+            retryCount--;
+            await new Promise(resolve => setTimeout(resolve, delay));
         }
+    }
+    throw new Error('Failed to fetch detections after multiple attempts');
+}
+
+submitButton.addEventListener('click', async () => {
+    const formData = new FormData();
+    const file = fileInput.files[0];
+    if (!file) {
+        alert('No file selected.');
+        return;
+    }
+
+    formData.append('file', file);
+
+    const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
+        method: 'POST',
+        body: formData
     });
+
+    if (response.ok) {
+        const data = await response.json();
+        const imageUrl = data.image_url;
+        const imageId = data.id;  // Capture the unique identifier
+
+        console.log('Image URL:', imageUrl); // Debug output
+        uploadedPhoto.src = `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
+        uploadedPhoto.style.display = 'block';
+
+        try {
+            const detections = await fetchDetections(imageId);
+            foutput.textContent = "Detected Items";
+            soutput.textContent = "Allergy Group";
+            console.log('Detections:', detections); // Debug output
+            detectedItemsList.innerHTML = '';
+            if (detections.length === 0) {
+                const messageItem = document.createElement('li');
+                messageItem.textContent = "Cannot detect any ingredient";
+                detectedItemsList.appendChild(messageItem);
+            } else {
+                detections.forEach(item => {
+                    console.log('Adding item:', item); // Debug output for each item
+                    if (item != 'other ingredients') {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        detectedItemsList.appendChild(listItem);
+                    }
+                });
+            }
+
+            displayAllergens(detections);
+        } catch (error) {
+            console.error('Failed to fetch detections:', error);
+        }
+    } else {
+        alert('Upload failed');
+        console.error('Upload failed');
+    }
+});
+
 
     changeCameraButton.addEventListener('click', () => {
         if (videoDevices.length > 1) {

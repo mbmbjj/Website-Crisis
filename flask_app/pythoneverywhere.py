@@ -20,7 +20,9 @@ UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
 PROCESSED_FOLDER = os.path.join(BASE_DIR, 'processed')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
-detected_class = set()
+
+# A dictionary to store detected classes for each request
+detection_results = {}
 
 @app.route('/')
 def index():
@@ -40,12 +42,13 @@ def upload_file():
         print('No selected file')
         return jsonify({'error': 'No selected file'})
     if file:
-        unique_filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+        unique_id = str(uuid.uuid4())
+        unique_filename = unique_id + os.path.splitext(file.filename)[1]
         filepath = os.path.join(UPLOAD_FOLDER, unique_filename)
         file.save(filepath)
-        processed_image_path = process_image(filepath)
+        processed_image_path = process_image(filepath, unique_id)
         print({'image_url': f'/processed/{os.path.basename(processed_image_path)}'})
-        return jsonify({'image_url': f'/processed/{os.path.basename(processed_image_path)}'})
+        return jsonify({'image_url': f'/processed/{os.path.basename(processed_image_path)}', 'id': unique_id})
 
 @app.route('/delete_all', methods=['POST'])
 def delete_all_files():
@@ -72,17 +75,19 @@ def delete_all_files():
 
     return jsonify({'message': 'All files deleted successfully'}), 200
 
-@app.route('/detections', methods=['GET'])
-def get_detections():
-    print(f'Detected items to send: {detected_class}')  # Debug output
-    return jsonify(list(detected_class))
+@app.route('/detections/<unique_id>', methods=['GET'])
+def get_detections(unique_id):
+    if unique_id not in detection_results:
+        return jsonify({'error': 'No detections found for this ID'}), 404
+    print(f'Detected items to send for {unique_id}: {detection_results[unique_id]}')  # Debug output
+    return jsonify(detection_results[unique_id])
 
 @app.route('/processed/<filename>')
 def serve_processed_file(filename):
     return send_from_directory(PROCESSED_FOLDER, filename)
 
-def process_image(image_path):
-    global detected_class
+def process_image(image_path, unique_id):
+    global detection_results
     detected_class = set()
 
     subfolder_path = os.path.join(UPLOAD_FOLDER, 'detect')
@@ -129,6 +134,8 @@ def process_image(image_path):
     processed_image_path = os.path.join(PROCESSED_FOLDER, unique_processed_filename)
     cv2.imwrite(processed_image_path, img)
 
-    return processed_image_path
+    # Store detected classes with the unique identifier
+    detection_results[unique_id] = list(detected_class)
 
+    return processed_image_path
 
