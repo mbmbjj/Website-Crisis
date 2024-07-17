@@ -93,15 +93,33 @@
         <h1>Advisor</h1>
     </section>
     <section class="flex-hori">
-        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border">
+        <div class="column-white" id="advisor"><img src="images\31713369_2148183592122073_4653734886421561344_n.jpg"
+                alt="Advisor image" class="round-border">
         </div>
         <div class="column" id="advisor-text">
-            <h2 id="advisor-name">ธนกฤต ดำดวน</h2>
+            <h2 id="advisor-name">ดร. คเณศ สุเมธพิพัธน์</h2>
             <p class="about-text" id="advisor-dess">
-                We believe that everyone deserves to enjoy their meals without the fear of allergic reactions. That’s
-                why we’ve created a user-friendly application that is accessible to everyone. Whether you’re at home, in
-                a restaurant, or traveling, our Food Scanning Programme is designed to be your trusted companion.
-            </p>
+                <span class="tab-space"></span>สวัสดีครับ ผมชื่อนายคเณศ สุเมธพิพัธน์ เป็นครูคณิตศาสตร์ โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้าน
+                Interdisciplinary Applied Mathematics
+                โดยมีด้านที่เคยศึกษาหรือทำวิจัยคือ
+                the stability of nanomaterials in a system, combinatorial game theory, game theory
+                และในปัจจุบัน มีความสนใจทางด้าน
+                optimization
+                และ
+                machine learning
+                โดยเฉพาะ
+                reinforcement learning
+                ทั้งในเชิง
+                academic research
+                และ
+                industrial research
+                งานอดิเรกคือเล่น
+                Dota2
+                และ
+                review
+
+                textbook
+                คณิตศาสตร์ที่ออกมาล่าสุด</p>
         </div>
     </section>
 
