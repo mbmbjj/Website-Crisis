@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <title>About Us</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -26,17 +25,83 @@
                         <h5>Details</h5>
                     </a></li>
                 <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
-                        <h5>Paper</h5>
+
                     </a></li>
             </ul>
         </div>
     </header>
-
-    <section class="first" id="about-us">
-        <h1>Our Team</h1>
+    <section class="first">
+        <h1 class="Topic" id="what-is">What is <br> Food Scanning Programme For Food Allergies</hๅ>
     </section>
-    <section>
-        <div class="column">
+    <section class="flex-hori">
+        <div class="column-white" id="what-is-text"><img src="images\Asset 3@4x.png" alt="Flow" class="round-border">
+        </div>
+        <div class="column-white" id="what-is-text">
+            <p class="about-text" id="what-is-dess">
+                Food Scanning Programme For Food Allergies
+                เป็นโปรแกรมแสกนส่วนประกอบของอาหารพร้อมระบุกลุ่มการแพ้อาหารมีเบื้องหลังการทำงานด้วย Machine learning
+                model YOLOv8 ที่มีรายละเอียดการทำงานตามแผนภาพทางด้านซ้ายนี้ โดยใช้การทำงานในระบบ API based
+                หากสนใจข้อมูลสามารถโหลดเอกสารเพิ่มเติมได้บริเวณแถบขวามสุดด้านบนสุดของหน้าเว็ป <br>
+                <br>โดยการตรวจจับอาหารของโมเดลจะได้ผลลัพธ์ออกมาภายในคลาสต่อไปนี้
+            </p>
+            <ul id="class-ul">
+                <li>candy</li>
+                <li>egg tart</li>
+                <li>french fries</li>
+                <li>chocolate</li>
+                <li>biscuit</li>
+                <li>popcorn</li>
+                <li>pudding</li>
+                <li>ice cream</li>
+                <li>cheese butter</li>
+                <li>cake</li>
+                <li>wine</li>
+                <li>milkshake</li>
+                <li>coffee</li>
+                <li>juice</li>
+                <li>milk</li>
+                <li>tea</li>
+                <li>almond</li>
+                <li>red beans</li>
+                <li>cashew</li>
+                <li>dried cranberries</li>
+                <li>soy</li>
+                <li>walnut</li>
+                <li>peanut</li>
+                <li>egg</li>
+                <li>Fruit</li>
+                <li>Meat</li>
+                <li>sausage</li>
+                <li>sauce</li>
+                <li>crab</li>
+                <li>fish</li>
+                <li>shellfish</li>
+                <li>shrimp</li>
+                <li>soup</li>
+                <li>bread</li>
+                <li>corn</li>
+                <li>hamburg</li>
+                <li>pizza</li>
+                <li>hanamaki baozi</li>
+                <li>wonton dumplings</li>
+                <li>pasta</li>
+                <li>noodles</li>
+                <li>rice</li>
+                <li>pie</li>
+                <li>tofu</li>
+                <li>Vegetable</li>
+                <li>Mushroom</li>
+                <li>salad</li>
+                <li>other ingredients</li>
+                <li>olives</li>
+            </ul>
+        </div>
+    </section>
+    <section class="banner" id="development">
+        <h1>In development things</h1>
+        
+    </section>
+    <section><div class="column">
             <div class="member">
                 <img src="images/S__18669690.jpg" alt="Image of First member" class="round-border">
                 <h2>อดุลย์วิชญ์ ขจิตตานนท์</h2>
@@ -87,25 +152,7 @@
                     Tel: 0843292183
                 </p>
             </div>
-        </div>
-
-
-    </section>
-    <section class="banner">
-        <h1>Advisor</h1>
-    </section>
-    <section class="flex-hori">
-        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border"></div>
-        <div class="column" id="advisor-text">
-            <h2 id="advisor-name">ธนกฤต ดำดวน</h2>
-            <p class="about-text" id="advisor-dess">
-                We believe that everyone deserves to enjoy their meals without the fear of allergic reactions. That’s
-                why we’ve created a user-friendly application that is accessible to everyone. Whether you’re at home, in
-                a restaurant, or traveling, our Food Scanning Programme is designed to be your trusted companion.
-            </p>
-        </div>
-    </section>
-
+        </div></section>
     <footer>
         <h2>contact us</h2>
         <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>

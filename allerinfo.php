@@ -21,6 +21,9 @@
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
                     </a></li>
+                <li><a href="abt.php">
+                        <h5>Details</h5>
+                    </a></li>
                 <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
                         <h5>Paper</h5>
                     </a></li>
@@ -86,11 +89,11 @@
             </p>
         </div>
     </section>
-    <section>
+    <section class="infointro">
     <div class="infointro">
-        <p>
+        <h1>
             โดยการแพ้อาหารแบ่งตามประเภทอาหารที่แพ้ได้ 7 หมวด ได้แก่ :
-        </p>
+        </h1>
     </div></section>
     
     <section>
