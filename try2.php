@@ -508,8 +508,7 @@
 //==================================================
 
     
-                const matchSet = new Set();
-
+console.log("into matching zone");
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
@@ -518,6 +517,7 @@
         }
 
         function compareAllergies(resultSet) {
+            
             const storedAnswers = getCookie('answers');
             if (storedAnswers) {
                 const allergyIntegers = storedAnswers.split(',').map(Number);
@@ -533,13 +533,11 @@
         function checkAllergies() {
             // const resultSet = [1, 2, 3, 4, 5, 6, 7]; // Example resultSet
             const matchingAllergies = compareAllergies(resultSet);
-            if(matchingAllergies)
-            matchSet.add(matchingAllergies);
             // alert('Matching Allergies: ' + matchingAllergies.join(', '));
-        }
-resultSet.forEach(element=>{
-    compareAllergies(resultSet);
-});
+        }      
+
+    
+    const matchSet = compareAllergies(resultSet);
         if (resultSet.has(1) && matchSet.has(1)) {
             listItem = document.createElement('li');
             listItem.textContent = "Soy"
