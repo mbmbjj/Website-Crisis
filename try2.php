@@ -112,6 +112,7 @@
     const submitButton = document.getElementById('submit-button');
     const detectedItemsList = document.getElementById('detectedItems');
     const detectedAller = document.getElementById('detectedAller');
+    const matchAller =document.getElementById('matchAller');
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
     const changeCameraButton = document.getElementById('change-camera-button');
@@ -499,10 +500,12 @@
             detectedAller.appendChild(listItem);
         }
     }
-    </script>
-<!--  -->
 
-    <script>
+//==================================================
+
+    
+                const matchSet = new Set();
+
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
@@ -523,16 +526,50 @@
                 return [];
             }
         }
-
         function checkAllergies() {
             // const resultSet = [1, 2, 3, 4, 5, 6, 7]; // Example resultSet
             const matchingAllergies = compareAllergies(resultSet);
+            if(matchingAllergies)
+            matchSet.add(matchingAllergies);
             // alert('Matching Allergies: ' + matchingAllergies.join(', '));
         }
 
-    </script>
-
-<!--  -->
+        if (resultSet.has(1) && matchSet.has(1)) {
+            listItem = document.createElement('li');
+            listItem.textContent = "Soy"
+            matchAller.appendChild(listItem);
+        }
+        if (resultSet.has(2) && matchSet.has(2)) {
+    const listItem = document.createElement('li');
+    listItem.textContent = "Cow milk";
+    matchAller.appendChild(listItem);
+}
+if (resultSet.has(3) && matchSet.has(3)) {
+    const listItem = document.createElement('li');
+    listItem.textContent = "Wheat";
+    matchAller.appendChild(listItem);
+}
+if (resultSet.has(4) && matchSet.has(4)) {
+    const listItem = document.createElement('li');
+    listItem.textContent = "Egg";
+    matchAller.appendChild(listItem);
+}
+if (resultSet.has(5) && matchSet.has(5)) {
+    const listItem = document.createElement('li');
+    listItem.textContent = "Fish";
+    matchAller.appendChild(listItem);
+}
+if (resultSet.has(6) && matchSet.has(6)) {
+    const listItem = document.createElement('li');
+    listItem.textContent = "Seafood";
+    matchAller.appendChild(listItem);
+}
+if (resultSet.has(7) && matchSet.has(7)) {
+    const listItem = document.createElement('li');
+    listItem.textContent = "Peanut";
+    matchAller.appendChild(listItem);
+}
+       </script>
 </body>
 
 </html>
