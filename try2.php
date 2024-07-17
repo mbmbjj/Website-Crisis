@@ -14,7 +14,7 @@
                 <li><a href="try2.php">
                         <h5>Home</h5>
                     </a></li>
-                <li><a href="newregist.html">
+                <li><a href="newregist.php">
                         <h5>Account</h5>
                     </a></li>
                 <li><a href="aboutus.php">
@@ -23,14 +23,10 @@
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
                     </a></li>
-<<<<<<< HEAD
-                <li><a href="file\NSC_26p23e0039_Report_Final01.pdf" download="Allergy_paper.pdf">
-=======
                 <li><a href="abt.php">
                         <h5>Details</h5>
                     </a></li>
                 <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
->>>>>>> 9a36c1f96a421a41ab8d34e057dffa408a71a660
                         <h5>Paper</h5>
                     </a></li>
             </ul>
@@ -235,11 +231,7 @@
         while (retryCount > 0) {
             try {
                 const detectionsResponse = await fetch(
-<<<<<<< HEAD
-                `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
-=======
                     `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
->>>>>>> 9a36c1f96a421a41ab8d34e057dffa408a71a660
                 if (detectionsResponse.ok) {
                     const detections = await detectionsResponse.json();
                     return detections;
@@ -281,11 +273,7 @@
 
             console.log('Image URL:', imageUrl); // Debug output
             uploadedPhoto.src =
-<<<<<<< HEAD
-            `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
-=======
                 `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
->>>>>>> 9a36c1f96a421a41ab8d34e057dffa408a71a660
             uploadedPhoto.style.display = 'block';
 
             try {
@@ -512,8 +500,39 @@
         }
     }
     </script>
+<!--  -->
 
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
 
+        function compareAllergies(resultSet) {
+            const storedAnswers = getCookie('answers');
+            if (storedAnswers) {
+                const allergyIntegers = storedAnswers.split(',').map(Number);
+                const matchingAllergies = resultSet.filter(element => allergyIntegers.includes(element));
+
+                console.log('Matching Allergies:', matchingAllergies);
+                return matchingAllergies;
+            } else {
+                console.log('No allergies stored in cookies.');
+                return [];
+            }
+        }
+
+        function checkAllergies() {
+            // const resultSet = [1, 2, 3, 4, 5, 6, 7]; // Example resultSet
+            const matchingAllergies = compareAllergies(resultSet);
+            // alert('Matching Allergies: ' + matchingAllergies.join(', '));
+        }
+        
+    </script>
+
+<!--  -->
 </body>
 
 </html>
