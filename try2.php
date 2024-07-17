@@ -112,6 +112,7 @@
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
     const changeCameraButton = document.getElementById('change-camera-button');
+    const tryNowButton = document.getElementById('jump-button');
 
     let currentStream;
     let currentDeviceIndex = 0;
@@ -119,7 +120,7 @@
 
     async function fetchData() {
         try {
-            const testresponse = await fetch('https://10.205.240.138:5000/test');
+            const testresponse = await fetch('https://tameszaza.pythonanywhere.com/test');
             if (testresponse.ok) {
                 const jsonResponse = await testresponse.json();
                 console.log(jsonResponse);
@@ -153,6 +154,44 @@
         currentStream = stream;
         video.srcObject = stream;
     }
+    tryNowButton.addEventListener('click', () => {
+        fetch('https://tameszaza.pythonanywhere.com/delete_all', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            folder: 'processed'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            console.log(data.message);
+                        } else {
+                            alert(data.error);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                fetch('https://tameszaza.pythonanywhere.com/delete_all', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            folder: 'uploads'
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            console.log(data.message);
+                        } else {
+                            alert(data.error);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+    })
 
     captureButton.addEventListener('click', () => {
         canvas.width = video.videoWidth;
@@ -195,7 +234,7 @@
 
         formData.append('file', file);
 
-        const response = await fetch('https://10.205.240.138:5000/upload', {
+        const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
             method: 'POST',
             body: formData
         });
@@ -205,10 +244,10 @@
             const imageUrl = data.image_url;
 
             console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src = `https://10.205.240.138:5000${imageUrl}`; // Ensure the correct URL is used
+            uploadedPhoto.src = `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
-            const detectionsResponse = await fetch('https://10.205.240.138:5000/detections');
+            const detectionsResponse = await fetch('https://tameszaza.pythonanywhere.com/detections');
             if (detectionsResponse.ok) {
                 foutput.textContent = "Detected Items";
                 soutput.textContent = "Allergy Group";
@@ -231,42 +270,7 @@
                 }
 
                 displayAllergens(detections);
-                // fetch('https://10.205.240.138:5000/delete_all', {
-                //         method: 'POST',
-                //         headers: {
-                //             'Content-Type': 'application/json'
-                //         },
-                //         body: JSON.stringify({
-                //             folder: 'processed'
-                //         })
-                //     })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         if (data.message) {
-                //             console.log(data.message);
-                //         } else {
-                //             alert(data.error);
-                //         }
-                //     })
-                //     .catch(error => console.error('Error:', error));
-                // fetch('https://10.205.240.138:5000/delete_all', {
-                //         method: 'POST',
-                //         headers: {
-                //             'Content-Type': 'application/json'
-                //         },
-                //         body: JSON.stringify({
-                //             folder: 'uploads'
-                //         })
-                //     })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         if (data.message) {
-                //             console.log(data.message);
-                //         } else {
-                //             alert(data.error);
-                //         }
-                //     })
-                //     .catch(error => console.error('Error:', error));
+                
 
             } else {
                 console.error('Failed to fetch detections');
