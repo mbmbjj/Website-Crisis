@@ -73,8 +73,8 @@
         </div>
         <div class="column">
             <div class="member">
-                <img src="images/138281.jpg" alt="Image of First member" class="round-border">
-                <h2>ธนกฤต ดำดวน</h2>
+                <img src="images/Bampic.jpg" alt="Image of First member" class="round-border">
+                <h2>ภัคธดา พิธาวราธร</h2>
                 <p class="about-text">
                     <span class="tab-space"></span>"สวัสดีค่า หนู ภัคธดา พิธาวราธร หรือ แบมแบมค่ะ ตอนนี้กำลังศึกษาอยู่ชั้นมัธยมศึกษาปีที่ 5 
                     โรงเรียนกำเนิดวิทย์ ในด้านวิชาการมีความชื่นชอบและสนใจในคอมพิวเตอร์และ เพราะรู้สึกว่าคอมพิวเตอร์มีอะไรให้เรียนรู้เยอะมาก ๆ  
