@@ -64,6 +64,6 @@
 
         <button type="submit">Login</button>
     </form>
-    <button onclick="window.location.href='newregister.php'">New user?Register</button>
+    <a href="newregist.php"><h5>New user?Register</h5></a>
 </body>
 </html>
