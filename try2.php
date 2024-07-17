@@ -67,6 +67,8 @@
                     <ul id="detectedItems"></ul>
                     <p class='output' id='soutput'></p>
                     <ul id="detectedAller"></ul>
+                    <p class='output' id='toutput'></p>
+                    <ul id="matchAller"></ul>
                     <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
@@ -115,6 +117,7 @@
     const matchAller =document.getElementById('matchAller');
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
+    const toutput = document.getElementById("toutput");
     const changeCameraButton = document.getElementById('change-camera-button');
     const tryNowButton = document.getElementById('jump-button');
 
@@ -281,6 +284,7 @@
                 const detections = await fetchDetections(imageId);
                 foutput.textContent = "Detected Items";
                 soutput.textContent = "Allergy Group";
+                toutput.textContent = 'Your matched allergy';
                 console.log('Detections:', detections); // Debug output
                 detectedItemsList.innerHTML = '';
                 if (detections.length === 0) {
@@ -443,9 +447,9 @@
     function replaceItems(detectedItems, specificNames) {
         return detectedItems.map(item => specificNames[item.toLowerCase()] || item);
     }
-
+    const resultSet = new Set();
     function displayAllergens(detections) {
-        const resultSet = new Set();
+        
         const updatedDetectedItems = replaceItems(detections, specificNames);
 
         updatedDetectedItems.forEach(item => {
