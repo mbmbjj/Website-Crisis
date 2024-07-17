@@ -53,13 +53,25 @@ h1{
     padding: 10px; /* Optional: Add padding for spacing */
     box-sizing: border-box; /* Ensure padding is included in width */
 }
-#left-column, #advisor-text {
+#left-column, #advisor-text, #what-is-text {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #advisor-name , #advisor-dess{
     text-align: left;
+}
+ul#class-ul{
+    
+    margin: 5%;
+    margin-top: 0;
+}
+#what-is-dess{
+    margin-bottom: 0;
+}
+ul#class-ul li{
+    
+    margin-right: 2%;
 }
 .column-white > * {
     margin-bottom: 20px;    /* Add space between each item */
@@ -136,8 +148,27 @@ li {
 li:last-child {
     margin-right: 0;
 }
+#development{
+    padding-top: 10%;
+}
 .round-border{
     border-radius: 5px;
+}
+.infointro{
+    margin-bottom: 0;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+.member .about-text{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+.member img {
+    width: 1000px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensures the image is scaled to cover the dimensions */
+    border-radius: 5px;
+    margin-bottom: 10px; /* Adjust spacing as needed */
 }
 .allerinfo ul {
     font-size: 0.47cm !important;
@@ -203,7 +234,7 @@ h5 {
 }
 footer p{
     margin-top: 1%;
-    font-size: smaller;
+    font-size: small;
 }
 footer h2{
     font-size: large;
@@ -259,6 +290,15 @@ h4.topic-small{
     text-align: right;
     margin: 50px;
     flex: 1.2;
+}
+#what-is-text{
+    background-color: #fff8eb;
+}
+#what-is{
+    line-height: 2;
+    letter-spacing: 4px;
+    margin-top: 10%;
+    margin-bottom: 20%;
 }
 .resize {
     width: 100%;
@@ -339,7 +379,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button, #select-file-button ,#submit-button, #download-link , #jump-button{
+#capture-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;

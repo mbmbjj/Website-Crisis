@@ -4,6 +4,7 @@
 <head>
     <title>My Page!</title>
     <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -13,7 +14,7 @@
                 <li><a href="try2.php">
                         <h5>Home</h5>
                     </a></li>
-                <li><a href="contact.php">
+                <li><a href="newregist.html">
                         <h5>Account</h5>
                     </a></li>
                 <li><a href="aboutus.php">
@@ -22,7 +23,7 @@
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
                     </a></li>
-                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+                <li><a href="file\NSC_26p23e0039_Report_Final01.pdf" download="Allergy_paper.pdf">
                         <h5>Paper</h5>
                     </a></li>
             </ul>
@@ -31,7 +32,7 @@
     <section id='first-section'>
         <div class='column' id='title'>
             <h1 class="Topic"><em>Food Scanning Programme<br><br> For Food Allergies</em></h1>
-            <p class='describtion'>"Add Description here Lorem ipsum donor bra/\/\"</p>
+            <p class='describtion'>"Quickly identify allergens in your diet."</p>
             <a href="#scan"><button id="jump-button" class="jump">Try now</button></a>
 
         </div>
@@ -47,7 +48,10 @@
                 <div id="camera-container">
                     <video id="video" autoplay></video>
                     <div class="button-row">
+
                         <button id="capture-button" class="capture">Capture Photo</button>
+                        <button id="change-camera-button" class="capture"><i
+                                class="fa-solid fa-camera-rotate"></i></button>
                         <button id="select-file-button" class="modal-button">Select File</button>
                     </div>
                     <canvas id="canvas" style="display:none;"></canvas>
@@ -60,7 +64,7 @@
                     <ul id="detectedItems"></ul>
                     <p class='output' id='soutput'></p>
                     <ul id="detectedAller"></ul>
-                    <p class='describtion'>"Add Disclaimer here Lorem ipsum donor bra/\/\"</p>
+                    <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
                 <div id="side-text-right">2. Tap the camera icon</div>
@@ -76,7 +80,7 @@
     </section>
     <footer>
         <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0123456789</p>
+        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
             <p>Agreement
@@ -107,16 +111,87 @@
     const detectedAller = document.getElementById('detectedAller');
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
+    const changeCameraButton = document.getElementById('change-camera-button');
+    const tryNowButton = document.getElementById('jump-button');
 
-    navigator.mediaDevices.getUserMedia({
-            video: true
-        })
-        .then(stream => {
-            video.srcObject = stream;
-        })
-        .catch(error => {
-            console.error('Error accessing the camera', error);
+    let currentStream;
+    let currentDeviceIndex = 0;
+    let videoDevices = [];
+
+    async function fetchData() {
+        try {
+            const testresponse = await fetch('https://tameszaza.pythonanywhere.com/test');
+            if (testresponse.ok) {
+                const jsonResponse = await testresponse.json();
+                console.log(jsonResponse);
+            } else {
+                console.error('HTTP error', testresponse.status);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    // Call the async function
+    fetchData();
+
+    async function getVideoDevices() {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        videoDevices = devices.filter(device => device.kind === 'videoinput');
+    }
+
+    async function startStream(deviceId) {
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+        }
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: deviceId ? {
+                    exact: deviceId
+                } : undefined
+            }
         });
+        currentStream = stream;
+        video.srcObject = stream;
+    }
+    tryNowButton.addEventListener('click', () => {
+        fetch('https://tameszaza.pythonanywhere.com/delete_all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    folder: 'processed'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        fetch('https://tameszaza.pythonanywhere.com/delete_all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    folder: 'uploads'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log(data.message);
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    })
 
     captureButton.addEventListener('click', () => {
         canvas.width = video.videoWidth;
@@ -124,7 +199,7 @@
         canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
         const dataUrl = canvas.toDataURL('image/png');
-        uploadedPhoto.src =dataUrl;
+        uploadedPhoto.src = dataUrl;
         uploadedPhoto.style.display = 'block';
 
         const blob = dataURLToBlob(dataUrl);
@@ -149,6 +224,30 @@
         }
     });
 
+    async function fetchDetections(imageId, retryCount = 5, delay = 1000) {
+        while (retryCount > 0) {
+            try {
+                const detectionsResponse = await fetch(
+                `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
+                if (detectionsResponse.ok) {
+                    const detections = await detectionsResponse.json();
+                    return detections;
+                } else if (detectionsResponse.status === 404) {
+                    console.log(`Detections not found yet, retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    retryCount--;
+                } else {
+                    throw new Error('Failed to fetch detections');
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                retryCount--;
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+        throw new Error('Failed to fetch detections after multiple attempts');
+    }
+
     submitButton.addEventListener('click', async () => {
         const formData = new FormData();
         const file = fileInput.files[0];
@@ -159,7 +258,7 @@
 
         formData.append('file', file);
 
-        const response = await fetch('http://localhost:5000/upload', {
+        const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
             method: 'POST',
             body: formData
         });
@@ -167,16 +266,17 @@
         if (response.ok) {
             const data = await response.json();
             const imageUrl = data.image_url;
+            const imageId = data.id; // Capture the unique identifier
 
             console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src = `http://localhost:5000${imageUrl}`; // Ensure the correct URL is used
+            uploadedPhoto.src =
+            `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
-            const detectionsResponse = await fetch('http://localhost:5000/detections');
-            if (detectionsResponse.ok) {
-                foutput.textContent = "Detected Items"
-                soutput.textContent = "Allergy Group"
-                const detections = await detectionsResponse.json();
+            try {
+                const detections = await fetchDetections(imageId);
+                foutput.textContent = "Detected Items";
+                soutput.textContent = "Allergy Group";
                 console.log('Detections:', detections); // Debug output
                 detectedItemsList.innerHTML = '';
                 if (detections.length === 0) {
@@ -195,49 +295,32 @@
                 }
 
                 displayAllergens(detections);
-                fetch('http://localhost:5000/delete_all', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ folder: 'processed' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    console.log(data.message);
-                } else {
-                    alert(data.error);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-            fetch('http://localhost:5000/delete_all', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ folder: 'uploads' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    console.log(data.message);
-                } else {
-                    alert(data.error);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-            
-            } else {
-                console.error('Failed to fetch detections');
+            } catch (error) {
+                console.error('Failed to fetch detections:', error);
             }
-            
-            
         } else {
             alert('Upload failed');
             console.error('Upload failed');
         }
     });
+
+
+    changeCameraButton.addEventListener('click', () => {
+        if (videoDevices.length > 1) {
+            currentDeviceIndex = (currentDeviceIndex + 1) % videoDevices.length;
+            startStream(videoDevices[currentDeviceIndex].deviceId);
+        }
+    });
+
+    // Initialize video stream and devices
+    getVideoDevices().then(() => {
+        if (videoDevices.length > 0) {
+            startStream(videoDevices[currentDeviceIndex].deviceId);
+        } else {
+            console.error('No video devices found');
+        }
+    });
+
 
     function dataURLToBlob(dataURL) {
         const parts = dataURL.split(',');

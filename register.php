@@ -138,7 +138,7 @@ if(isset($_POST['Wheat'])) $allergies[] = $allergyMap['Wheat'];
                 }
                 else{
 
-                    mysqli_query($con,"INSERT INTO users(Username,Email,Age,Password, Allergies) VALUES('$username','$email','$age','$password', '$allergiesString')") or die("Error Occured");
+                    mysqli_query($con,"INSERT INTO realUser(Username,Email,Age,Password, Allergies) VALUES('$username','$email','$age','$password', '$allergiesString')") or die("Error Occured");
 
                     echo "<div class='message'>
                             <p>Registration successfully!</p>

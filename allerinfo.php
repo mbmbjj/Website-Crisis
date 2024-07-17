@@ -2,11 +2,12 @@
 <html>
 
 <head>
+    <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -20,6 +21,9 @@
                     </a></li>
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
+                    </a></li>
+                <li><a href="abt.php">
+                        <h5>Details</h5>
                     </a></li>
                 <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
                         <h5>Paper</h5>
@@ -86,17 +90,18 @@
             </p>
         </div>
     </section>
-    <section>
-    <div class="infointro">
-        <p>
-            โดยการแพ้อาหารแบ่งตามประเภทอาหารที่แพ้ได้ 7 หมวด ได้แก่ :
-        </p>
-    </div></section>
-    
+    <section class="infointro">
+        <div class="infointro">
+            <h1>
+                โดยการแพ้อาหารแบ่งตามประเภทอาหารที่แพ้ได้ 7 หมวด ได้แก่ :
+            </h1>
+        </div>
+    </section>
+
     <section>
         <div class="column-white">
             <div class="topic">
-            <h4 class="topic-small">1. ปลา</h4>
+                <h4 class="topic-small">1. ปลา</h4>
             </div>
             <div class="allerinfo">
                 <p>ตัวอย่างอาหารที่ต้องเลี่ยง : <br /></p>
@@ -108,14 +113,14 @@
                     <li>ปูอัด</li>
                     <li><b>ฉลากระบุคำว่า</b> ปลา(Fish)</li>
                     <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงน้ำปลา</li>
-                    
+
                 </ul>
             </div>
         </div>
         <div class="column-white">
 
             <div class="topic">
-            <h4 class="topic-small">2. อาหารทะเล</h4>
+                <h4 class="topic-small">2. อาหารทะเล</h4>
             </div>
             <div class="allerinfo">
                 <p>ตัวอย่างอาหารที่ต้องเลี่ยง : <br /></p>
@@ -127,7 +132,7 @@
                     <li>กั้ง</li>
                     <li>สัตว์ทะเลเปลือกแข็งอื่นๆ</li>
                     <li>
-                    <b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงเครื่องปรุงที่มีอาหารทะเลปนที่ไม่ใช่ปลา
+                        <b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงเครื่องปรุงที่มีอาหารทะเลปนที่ไม่ใช่ปลา
                         เช่น น้ำมันหอย
                     </li>
                 </ul>
@@ -142,7 +147,7 @@
                 <h4 class="topic-small">3. ไข่</h4>
             </div>
             <div class="allerinfo">
-                
+
                 <p>ตัวอย่างอาหารที่ต้องเลี่ยง : <br /></p>
                 <ul>
                     <li>ขนมไทยที่มีไข่ เช่น ทองหยิบทองหยอด ฝอยทอง</li>
@@ -150,11 +155,11 @@
                     <li>บะหมี่</li>
                     <!-- <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของแป้งสาลี</li> -->
                     <li>
-                        
-                    <b>ฉลากระบุคำว่า</b> <br>egg, egg yolk,<br> egg white,<br>
+
+                        <b>ฉลากระบุคำว่า</b> <br>egg, egg yolk,<br> egg white,<br>
                         โอวัลบูมิน<br>(ovalbumin),<br>โอโวมูคอยด์<br>(ovomucoid)
                     </li>
-                    
+
 
                 </ul>
                 <p class="about-txt">*หากแพ้ไข่ไก่ควรหลีกเลี่ยงไข่ทุกชนิด เช่น ไข่เป็ด ไข่นกกระทา</p>
@@ -178,7 +183,7 @@
                     <li><b>ในรายที่แพ้รุนแรง </b> หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของแป้งสาลี</li>
 
                     <li>
-                    <b>ฉลากระบุคำว่า</b> <br>แป้งสาลี, <br>แป้งข้าวสาลี (wheat) ,<br>กลูเตน(gluten)
+                        <b>ฉลากระบุคำว่า</b> <br>แป้งสาลี, <br>แป้งข้าวสาลี (wheat) ,<br>กลูเตน(gluten)
                         ,<br>Flour(แป้งฟราว์) ,<br>แป้ง spelt ,<br>มอล์ต(malt),<br> Barley(บาเล่ย์)
                         ,<br>Rye(ไรย์),<br> oat (โอ๊ด)
                     </li>
@@ -199,7 +204,7 @@
                     <li>ส้มตำใส่ถั่วลิสง ๆ</li>
                     <!-- <li><b>ในรายที่แพ้รุนแรง </b> หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของถั่วลิสง</li> -->
                     <li>
-                    <b>ฉลากระบุคำว่า</b><br>ถั่วลิสง (peanut),<br> nuts,<br> mixed nuts
+                        <b>ฉลากระบุคำว่า</b><br>ถั่วลิสง (peanut),<br> nuts,<br> mixed nuts
                     </li>
                 </ul>
             </div>
@@ -218,7 +223,7 @@
                     <li>อาหารที่มีถั่วเหลืองอื่น ๆ</li>
                     <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของ <br>ถั่วเหลือง</li>
                     <li>
-                    <b>ฉลากระบุคำว่า</b><br> Soy , Soybean ซึ่งแปลว่า
+                        <b>ฉลากระบุคำว่า</b><br> Soy , Soybean ซึ่งแปลว่า
                         ว่ามีส่วนประกอบของถั่วเหลือง
                     </li>
                 </ul>
@@ -242,7 +247,7 @@
                     <li>ชีส</li>
                     <li>อาหารที่มีนมวัวอื่นๆ</li>
                     <li>
-                    <b>ฉลากระบุคำว่า</b><br> นมผง ,<br>นมวัว <br>(Cow’s milk) ,<br>เคซีน(casein) ,<br>เวย์
+                        <b>ฉลากระบุคำว่า</b><br> นมผง ,<br>นมวัว <br>(Cow’s milk) ,<br>เคซีน(casein) ,<br>เวย์
                         (whey)
                     </li>
                 </ul>
@@ -252,24 +257,34 @@
         <br /><br />
     </section>
     <section>
-    <div class="bottom">
-        <h4>เอกสารอ้างอิง</h4>
-        <p class="ref">
-            เอกสารให้ความรู้ "Food allergy&anaphylaxis training program" <br />
-            จัดทำโดย ศูนย์ความเป็นเลิศทางด้านโรคภูมิเเพ้ โรคหืดและะระบบทางเดินหายใจ
-            เเละคณะกรรมการดูเเลผู้ป่วยด้านโภชนบำบัด
-            โรงพยาบาลธรรมศาสตร์เฉลิมพระเกียรติ
-        </p>
-    </div>
+        <div class="bottom">
+            <h4>เอกสารอ้างอิง</h4>
+            <p class="ref">
+                เอกสารให้ความรู้ "Food allergy&anaphylaxis training program" <br />
+                จัดทำโดย ศูนย์ความเป็นเลิศทางด้านโรคภูมิเเพ้ โรคหืดและะระบบทางเดินหายใจ
+                เเละคณะกรรมการดูเเลผู้ป่วยด้านโภชนบำบัด
+                โรงพยาบาลธรรมศาสตร์เฉลิมพระเกียรติ
+            </p>
+        </div>
     </section>
     <footer>
         <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0123456789</p>
+        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
-            <p>Agreement 
-This software is a work developed by Adulvitch Kajittanon, Thanakrit Damduan and Phakthada Pitavaratorn from Kamnoetvidya Science Academy (KVIS) under the provision of Dr.Kanes Sumetpipat under Program for food allergy warning in food allergy which has been supported by the National Science and Technology Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills in developing software. Therefore, the intellectual property of this software shall belong to the developer and the developer gives  
-NSTDA a permission to distribute this software as an “as is” and non-modified software for a temporary and non-exclusive use without remuneration to anyone for his or her own purpose or academic purpose, which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user for taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall not be liable for any error, software efficiency and damages in connection with or arising out of the use of the software.</p>
+            <p>Agreement
+                This software is a work developed by Adulvitch Kajittanon, Thanakrit Damduan and Phakthada Pitavaratorn
+                from Kamnoetvidya Science Academy (KVIS) under the provision of Dr.Kanes Sumetpipat under Program for
+                food allergy warning in food allergy which has been supported by the National Science and Technology
+                Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills
+                in developing software. Therefore, the intellectual property of this software shall belong to the
+                developer and the developer gives
+                NSTDA a permission to distribute this software as an “as is” and non-modified software for a temporary
+                and non-exclusive use without remuneration to anyone for his or her own purpose or academic purpose,
+                which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user for
+                taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall
+                not be liable for any error, software efficiency and damages in connection with or arising out of the
+                use of the software.</p>
         </div>
     </footer>
 </body>

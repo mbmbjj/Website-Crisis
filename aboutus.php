@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>About Us</title>
+    <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -21,6 +21,9 @@
                     </a></li>
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
+                    </a></li>
+                <li><a href="abt.php">
+                        <h5>Details</h5>
                     </a></li>
                 <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
                         <h5>Paper</h5>
@@ -92,7 +95,8 @@
         <h1>Advisor</h1>
     </section>
     <section class="flex-hori">
-        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border"></div>
+        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border">
+        </div>
         <div class="column" id="advisor-text">
             <h2 id="advisor-name">ธนกฤต ดำดวน</h2>
             <p class="about-text" id="advisor-dess">
@@ -105,7 +109,7 @@
 
     <footer>
         <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0123456789</p>
+        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
             <p>Agreement

@@ -1,10 +1,26 @@
 <?php 
-   session_start();
+// Enable error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-   include("php/config.php");
-   if(!isset($_SESSION['valid'])){
+// Start output buffering
+ob_start();
+
+// Start the session
+session_start();
+
+// Include the config file
+include("php/config.php");
+
+// Check if session is valid
+if(!isset($_SESSION['valid'])){
     header("Location: loginpage.php");
-   }
+    exit();
+}
+
+// End output buffering and flush output
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>
