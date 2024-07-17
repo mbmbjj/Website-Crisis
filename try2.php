@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>My Page!</title>
+    <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -23,7 +23,14 @@
                 <li><a href="allerinfo.php">
                         <h5>Learn more</h5>
                     </a></li>
+<<<<<<< HEAD
                 <li><a href="file\NSC_26p23e0039_Report_Final01.pdf" download="Allergy_paper.pdf">
+=======
+                <li><a href="abt.php">
+                        <h5>Details</h5>
+                    </a></li>
+                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+>>>>>>> 9a36c1f96a421a41ab8d34e057dffa408a71a660
                         <h5>Paper</h5>
                     </a></li>
             </ul>
@@ -228,7 +235,11 @@
         while (retryCount > 0) {
             try {
                 const detectionsResponse = await fetch(
+<<<<<<< HEAD
                 `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
+=======
+                    `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
+>>>>>>> 9a36c1f96a421a41ab8d34e057dffa408a71a660
                 if (detectionsResponse.ok) {
                     const detections = await detectionsResponse.json();
                     return detections;
@@ -270,7 +281,11 @@
 
             console.log('Image URL:', imageUrl); // Debug output
             uploadedPhoto.src =
+<<<<<<< HEAD
             `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
+=======
+                `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
+>>>>>>> 9a36c1f96a421a41ab8d34e057dffa408a71a660
             uploadedPhoto.style.display = 'block';
 
             try {
