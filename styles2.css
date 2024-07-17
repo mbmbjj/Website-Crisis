@@ -151,6 +151,29 @@ section#login{
 section#thick-area{
     height: 300px;
 }
+#checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.checkbox-item input {
+    margin-right: 5px;
+}
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+#thick{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+#other-input {
+    margin-bottom: 15px;
+}
 ul.myUL {
     padding: 0;
     margin: 0;
@@ -411,7 +434,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button,#login-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
+#capture-button, #register-button,#login-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;

@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Food Scanner</title>
-<link rel="stylesheet" href="styles2.css">
+    <title>Food Scanner</title>
+    <link rel="stylesheet" href="styles2.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            return null;
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    function checkLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const storedUsername = getCookie('username');
+        const storedPassword = getCookie('password');
+
+        if (username === storedUsername && password === storedPassword) {
+            window.location.href = 'try2.php';
+        } else {
+            alert('Wrong username or password.');
         }
-
-        function checkLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const storedUsername = getCookie('username');
-            const storedPassword = getCookie('password');
-
-            if (username === storedUsername && password === storedPassword) {
-                window.location.href = 'try2.php';
-            } else {
-                alert('Wrong username or password.');
-            }
-        }
+    }
     </script>
 </head>
+
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -53,21 +55,24 @@
             </ul>
         </div>
     </header>
-    <section class="first-section" id="login"><h1 class="Topic">Login</h1>
-    <div class="input-form">
-    <form onsubmit="checkLogin(); return false;">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" class="input-text" required><br><br>
+    <section class="first-section" id="login">
+        <h1 class="Topic">Login</h1>
+        <div class="input-form">
+            <form onsubmit="checkLogin(); return false;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="input-text" required><br><br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" class="input-text" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="input-text" required><br><br>
 
-        <button type="submit" id="login-button">Login</button>
-    </form>
-    <a href="newregist.php"><h5 class="register-link">New user? Register</h5></a>
+                <button type="submit" id="login-button">Login</button>
+            </form>
+            <a href="newregist.php">
+                <h5 class="register-link">New user? Register</h5>
+            </a></div>
     </section>
     <section id="thick-area"></section>
-    </div>
+    
     <footer>
         <h2>contact us</h2>
         <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
@@ -89,4 +94,5 @@
         </div>
     </footer>
 </body>
+
 </html>
