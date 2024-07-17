@@ -26,7 +26,7 @@
                 <li><a href="abt.php">
                         <h5>Details</h5>
                     </a></li>
-                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+                <li><a href="file\NSC_26p23e0039_Report_Final01.pdf" download="Allergy_paper.pdf">
                         <h5>Paper</h5>
                     </a></li>
             </ul>
