@@ -537,7 +537,9 @@
             matchSet.add(matchingAllergies);
             // alert('Matching Allergies: ' + matchingAllergies.join(', '));
         }
-
+resultSet.forEach(element=>{
+    compareAllergies(resultSet);
+});
         if (resultSet.has(1) && matchSet.has(1)) {
             listItem = document.createElement('li');
             listItem.textContent = "Soy"
