@@ -14,7 +14,7 @@
                 <li><a href="try2.php">
                         <h5>Home</h5>
                     </a></li>
-                <li><a href="newregist.php">
+                <li><a href="newlogin.php">
                         <h5>Account</h5>
                     </a></li>
                 <li><a href="aboutus.php">
@@ -529,7 +529,7 @@
             const matchingAllergies = compareAllergies(resultSet);
             // alert('Matching Allergies: ' + matchingAllergies.join(', '));
         }
-        
+
     </script>
 
 <!--  -->
