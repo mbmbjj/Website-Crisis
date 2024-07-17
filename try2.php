@@ -32,7 +32,7 @@
     <section id='first-section'>
         <div class='column' id='title'>
             <h1 class="Topic"><em>Food Scanning Programme<br><br> For Food Allergies</em></h1>
-            <p class='describtion'>"Add Description here Lorem ipsum donor bra/\/\"</p>
+            <p class='describtion'>"Quickly identify allergens in your diet."</p>
             <a href="#scan"><button id="jump-button" class="jump">Try now</button></a>
 
         </div>
@@ -64,7 +64,7 @@
                     <ul id="detectedItems"></ul>
                     <p class='output' id='soutput'></p>
                     <ul id="detectedAller"></ul>
-                    <p class='describtion'>"Add Disclaimer here Lorem ipsum donor bra/\/\"</p>
+                    <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
                 <div id="side-text-right">2. Tap the camera icon</div>
