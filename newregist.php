@@ -17,6 +17,9 @@
             document.cookie = `password=${password}; path=/`;
             document.cookie = `answers=${answers.join(',')}; path=/`;
             document.cookie = `otherAnswer=${otherAnswer}; path=/`;
+
+            // Redirect to newlogin.php after storing the data
+            window.location.href = 'newlogin.php';
         }
 
         function showOtherAnswerInput() {
@@ -42,19 +45,19 @@
         <input type="password" id="password" name="password" required><br><br>
 
         <label>Allergies (select all that apply):</label><br>
-        <input type="checkbox" id="egg" name="allergy" value="egg">
+        <input type="checkbox" id="egg" name="allergy" value="1">
         <label for="egg">Egg</label><br>
-        <input type="checkbox" id="fish" name="allergy" value="fish">
+        <input type="checkbox" id="fish" name="allergy" value="2">
         <label for="fish">Fish</label><br>
-        <input type="checkbox" id="peanut" name="allergy" value="peanut">
+        <input type="checkbox" id="peanut" name="allergy" value="3">
         <label for="peanut">Peanut</label><br>
-        <input type="checkbox" id="milk" name="allergy" value="milk">
+        <input type="checkbox" id="milk" name="allergy" value="4">
         <label for="milk">Milk</label><br>
-        <input type="checkbox" id="seafood" name="allergy" value="seafood">
+        <input type="checkbox" id="seafood" name="allergy" value="5">
         <label for="seafood">Seafood</label><br>
-        <input type="checkbox" id="soy" name="allergy" value="soy">
+        <input type="checkbox" id="soy" name="allergy" value="6">
         <label for="soy">Soy</label><br>
-        <input type="checkbox" id="wheat" name="allergy" value="wheat">
+        <input type="checkbox" id="wheat" name="allergy" value="7">
         <label for="wheat">Wheat</label><br>
         <input type="checkbox" id="other" name="allergy" value="other" onclick="showOtherAnswerInput()">
         <label for="other">Other</label><br>
