@@ -130,6 +130,13 @@ div.column h2{
     text-align: center; /* Centers the text */
 }
 
+section#login{
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
+    
+    text-align: center; /* Centers the text */
+}
 .top-container {
     text-align: center;
     width: 100%;
