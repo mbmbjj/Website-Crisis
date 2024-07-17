@@ -145,8 +145,34 @@ section#login{
     background-color: moccasin;
     border-radius: 5px;
     padding: 20px;
-    width: 300px;
+    width: 400px;
     text-align: center;
+}
+section#thick-area{
+    height: 300px;
+}
+#checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.checkbox-item input {
+    margin-right: 5px;
+}
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+#thick{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+#other-input {
+    margin-bottom: 15px;
 }
 ul.myUL {
     padding: 0;
@@ -163,11 +189,12 @@ ul.myUL {
     color: black;
 }
 .input-text{
+    background-color: #fff8eb;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 15px;
-    width: calc(100% - 22px); /* Adjust width to account for padding */
+    width: calc(100% - 40px); /* Adjust width to account for padding */
 }
 li {
     display: inline-block;
@@ -407,7 +434,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button,#login-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
+#capture-button, #register-button,#login-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;
