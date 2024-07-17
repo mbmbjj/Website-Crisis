@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 
@@ -25,7 +26,7 @@
                         <h5>Details</h5>
                     </a></li>
                 <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
-
+                        <h5>Paper</h5>
                     </a></li>
             </ul>
         </div>
@@ -38,7 +39,7 @@
         </div>
         <div class="column-white" id="what-is-text">
             <p class="about-text" id="what-is-dess">
-                Food Scanning Programme For Food Allergies
+                <span class="tab-space"></span>Food Scanning Programme For Food Allergies
                 เป็นโปรแกรมแสกนส่วนประกอบของอาหารพร้อมระบุกลุ่มการแพ้อาหารมีเบื้องหลังการทำงานด้วย Machine learning
                 model YOLOv8 ที่มีรายละเอียดการทำงานตามแผนภาพทางด้านซ้ายนี้ โดยใช้การทำงานในระบบ API based
                 หากสนใจข้อมูลสามารถโหลดเอกสารเพิ่มเติมได้บริเวณแถบขวามสุดด้านบนสุดของหน้าเว็ป <br>
@@ -99,60 +100,48 @@
     </section>
     <section class="banner" id="development">
         <h1>In development things</h1>
-        
+
     </section>
-    <section><div class="column">
+    <section>
+        <div class="column">
             <div class="member">
-                <img src="images/S__18669690.jpg" alt="Image of First member" class="round-border">
-                <h2>อดุลย์วิชญ์ ขจิตตานนท์</h2>
+                <img src="images\Food-101-dataset-Activeloop-Platform-visualization-image-1024x455.png"
+                    alt="Image of Dataset Expansion" class="round-border">
+                <h2>Dataset Expansion</h2>
                 <p class="about-text">
-                    <span class="tab-space"></span>"ผม อดุลย์วิชญ์ ขจิตตานนท์ ชื่อเล่นชื่อพัตเตอร์ครับ ตอนนี้อยู่ชั้น
-                    ม.5 โรงเรียนกำเนิดวิทย์ มีความสนใจในด้านคอมพิวเตอร์ มีคว่ามถนัดในด้าน Problem solving และ algorithm
-                    เคยเขียนภาษา C, C++, Python, HTML, CSS, PHP, Java, JavaScript
-                    ตอนนี้กำลังศึกษาในส่วน Machine learning เป็นหลัก ได้รับเลือกเป็นสำรองผู้แทนศูนย์ สอวน. คอมพิวเตอร์
-                    ศูนย์โรงเรียนมหิดลวิทยานุสรณ์ ปีการศึกษา 2566
-                    งานอดิเรกที่ผมชอบ คือการเล่นบาสเก็ตบอลและเล่นเกมออนไลน์ครับ"
-                    <br><br>IG: adulkjt<br>
-                    Email: adulkajit@gmail.com<br>
-                    Tel: 0929989812
+                    <span class="tab-space"></span>เนื่องจากตอนนี้ Dataset
+                    ที่เราใช้ส่วนใหญ่จะเป็นภาพอาหารต่างประเทศทำให้มีข้อจำกัดในการใช้งาน
+                    ในการแสกนภาพอาหารถิ่นพวดเราจึงมีแผนที่จะขยายขอบเขตของ Dataset
+                    ที่ใช้ในการเรียนรู้ของโมเดลโดยมีแผนจะรวบรวมอาหารถิ่นของประเทศไทย และประเทศอื่น ๆ ในลำดับต่อไป
                 </p>
             </div>
         </div>
         <div class="column">
 
             <div class="member">
-                <img src="images/138281.jpg" alt="Image of First member" class="round-border">
-                <h2>ธนกฤต ดำดวน</h2>
+                <img src="images\F1_curve.png" alt="Image of Model Accuracy" class="round-border">
+                <h2>Model Accuracy</h2>
                 <p class="about-text">
-                    <span class="tab-space"></span>"ผม ธนกฤต ดำดวน สามารถเรียกผมว่าเตมส์ ก็ได้ครับ
-                    ผมเป็นนักเรียน ม.5 โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้านคอมพิวเตอร์ และฟิสิกส์
-                    ในด้านคอมพิวเตอร์ผมมีความสนใจด้าน การพัฒนา machine learning algorithm เป็นพิเศษ
-                    เคยได้ผ่านการอบรมค่าย สอวน.คอมพิวเตอร์ ค่าย 2 ศูนย์สามเสน
-                    เป็นผู้แทนศูนย์โรงเรียนมหิดลวิทยานุสรณ์วิชาฟิสิกส์เข้าร่วมการแข่งขันฟิสิกส์โอลิมปิกระดับชาติได้รับรางวัลเหรียญเงินคับ
-                    นอกจากทางด้านวิชาการแล้วผมยังมีความสนใจทางด้านการถ่ายภาพอีกด้วยครับ"
-                    <br><br>IG: dd_ttnk<br>
-                    Email: Thanakrit.dam64@gmail.com<br>
-                    Tel: 0843292183
+                    <span class="tab-space"></span>เรากำลังพัฒนาความแม่นยำของโมเดลของเราให้มีประสิทธิภาพ
+                    และเพื่อให้ผู้ใช้มีประสบการณ์การการใช้งานที่ดีที่สุดมีความผิดพลาดที่เกิดขึ้นน้อยที่สุดโดยทำได้โดยการหา
+                    Dataset
+                    ที่มีขนาดใหญ่ขึ้นและคุณภาพสูงขึ้นซึ่งกระบวนการทั้งหมดนี้ใช้เวลาและทางทีมพัฒนากำลังพยามอย่างเต็มที่เพื่อพัฒนาขีดความสามารถของ
                 </p>
             </div>
         </div>
         <div class="column">
+
             <div class="member">
-                <img src="images/138281.jpg" alt="Image of First member" class="round-border">
-                <h2>ธนกฤต ดำดวน</h2>
+                <img src="images\blank-profile-picture-973460_960_720.png" alt="Image of Customization"
+                    class="round-border">
+                <h2>Customization</h2>
                 <p class="about-text">
-                    <span class="tab-space"></span>"ผม ธนกฤต ดำดวน สามารถเรียกผมว่าเตมส์ ก็ได้ครับ
-                    ผมเป็นนักเรียน ม.5 โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้านคอมพิวเตอร์ และฟิสิกส์
-                    ในด้านคอมพิวเตอร์ผมมีความสนใจด้าน การพัฒนา machine learning algorithm เป็นพิเศษ
-                    เคยได้ผ่านการอบรมค่าย สอวน.คอมพิวเตอร์ ค่าย 2 ศูนย์สามเสน
-                    เป็นผู้แทนศูนย์โรงเรียนมหิดลวิทยานุสรณ์วิชาฟิสิกส์เข้าร่วมการแข่งขันฟิสิกส์โอลิมปิกระดับชาติได้รับรางวัลเหรียญเงินคับ
-                    นอกจากทางด้านวิชาการแล้วผมยังมีความสนใจทางด้านการถ่ายภาพอีกด้วยครับ"
-                    <br><br>IG: dd_ttnk<br>
-                    Email: Thanakrit.dam64@gmail.com<br>
-                    Tel: 0843292183
+                    <span class="tab-space"></span>เรากำลังพัฒนาระบบ customize เพื่อให้ผู้ใช้สามารถปรับแต่งหน้า web
+                    ปรับปรุงข้อมูลส่วนตัวการจัดเก็บข้อมูลและระบบเกี่ยวกับ account รวมถึงระบบ easter egg อื่น ๆ ด้วย
                 </p>
             </div>
-        </div></section>
+        </div>
+    </section>
     <footer>
         <h2>contact us</h2>
         <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>

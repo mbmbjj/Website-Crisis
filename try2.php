@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <title>My Page!</title>
+    <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -231,7 +231,7 @@
         while (retryCount > 0) {
             try {
                 const detectionsResponse = await fetch(
-                `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
+                    `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
                 if (detectionsResponse.ok) {
                     const detections = await detectionsResponse.json();
                     return detections;
@@ -273,7 +273,7 @@
 
             console.log('Image URL:', imageUrl); // Debug output
             uploadedPhoto.src =
-            `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
+                `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
             uploadedPhoto.style.display = 'block';
 
             try {

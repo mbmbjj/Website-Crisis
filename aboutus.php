@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>About Us</title>
+    <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -95,7 +95,8 @@
         <h1>Advisor</h1>
     </section>
     <section class="flex-hori">
-        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border"></div>
+        <div class="column-white" id="advisor"><img src="images/138281.jpg" alt="Advisor image" class="round-border">
+        </div>
         <div class="column" id="advisor-text">
             <h2 id="advisor-name">ธนกฤต ดำดวน</h2>
             <p class="about-text" id="advisor-dess">
