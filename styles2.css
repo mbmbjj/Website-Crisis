@@ -145,8 +145,11 @@ section#login{
     background-color: moccasin;
     border-radius: 5px;
     padding: 20px;
-    width: 300px;
+    width: 400px;
     text-align: center;
+}
+section#thick-area{
+    height: 300px;
 }
 ul.myUL {
     padding: 0;
@@ -163,11 +166,12 @@ ul.myUL {
     color: black;
 }
 .input-text{
+    background-color: #fff8eb;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 15px;
-    width: calc(100% - 22px); /* Adjust width to account for padding */
+    width: calc(100% - 40px); /* Adjust width to account for padding */
 }
 li {
     display: inline-block;
