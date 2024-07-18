@@ -284,7 +284,6 @@
                 const detections = await fetchDetections(imageId);
                 foutput.textContent = "Detected Items";
                 soutput.textContent = "Allergy Group";
-                toutput.textContent = 'Your matched allergy';
                 console.log('Detections:', detections); // Debug output
                 detectedItemsList.innerHTML = '';
                 if (detections.length === 0) {
@@ -447,9 +446,9 @@
     function replaceItems(detectedItems, specificNames) {
         return detectedItems.map(item => specificNames[item.toLowerCase()] || item);
     }
-    const resultSet = new Set();
+    
     function displayAllergens(detections) {
-        
+        const resultSet = new Set();
         const updatedDetectedItems = replaceItems(detections, specificNames);
 
         updatedDetectedItems.forEach(item => {
