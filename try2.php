@@ -62,7 +62,8 @@
                     <img id="uploaded-photo" alt="No Image uploaded" style="display:block;">
                     <!-- Ensure this image is visible -->
                     <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
-                    <button id="submit-button" class="submit">Submit</button>
+                    <div id="submit-container"><button id="submit-button" class="submit">Submit</button></div>
+                    <p class='output' id='submit-text'>Processing</p>
                     <p class='output' id='foutput'></p>
                     <ul id="detectedItems"></ul>
                     <p class='output' id='soutput'></p>
@@ -120,6 +121,7 @@
     const toutput = document.getElementById("toutput");
     const changeCameraButton = document.getElementById('change-camera-button');
     const tryNowButton = document.getElementById('jump-button');
+    const submitText =document.getElementById("submit-text");
 
     let currentStream;
     let currentDeviceIndex = 0;
@@ -237,6 +239,8 @@
                 const detectionsResponse = await fetch(
                     `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
                 if (detectionsResponse.ok) {
+                    submitButton.style.display = 'block';
+                    submitText.style.display = 'none';
                     const detections = await detectionsResponse.json();
                     return detections;
                 } else if (detectionsResponse.status === 404) {
@@ -256,6 +260,8 @@
     }
 
     submitButton.addEventListener('click', async () => {
+        submitButton.style.display = 'none';
+        submitText.style.display = 'block';
         const formData = new FormData();
         const file = fileInput.files[0];
         if (!file) {

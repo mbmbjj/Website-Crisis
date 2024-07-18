@@ -58,6 +58,9 @@ h1{
     justify-content: center;
     align-items: center;
 }
+#submit-button{
+    align-self: center;
+}
 #advisor-name , #advisor-dess{
     text-align: left;
 }
@@ -446,6 +449,11 @@ h4.topic-small{
     color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
+#submit-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 #jump-button{
     align-self: center !important; 
     display: flex;
@@ -497,6 +505,9 @@ h4.topic-small{
 .popup p {
     color: #333;
     margin-bottom: 0;
+}
+#submit-text{
+    display: none;
 }
 #close-btn {
     cursor: pointer;
