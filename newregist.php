@@ -108,7 +108,7 @@
             </div>
             <div id="other-input" style="display:none;">
                 <label for="other-answer">Please specify:</label>
-                <input type="text" id="other-answer" name="other-answer"><br><br>
+                <input type="text" id="other-answer" name="other-answer" class="input-text"><br><br>
             </div>
             <button type="submit" id="register-button">Register</button>
         </form>

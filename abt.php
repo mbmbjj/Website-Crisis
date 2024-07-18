@@ -7,13 +7,13 @@
 </head>
 
 <body>
-    <header>
+<header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
                         <h5>Home</h5>
                     </a></li>
-                <li><a href="contact.php">
+                <li><a href="newlogin.php">
                         <h5>Account</h5>
                     </a></li>
                 <li><a href="aboutus.php">
@@ -25,7 +25,7 @@
                 <li><a href="abt.php">
                         <h5>Details</h5>
                     </a></li>
-                <li><a href="file\NSC_26p23e0039_Report rev.1.pdf" download="Allergy_paper.pdf">
+                <li><a href="file\NSC_26p23e0039_Report_Final01.pdf" download="Allergy_paper.pdf">
                         <h5>Paper</h5>
                     </a></li>
             </ul>
