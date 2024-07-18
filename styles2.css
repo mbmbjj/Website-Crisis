@@ -452,7 +452,6 @@ h4.topic-small{
 #submit-container{
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 #jump-button{
     align-self: center !important; 
