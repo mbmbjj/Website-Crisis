@@ -233,7 +233,7 @@
         }
     });
 
-    async function fetchDetections(imageId, retryCount = 5, delay = 1000) {
+    async function fetchDetections(imageId, retryCount = 10, delay = 1000) {
         while (retryCount > 0) {
             try {
                 const detectionsResponse = await fetch(
@@ -257,6 +257,7 @@
             }
         }
         throw new Error('Failed to fetch detections after multiple attempts');
+        
     }
 
     submitButton.addEventListener('click', async () => {
@@ -266,6 +267,8 @@
         const file = fileInput.files[0];
         if (!file) {
             alert('No file selected.');
+            submitButton.style.display = 'block';
+        submitText.style.display = 'none';
             return;
         }
 
@@ -310,10 +313,14 @@
                 displayAllergens(detections);
             } catch (error) {
                 console.error('Failed to fetch detections:', error);
+                submitButton.style.display = 'block';
+        submitText.style.display = 'none';
             }
         } else {
             alert('Upload failed');
             console.error('Upload failed');
+            submitButton.style.display = 'block';
+        submitText.style.display = 'none';
         }
     });
 
