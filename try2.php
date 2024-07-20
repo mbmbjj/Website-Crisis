@@ -73,7 +73,7 @@
                     <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
-                <div id="side-text-right">2. Tap the camera icon</div>
+                <div id="side-text-right">2. Tap the capture button</div>
             </div>
         </div>
         <div class="popup-container" id="popup-container">
