@@ -73,7 +73,30 @@
                     <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
-                <div id="side-text-right">2. Tap the capture button</div>
+                <div id="side-text-right">2. Tap the capture button <div>
+                        <form id="feedback-form">
+                            <label for="name">Name (optional):</label>
+                            <input type="text" id="name" name="name">
+
+                            <label for="email">Email (optional):</label>
+                            <input type="email" id="email" name="email">
+
+                            <label for="rating">Rating:</label>
+                            <select id="rating" name="rating">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+
+                            <label for="comments">Comments:</label>
+                            <textarea id="comments" name="comments"></textarea>
+
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="popup-container" id="popup-container">
@@ -115,17 +138,46 @@
     const submitButton = document.getElementById('submit-button');
     const detectedItemsList = document.getElementById('detectedItems');
     const detectedAller = document.getElementById('detectedAller');
-    const matchAller =document.getElementById('matchAller');
+    const matchAller = document.getElementById('matchAller');
     const foutput = document.getElementById("foutput");
     const soutput = document.getElementById("soutput");
     const toutput = document.getElementById("toutput");
     const changeCameraButton = document.getElementById('change-camera-button');
     const tryNowButton = document.getElementById('jump-button');
-    const submitText =document.getElementById("submit-text");
+    const submitText = document.getElementById("submit-text");
 
     let currentStream;
     let currentDeviceIndex = 0;
     let videoDevices = [];
+    document.getElementById('feedback-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const rating = document.getElementById('rating').value;
+        const comments = document.getElementById('comments').value;
+
+        // Example: Send feedback to your server
+        fetch('https://tameszaza.pythonanywhere.com/test/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    rating: rating,
+                    comments: comments
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Thank you for your feedback!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
 
     async function fetchData() {
         try {
@@ -257,7 +309,7 @@
             }
         }
         throw new Error('Failed to fetch detections after multiple attempts');
-        
+
     }
 
     submitButton.addEventListener('click', async () => {
@@ -268,7 +320,7 @@
         if (!file) {
             alert('No file selected.');
             submitButton.style.display = 'block';
-        submitText.style.display = 'none';
+            submitText.style.display = 'none';
             return;
         }
 
@@ -314,13 +366,13 @@
             } catch (error) {
                 console.error('Failed to fetch detections:', error);
                 submitButton.style.display = 'block';
-        submitText.style.display = 'none';
+                submitText.style.display = 'none';
             }
         } else {
             alert('Upload failed');
             console.error('Upload failed');
             submitButton.style.display = 'block';
-        submitText.style.display = 'none';
+            submitText.style.display = 'none';
         }
     });
 
@@ -459,7 +511,7 @@
     function replaceItems(detectedItems, specificNames) {
         return detectedItems.map(item => specificNames[item.toLowerCase()] || item);
     }
-    
+
     function displayAllergens(detections) {
         const resultSet = new Set();
         const updatedDetectedItems = replaceItems(detections, specificNames);
@@ -517,77 +569,78 @@
         }
     }
 
-//==================================================
+    //==================================================
 
-    
-                const matchSet = new Set();
 
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-            return null;
+    const matchSet = new Set();
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+
+    function compareAllergies(resultSet) {
+        const storedAnswers = getCookie('answers');
+        if (storedAnswers) {
+            const allergyIntegers = storedAnswers.split(',').map(Number);
+            const matchingAllergies = resultSet.filter(element => allergyIntegers.includes(element));
+
+            console.log('Matching Allergies:', matchingAllergies);
+            return matchingAllergies;
+        } else {
+            console.log('No allergies stored in cookies.');
+            return [];
         }
+    }
 
-        function compareAllergies(resultSet) {
-            const storedAnswers = getCookie('answers');
-            if (storedAnswers) {
-                const allergyIntegers = storedAnswers.split(',').map(Number);
-                const matchingAllergies = resultSet.filter(element => allergyIntegers.includes(element));
-
-                console.log('Matching Allergies:', matchingAllergies);
-                return matchingAllergies;
-            } else {
-                console.log('No allergies stored in cookies.');
-                return [];
-            }
-        }
-        function checkAllergies() {
-            // const resultSet = [1, 2, 3, 4, 5, 6, 7]; // Example resultSet
-            const matchingAllergies = compareAllergies(resultSet);
-            if(matchingAllergies)
+    function checkAllergies() {
+        // const resultSet = [1, 2, 3, 4, 5, 6, 7]; // Example resultSet
+        const matchingAllergies = compareAllergies(resultSet);
+        if (matchingAllergies)
             matchSet.add(matchingAllergies);
-            // alert('Matching Allergies: ' + matchingAllergies.join(', '));
-        }
-resultSet.forEach(element=>{
-    compareAllergies(resultSet);
-});
-        if (resultSet.has(1) && matchSet.has(1)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Soy"
-            matchAller.appendChild(listItem);
-        }
-        if (resultSet.has(2) && matchSet.has(2)) {
-    const listItem = document.createElement('li');
-    listItem.textContent = "Cow milk";
-    matchAller.appendChild(listItem);
-}
-if (resultSet.has(3) && matchSet.has(3)) {
-    const listItem = document.createElement('li');
-    listItem.textContent = "Wheat";
-    matchAller.appendChild(listItem);
-}
-if (resultSet.has(4) && matchSet.has(4)) {
-    const listItem = document.createElement('li');
-    listItem.textContent = "Egg";
-    matchAller.appendChild(listItem);
-}
-if (resultSet.has(5) && matchSet.has(5)) {
-    const listItem = document.createElement('li');
-    listItem.textContent = "Fish";
-    matchAller.appendChild(listItem);
-}
-if (resultSet.has(6) && matchSet.has(6)) {
-    const listItem = document.createElement('li');
-    listItem.textContent = "Seafood";
-    matchAller.appendChild(listItem);
-}
-if (resultSet.has(7) && matchSet.has(7)) {
-    const listItem = document.createElement('li');
-    listItem.textContent = "Peanut";
-    matchAller.appendChild(listItem);
-}
-       </script>
+        // alert('Matching Allergies: ' + matchingAllergies.join(', '));
+    }
+    resultSet.forEach(element => {
+        compareAllergies(resultSet);
+    });
+    if (resultSet.has(1) && matchSet.has(1)) {
+        listItem = document.createElement('li');
+        listItem.textContent = "Soy"
+        matchAller.appendChild(listItem);
+    }
+    if (resultSet.has(2) && matchSet.has(2)) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "Cow milk";
+        matchAller.appendChild(listItem);
+    }
+    if (resultSet.has(3) && matchSet.has(3)) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "Wheat";
+        matchAller.appendChild(listItem);
+    }
+    if (resultSet.has(4) && matchSet.has(4)) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "Egg";
+        matchAller.appendChild(listItem);
+    }
+    if (resultSet.has(5) && matchSet.has(5)) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "Fish";
+        matchAller.appendChild(listItem);
+    }
+    if (resultSet.has(6) && matchSet.has(6)) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "Seafood";
+        matchAller.appendChild(listItem);
+    }
+    if (resultSet.has(7) && matchSet.has(7)) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "Peanut";
+        matchAller.appendChild(listItem);
+    }
+    </script>
 </body>
 
 </html>

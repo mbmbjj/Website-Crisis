@@ -90,6 +90,34 @@ ul#class-ul li{
 #advisor{
     padding: 0%;
 }
+form#feedback-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form#feedback-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+form#feedback-form input, form#feedback-form select, #feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+form#feedback-form button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
 div.column img{
     
     max-width: 100%;
