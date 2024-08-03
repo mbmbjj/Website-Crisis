@@ -21,7 +21,41 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
+}/* Loading */
+/* Loading */
+#loading {
+    display: flex;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    width: 80px; /* Adjust as needed */
+    height: 80px; /* Adjust as needed */
+    background-color: white;
+    border-radius: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    transition: opacity 0.5s;
 }
+
+#loading .fa-spinner {
+    font-size: 48px; /* Adjust the size of the icon */
+    color: #ffd43b;
+    animation: spin 2s linear infinite; /* Add spinning animation */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+  
 h1{
     text-align: center;
 }

@@ -63,6 +63,9 @@
                     <!-- Ensure this image is visible -->
                     <input type="file" id="fileInput" name="file" accept="image/*" style="display:none;">
                     <div id="submit-container"><button id="submit-button" class="submit">Submit</button></div>
+                    <div id="loading">
+                        <i class="fa fa-spinner"></i>
+                    </div>
                     <p class='output' id='submit-text'>Processing</p>
                     <p class='output' id='foutput'></p>
                     <ul id="detectedItems"></ul>
@@ -128,6 +131,7 @@
         </div>
     </footer>
     <script>
+    const loading = document.getElementById('loading');
     const video = document.getElementById('video');
     const captureButton = document.getElementById('capture-button');
     const canvas = document.getElementById('canvas');
@@ -145,7 +149,7 @@
     const changeCameraButton = document.getElementById('change-camera-button');
     const tryNowButton = document.getElementById('jump-button');
     const submitText = document.getElementById("submit-text");
-
+    loading.style.opacity = '0';
     let currentStream;
     let currentDeviceIndex = 0;
     let videoDevices = [];
@@ -293,6 +297,7 @@
                 if (detectionsResponse.ok) {
                     submitButton.style.display = 'block';
                     submitText.style.display = 'none';
+                    loading.style.opacity = '0';
                     const detections = await detectionsResponse.json();
                     return detections;
                 } else if (detectionsResponse.status === 404) {
@@ -315,12 +320,14 @@
     submitButton.addEventListener('click', async () => {
         submitButton.style.display = 'none';
         submitText.style.display = 'block';
+        loading.style.opacity = '1';
         const formData = new FormData();
         const file = fileInput.files[0];
         if (!file) {
             alert('No file selected.');
             submitButton.style.display = 'block';
             submitText.style.display = 'none';
+            loading.style.opacity = '0';
             return;
         }
 
@@ -367,12 +374,14 @@
                 console.error('Failed to fetch detections:', error);
                 submitButton.style.display = 'block';
                 submitText.style.display = 'none';
+                loading.style.opacity = '0';
             }
         } else {
             alert('Upload failed');
             console.error('Upload failed');
             submitButton.style.display = 'block';
             submitText.style.display = 'none';
+            loading.style.opacity = '0';
         }
     });
 
