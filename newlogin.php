@@ -7,31 +7,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-    function checkLogin() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+     function checkLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-    const data = { username, password };
+            const data = { username, password };
 
-    fetch('https://tameszaza.pythonanywhere.com/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert(data.error);
-        } else {
-            alert(data.message);
+            fetch('http://your-api-domain/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
     </script>
 </head>
 
