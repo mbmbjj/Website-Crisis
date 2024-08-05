@@ -7,26 +7,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
-    }
-
     function checkLogin() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-        const storedUsername = getCookie('username');
-        const storedPassword = getCookie('password');
+    const data = { username, password };
 
-        if (username === storedUsername && password === storedPassword) {
-            window.location.href = 'try2.php';
+    fetch('https://tameszaza.pythonanywhere.com/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
         } else {
-            alert('Wrong username or password.');
+            alert(data.message);
         }
-    }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
     </script>
 </head>
 
