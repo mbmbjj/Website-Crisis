@@ -128,7 +128,7 @@ form#feedback-form {
     max-width: 500px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
 }
 
@@ -143,14 +143,6 @@ form#feedback-form input, form#feedback-form select, #feedback-form textarea {
     margin-top: 5px;
 }
 
-form#feedback-form button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
 
 div.column img{
     
@@ -171,6 +163,7 @@ div.column-white img{
 #about-us h1, section.banner h1{
     font-size: 2em;
 }
+
 div.column {
     align-items: center;
     flex: 1;
@@ -195,7 +188,7 @@ div.column h2{
     text-align: center; /* Centers the text */
 }
 
-section#login{
+section#login, section#feedback{
     display: flex; /* Enables flexbox layout */
     justify-content: center; /* Horizontally centers the content */
     align-items: center; /* Vertically centers the content */
@@ -386,6 +379,7 @@ footer h2{
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: Subtle shadow for text container */
 }
 
+
 p.describtion {
     margin-top:2%;
     font-size: small;
@@ -499,7 +493,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button, #register-button,#login-button, #select-file-button ,#submit-button, #download-link , #jump-button, #change-camera-button{
+#capture-button, #register-button,#login-button, #select-file-button ,#submit-button, #download-link ,#feedback-button, #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;

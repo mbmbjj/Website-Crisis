@@ -1,3 +1,7 @@
+<?php
+// Assuming the rating value is being retrieved from a POST request or a database.
+$rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +11,7 @@
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -54,7 +58,6 @@
             </div>
         </div>
         <div class="column">
-
             <div class="member">
                 <img src="images/138281.jpg" alt="Image of First member" class="round-border">
                 <h2>ธนกฤต ดำดวน</h2>
@@ -76,9 +79,11 @@
                 <img src="images/Bampic.jpg" alt="Image of First member" class="round-border">
                 <h2>ภัคธดา พิธาวราธร</h2>
                 <p class="about-text">
-                    <span class="tab-space"></span>"สวัสดีค่า หนู ภัคธดา พิธาวราธร หรือ แบมแบมค่ะ ตอนนี้กำลังศึกษาอยู่ชั้นมัธยมศึกษาปีที่ 5 
-                    โรงเรียนกำเนิดวิทย์ ในด้านวิชาการมีความชื่นชอบและสนใจในคอมพิวเตอร์และ เพราะรู้สึกว่าคอมพิวเตอร์มีอะไรให้เรียนรู้เยอะมาก ๆ  
-                    และมีประสบการณ์อบรมค่าย สอวน.คอมพิวเตอร์ ค่าย 2 ศูนย์โรงเรียนมหิดลวิทยานุสรณ์ นอกจากด้านวิชาการ 
+                    <span class="tab-space"></span>"สวัสดีค่า หนู ภัคธดา พิธาวราธร หรือ แบมแบมค่ะ
+                    ตอนนี้กำลังศึกษาอยู่ชั้นมัธยมศึกษาปีที่ 5
+                    โรงเรียนกำเนิดวิทย์ ในด้านวิชาการมีความชื่นชอบและสนใจในคอมพิวเตอร์และ
+                    เพราะรู้สึกว่าคอมพิวเตอร์มีอะไรให้เรียนรู้เยอะมาก ๆ
+                    และมีประสบการณ์อบรมค่าย สอวน.คอมพิวเตอร์ ค่าย 2 ศูนย์โรงเรียนมหิดลวิทยานุสรณ์ นอกจากด้านวิชาการ
                     หนูยังมีความชื่นชอบในการออกแบบศิลปะอีกด้วยค่ะ"
                     <br><br>IG: _bbxm_phx<br>
                     Email: Phakthada.bb@gmail.com<br>
@@ -99,7 +104,8 @@
         <div class="column" id="advisor-text">
             <h2 id="advisor-name">ดร. คเณศ สุเมธพิพัธน์</h2>
             <p class="about-text" id="advisor-dess">
-                <span class="tab-space"></span>สวัสดีครับ ผมชื่อนายคเณศ สุเมธพิพัธน์ เป็นครูคณิตศาสตร์ โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้าน
+                <span class="tab-space"></span>สวัสดีครับ ผมชื่อนายคเณศ สุเมธพิพัธน์ เป็นครูคณิตศาสตร์
+                โรงเรียนกำเนิดวิทย์ มีความสนใจทางด้าน
                 Interdisciplinary Applied Mathematics
                 โดยมีด้านที่เคยศึกษาหรือทำวิจัยคือ
                 the stability of nanomaterials in a system, combinatorial game theory, game theory
@@ -119,7 +125,29 @@
                 review
 
                 textbook
-                คณิตศาสตร์ที่ออกมาล่าสุด</p>
+                คณิตศาสตร์ที่ออกมาล่าสุด
+            </p>
+        </div>
+    </section>
+    <section id="feedback">
+        <h1 class='Topic'>Give us the feedback</h1>
+        <div class='input-form'>
+            <form id="feedback-form" method="post" action="process_feedback.php">
+                <label for="name">Name (optional):</label>
+                <input type="text" id="name" name="name">
+
+                <label for="email">Email (optional):</label>
+                <input type="email" id="email" name="email">
+
+                <label for="rating">Rating:</label>
+                <input type="range" id="rating" name="rating" min="1" max="5" value="<?php echo $rating_value; ?>">
+                <span id="rating-value"><?php echo $rating_value; ?></span>
+
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments"></textarea>
+
+                <button type="submit" id="feedback-button">Submit</button>
+            </form>
         </div>
     </section>
 
@@ -143,6 +171,45 @@
                 use of the software.</p>
         </div>
     </footer>
+
+    <script>
+        const rating = document.getElementById('rating');
+        const ratingValue = document.getElementById('rating-value');
+
+        rating.addEventListener('input', function() {
+            ratingValue.textContent = rating.value;
+        });
+        document.getElementById('rating').addEventListener('input', function() {
+            document.getElementById('rating-value').innerText = this.value;
+        });
+
+        document.getElementById('feedback-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = {
+        name: document.getElementById('name').value || '',
+        email: document.getElementById('email').value || '',
+        rating: document.getElementById('rating').value,
+        comments: document.getElementById('comments').value
+    };
+
+    fetch('https://tameszaza.pythonanywhere.com/process_feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting your feedback.');
+    });
+});
+    </script>
 </body>
 
 </html>

@@ -77,27 +77,7 @@
 
                 </div>
                 <div id="side-text-right">2. Tap the capture button <div>
-                        <form id="feedback-form">
-                            <label for="name">Name (optional):</label>
-                            <input type="text" id="name" name="name">
-
-                            <label for="email">Email (optional):</label>
-                            <input type="email" id="email" name="email">
-
-                            <label for="rating">Rating:</label>
-                            <select id="rating" name="rating">
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-
-                            <label for="comments">Comments:</label>
-                            <textarea id="comments" name="comments"></textarea>
-
-                            <button type="submit">Submit</button>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -153,35 +133,7 @@
     let currentStream;
     let currentDeviceIndex = 0;
     let videoDevices = [];
-    document.getElementById('feedback-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const rating = document.getElementById('rating').value;
-        const comments = document.getElementById('comments').value;
-
-        // Example: Send feedback to your server
-        fetch('https://tameszaza.pythonanywhere.com/test/feedback', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    rating: rating,
-                    comments: comments
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Thank you for your feedback!');
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    });
+    
 
     async function fetchData() {
         try {
