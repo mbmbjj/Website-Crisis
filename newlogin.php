@@ -13,7 +13,7 @@
 
             const data = { username, password };
 
-            fetch('http://your-api-domain/api/login', {
+            fetch('https://tameszaza.pythonanywhere.com/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -15,7 +15,7 @@
 
             const data = { username, email, password, allergies };
 
-            fetch('http://your-api-domain/api/register', {
+            fetch('https://tameszaza.pythonanywhere.com/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
