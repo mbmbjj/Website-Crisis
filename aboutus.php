@@ -31,7 +31,7 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
             })
             .catch(error => {
                 console.error('Error:', error);
-            });
+            }); 
         }
 
     </script>

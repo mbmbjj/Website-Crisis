@@ -28,9 +28,7 @@
             return null;
         }
 
-        function eraseCookie(name) {
-            document.cookie = name + '=; Max-Age=-99999999;';
-        }
+        
 
         function checkLogin() {
             const username = document.getElementById('username').value;
@@ -74,8 +72,9 @@
             }
         }
 
-        // Check if the user is already logged in when the page loads
-        window.onload = checkIfLoggedIn;
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
         function logout() {
             fetch('https://tameszaza.pythonanywhere.com/api/logout', {
                 method: 'POST',
@@ -107,6 +106,8 @@
             document.getElementById('email').textContent = `Email: ${email}`;
             document.getElementById('allergies').textContent = `Allergies: ${allergies}`;
         });
+        // Check if the user is already logged in when the page loads
+        window.onload = checkIfLoggedIn;
     </script>
 </head>
 
