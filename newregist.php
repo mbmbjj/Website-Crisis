@@ -33,6 +33,7 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+            window.location.href = "newlogin.php";
         }
     </script>
 </head>

@@ -61,7 +61,21 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+            redirect();
         }
+        function redirect(){
+            window.location.href = "try2.php";
+        }
+        function checkIfLoggedIn() {
+            const username = getCookie('username');
+            if (username) {
+                // User is already logged in, redirect to the home page or another appropriate page
+                redirect();
+            }
+        }
+
+        // Check if the user is already logged in when the page loads
+        window.onload = checkIfLoggedIn;
     </script>
 </head>
 
