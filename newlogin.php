@@ -76,6 +76,37 @@
 
         // Check if the user is already logged in when the page loads
         window.onload = checkIfLoggedIn;
+        function logout() {
+            fetch('https://tameszaza.pythonanywhere.com/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    eraseCookie('username');
+                    eraseCookie('email');
+                    eraseCookie('allergies');
+                    window.location.href = 'login.html';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const username = getCookie('username');
+            const email = getCookie('email');
+            const allergies = getCookie('allergies');
+
+            document.getElementById('username').textContent = `Username: ${username}`;
+            document.getElementById('email').textContent = `Email: ${email}`;
+            document.getElementById('allergies').textContent = `Allergies: ${allergies}`;
+        });
     </script>
 </head>
 
