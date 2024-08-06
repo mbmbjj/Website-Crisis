@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-     function setCookie(name, value, days) {
+        function setCookie(name, value, days) {
             var expires = "";
             if (days) {
                 var date = new Date();
@@ -28,12 +27,21 @@
             return null;
         }
 
-        
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999; path=/';
+        }
 
-        function checkLogin() {
+        function checkIfLoggedIn() {
+            const username = getCookie('username');
+            if (username) {
+                redirect();
+            }
+        }
+
+        function checkLogin(event) {
+            event.preventDefault(); // Prevent the default form submission
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
             const data = { username, password };
 
             fetch('https://tameszaza.pythonanywhere.com/api/login', {
@@ -54,27 +62,18 @@
                     setCookie('allergies', JSON.stringify(data.allergies), 1);
                     console.log("Email:", data.email);
                     console.log("Allergies:", data.allergies);
+                    redirect();
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-            redirect();
-        }
-        function redirect(){
-            window.location.href = "try2.php";
-        }
-        function checkIfLoggedIn() {
-            const username = getCookie('username');
-            if (username) {
-                // User is already logged in, redirect to the home page or another appropriate page
-                redirect();
-            }
         }
 
-        function eraseCookie(name) {
-            document.cookie = name + '=; Max-Age=-99999999;';
+        function redirect() {
+            window.location.href = "try2.php";
         }
+
         function logout() {
             fetch('https://tameszaza.pythonanywhere.com/api/logout', {
                 method: 'POST',
@@ -102,11 +101,13 @@
             const email = getCookie('email');
             const allergies = getCookie('allergies');
 
-            document.getElementById('username').textContent = `Username: ${username}`;
-            document.getElementById('email').textContent = `Email: ${email}`;
-            document.getElementById('allergies').textContent = `Allergies: ${allergies}`;
+            if (username && email && allergies) {
+                document.getElementById('username').textContent = `Username: ${username}`;
+                document.getElementById('email').textContent = `Email: ${email}`;
+                document.getElementById('allergies').textContent = `Allergies: ${allergies}`;
+            }
         });
-        // Check if the user is already logged in when the page loads
+
         window.onload = checkIfLoggedIn;
     </script>
 </head>
@@ -139,7 +140,7 @@
     <section class="first-section" id="login">
         <h1 class="Topic">Login</h1>
         <div class="input-form">
-            <form onsubmit="checkLogin(); return false;">
+            <form onsubmit="checkLogin(event);">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" class="input-text" required><br><br>
 
@@ -150,7 +151,8 @@
             </form>
             <a href="newregist.php">
                 <h5 class="register-link">New user? Register</h5>
-            </a></div>
+            </a>
+        </div>
     </section>
     <section id="thick-area"></section>
     
