@@ -9,9 +9,10 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
     <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
     <script>
-        function eraseCookie(name) {
-            document.cookie = name + '=; Max-Age=-99999999;';
+          function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999; path=/';
         }
+
         function logout() {
             fetch('https://tameszaza.pythonanywhere.com/api/logout', {
                 method: 'POST',
@@ -26,12 +27,12 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
                     eraseCookie('username');
                     eraseCookie('email');
                     eraseCookie('allergies');
-                    window.location.href = 'login.html';
+                    window.location.href = 'try2.php';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-            }); 
+            });
         }
 
     </script>
