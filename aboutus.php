@@ -8,6 +8,33 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
 <head>
     <title>Food Scanner</title>
     <link rel="stylesheet" href="styles2.css">
+    <script>
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
+        function logout() {
+            fetch('https://tameszaza.pythonanywhere.com/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    eraseCookie('username');
+                    eraseCookie('email');
+                    eraseCookie('allergies');
+                    window.location.href = 'login.html';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    </script>
 </head>
 
 <body>
@@ -209,7 +236,10 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
         alert('There was an error submitting your feedback.');
     });
 });
+
     </script>
+
+    <button onclick="logout()">Logout</button>
 </body>
 
 </html>
