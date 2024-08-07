@@ -105,6 +105,7 @@
                 document.getElementById('username').textContent = `Username: ${username}`;
                 document.getElementById('email').textContent = `Email: ${email}`;
                 document.getElementById('allergies').textContent = `Allergies: ${allergies}`;
+                redirect(); // Redirect after updating the DOM if the user is logged in
             }
         });
 
@@ -179,3 +180,4 @@
 </body>
 
 </html>
+        

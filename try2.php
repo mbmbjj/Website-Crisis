@@ -72,7 +72,7 @@
                     <p class='output' id='soutput'></p>
                     <ul id="detectedAller"></ul>
                     <p class='output' id='toutput'></p>
-                    <ul id="matchAller"></ul>
+                    <ul id="matchAller"></ul>`
                     <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
@@ -304,6 +304,7 @@
                 const detections = await fetchDetections(imageId);
                 foutput.textContent = "Detected Items";
                 soutput.textContent = "Allergy Group";
+                toutput.textContent = "Match Group";
                 console.log('Detections:', detections); // Debug output
                 detectedItemsList.innerHTML = '';
                 if (detections.length === 0) {
@@ -528,79 +529,107 @@
             listItem.textContent = "Shelled nut"
             detectedAller.appendChild(listItem);
         }
+        checkAllergies(resultSet);
     }
 
     //==================================================
 
 
-    const matchSet = new Set();
+    // const matchSet = new Set();
 
     function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-        return null;
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
+    return null;
+}
 
-    function compareAllergies(resultSet) {
-        const storedAnswers = getCookie('answers');
-        if (storedAnswers) {
-            const allergyIntegers = storedAnswers.split(',').map(Number);
-            const matchingAllergies = resultSet.filter(element => allergyIntegers.includes(element));
+function compareAllergies(resultSet) {
+    const storedAnswers = getCookie('allergies');
+    console.log("Stored Answers (raw cookie value):", storedAnswers);
 
-            console.log('Matching Allergies:', matchingAllergies);
-            return matchingAllergies;
-        } else {
-            console.log('No allergies stored in cookies.');
-            return [];
+    if (storedAnswers) {
+        // Check if storedAnswers is already an array or a string
+        const allergyStrings = Array.isArray(storedAnswers) ? storedAnswers : JSON.parse(storedAnswers);
+        const allergyIntegers = allergyStrings.map(value => {
+            const parsedValue = Number(value);
+            console.log(`Parsed Value: ${value} -> ${parsedValue}`);
+            return parsedValue;
+        });
+
+        console.log("Allergy Integers:", allergyIntegers);
+        console.log("ResultSet:", resultSet);
+
+        const matchingAllergies = allergyIntegers.filter(value => resultSet.has(value));
+        console.log('Matching Allergies:', matchingAllergies);
+        
+        return matchingAllergies;
+    } else {
+        console.log('No allergies stored in cookies.');
+        return [];
+    }
+}
+
+
+
+
+function checkAllergies(resultSet) {
+    const matchingAllergies = compareAllergies(resultSet);
+    
+    if (matchAller) { // Ensure matchAller is not null
+        matchAller.innerHTML = ''; // Clear previous allergens
+
+        if (matchingAllergies.includes(1)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Soy";
+            matchAller.appendChild(listItem);
         }
+        if (matchingAllergies.includes(2)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Cow milk";
+            matchAller.appendChild(listItem);
+        }
+        if (matchingAllergies.includes(3)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Wheat";
+            matchAller.appendChild(listItem);
+        }
+        if (matchingAllergies.includes(4)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Egg";
+            matchAller.appendChild(listItem);
+        }
+        if (matchingAllergies.includes(5)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Fish";
+            matchAller.appendChild(listItem);
+        }
+        if (matchingAllergies.includes(6)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Seafood";
+            matchAller.appendChild(listItem);
+        }
+        if (matchingAllergies.includes(7)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Peanut";
+            matchAller.appendChild(listItem);
+        }
+        if (matchingAllergies.includes(8)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = "Shelled nut";
+            matchAller.appendChild(listItem);
+        }
+    } else {
+        console.error('Element with ID matchAller not found.');
     }
+}
 
-    function checkAllergies() {
-        // const resultSet = [1, 2, 3, 4, 5, 6, 7]; // Example resultSet
-        const matchingAllergies = compareAllergies(resultSet);
-        if (matchingAllergies)
-            matchSet.add(matchingAllergies);
-        // alert('Matching Allergies: ' + matchingAllergies.join(', '));
-    }
-    resultSet.forEach(element => {
-        compareAllergies(resultSet);
-    });
-    if (resultSet.has(1) && matchSet.has(1)) {
-        listItem = document.createElement('li');
-        listItem.textContent = "Soy"
-        matchAller.appendChild(listItem);
-    }
-    if (resultSet.has(2) && matchSet.has(2)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = "Cow milk";
-        matchAller.appendChild(listItem);
-    }
-    if (resultSet.has(3) && matchSet.has(3)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = "Wheat";
-        matchAller.appendChild(listItem);
-    }
-    if (resultSet.has(4) && matchSet.has(4)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = "Egg";
-        matchAller.appendChild(listItem);
-    }
-    if (resultSet.has(5) && matchSet.has(5)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = "Fish";
-        matchAller.appendChild(listItem);
-    }
-    if (resultSet.has(6) && matchSet.has(6)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = "Seafood";
-        matchAller.appendChild(listItem);
-    }
-    if (resultSet.has(7) && matchSet.has(7)) {
-        const listItem = document.createElement('li');
-        listItem.textContent = "Peanut";
-        matchAller.appendChild(listItem);
-    }
+    
+    
     </script>
 </body>
 

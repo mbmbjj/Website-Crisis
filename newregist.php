@@ -7,34 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
     function storeFormData() {
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const allergies = Array.from(document.querySelectorAll('input[name="allergy"]:checked'))
-                                   .map(checkbox => checkbox.value);
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const allergies = Array.from(document.querySelectorAll('input[name="allergy"]:checked'))
+                           .map(checkbox => checkbox.value);
 
-            const data = { username, email, password, allergies };
+    const data = { username, email, password, allergies };
 
-            fetch('https://tameszaza.pythonanywhere.com/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-            window.location.href = "newlogin.php";
+    fetch('https://tameszaza.pythonanywhere.com/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert(data.message);
+            window.location.href = "newlogin.php"; // Redirect after successful registration
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
     </script>
 </head>
 <body>
