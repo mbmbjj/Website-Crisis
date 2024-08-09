@@ -13,26 +13,7 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
             document.cookie = name + '=; Max-Age=-99999999; path=/';
         }
 
-        function setCookie(name, value, days) {
-            var expires = "";
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
-        }
-
-        function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
+        
 
         function logout() {
             fetch('https://tameszaza.pythonanywhere.com/api/logout', {
@@ -56,39 +37,7 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
                 });
         }
 
-        function updateUserData() {
-            const username = getCookie('username'); // Or however you're obtaining the username
-            const email = document.getElementById('email').value; // Assume this is from a form input
-            const allergies = ["3", "4", "6"]; // Example, could be dynamic
-
-            const data = {
-                username: username,
-                email: email,
-                allergies: allergies
-            };
-
-            fetch('https://tameszaza.pythonanywhere.com/api/update_user', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert(data.error);
-                    } else {
-                        alert(data.message);
-                        console.log("Updated User Info:", data);
-                        // Use the updated user info as needed
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
+        
     </script>
 </head>
 
@@ -292,51 +241,10 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
                 });
         });
 
-        function editPassword() {
-            const username = getCookie('username'); // Or however you're obtaining the username
-            const oldPassword = document.getElementById('old_password').value;
-            const newPassword = document.getElementById('new_password').value;
-
-            const data = {
-                username: username,
-                old_password: oldPassword,
-                new_password: newPassword
-            };
-
-            fetch('https://tameszaza.pythonanywhere.com/api/edit_password', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert(data.error);
-                    } else {
-                        alert(data.message);
-                        console.log("Updated User Info:", data);
-                        // You can use the returned data (username, email, allergies) here
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
+        
     </script>
 
-    <button onclick="logout()">Logout</button><button onclick="updateUserData()">edit cookie</button>
-    <form id="edit-password-form" onsubmit="editPassword(); return false;">
-        <label for="old_password">Old Password:</label>
-        <input type="password" id="old_password" name="old_password" required><br><br>
-
-        <label for="new_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password" required><br><br>
-
-        <button type="submit">Change Password</button>
-    </form>
+    
 </body>
 
 </html>
