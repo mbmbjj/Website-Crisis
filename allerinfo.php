@@ -13,7 +13,7 @@
                 <li><a href="try2.php">
                         <h5>Home</h5>
                     </a></li>
-                <li><a href="newlogin.php">
+                <li><a href="account.php">
                         <h5>Account</h5>
                     </a></li>
                 <li><a href="aboutus.php">

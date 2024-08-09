@@ -8,6 +8,29 @@ if (!isset($_SESSION['username']) && !isset($_COOKIE['username'])) {
     exit(); // Make sure to exit after redirect
 }
 
+// Handle form submission for updating profile
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the data from the form submission
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
+    $allergies = isset($_POST['allergies']) ? json_decode($_POST['allergies'], true) : [];
+
+    // Update session variables
+    $_SESSION['username'] = $username;
+    $_SESSION['email'] = $email;
+    $_SESSION['allergies'] = json_encode($allergies); // Store allergies as JSON string in session
+
+    // Set cookies to expire in 30 days (86400 seconds per day)
+    setcookie('username', $username, time() + (86400 * 30), "/");
+    setcookie('email', $email, time() + (86400 * 30), "/");
+    setcookie('allergies', json_encode($allergies), time() + (86400 * 30), "/");
+
+    // Redirect to the account page after update
+    header("Location: account.php");
+    exit();
+}
+
 // Retrieve user information from cookies if session is not set
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : (isset($_COOKIE['username']) ? $_COOKIE['username'] : '');
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : (isset($_COOKIE['email']) ? $_COOKIE['email'] : '');
@@ -60,35 +83,6 @@ $selectedValues = array_keys($selectedAllergies);
                 otherInput.style.display = 'none';
             }
         }
-
-        function updateProfile(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            var formData = new FormData(document.getElementById('edit-form'));
-            var allergies = [];
-            document.querySelectorAll('input[name="allergy"]:checked').forEach(function(checkbox) {
-                allergies.push(checkbox.value);
-            });
-            if (document.getElementById('other').checked) {
-                var otherAnswer = document.getElementById('other-answer').value;
-                allergies.push('other');
-                formData.append('other-answer', otherAnswer);
-            }
-            formData.append('allergies', JSON.stringify(allergies));
-
-            fetch('update_profile.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert('Profile updated successfully!');
-                window.location.href = 'account.php';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
     </script>
 </head>
 <body>
@@ -105,8 +99,9 @@ $selectedValues = array_keys($selectedAllergies);
         </div>
     </header>
     <section class="first-section" id="login">
-        <h1>Edit Your Profile</h1>
-        <form id="edit-form" onsubmit="updateProfile(event);">
+        <h1 class="Topic">Edit Your Profile</h1>
+        <div class="input-form">
+        <form id="edit-form" method="POST" action="edit.php">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" class="input-text" value="<?php echo htmlspecialchars($username); ?>" required><br><br>
 
@@ -121,13 +116,13 @@ $selectedValues = array_keys($selectedAllergies);
                 <?php
                 foreach ($allergyMapping as $value => $name) {
                     echo '<div class="checkbox-item">';
-                    echo '<input type="checkbox" id="' . $value . '" name="allergy" value="' . $value . '"' . (in_array($value, $selectedValues) ? ' checked' : '') . '>';
+                    echo '<input type="checkbox" id="' . $value . '" name="allergy[]" value="' . $value . '"' . (in_array($value, $selectedValues) ? ' checked' : '') . '>';
                     echo '<label for="' . $value . '">' . $name . '</label>';
                     echo '</div>';
                 }
                 ?>
                 <div class="checkbox-item">
-                    <input type="checkbox" id="other" name="allergy" value="other" onclick="showOtherAnswerInput()" <?php echo in_array('other', $selectedValues) ? 'checked' : ''; ?>>
+                    <input type="checkbox" id="other" name="allergy[]" value="other" onclick="showOtherAnswerInput()" <?php echo in_array('other', $selectedValues) ? 'checked' : ''; ?>>
                     <label for="other">Other</label>
                 </div>
             </div>
@@ -137,28 +132,7 @@ $selectedValues = array_keys($selectedAllergies);
             </div>
             <button type="submit" id="update-button">Update Profile</button>
         </form>
-    </section>
-    <section id="thick-area"></section>
-
-    <footer>
-        <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
-        <div id="disclaimer">
-            <h2>Disclaimer</h2>
-            <p>Agreement
-                This software is a work developed by Adulvitch Kajittanon, Thanakrit Damduan and Phakthada Pitavaratorn
-                from Kamnoetvidya Science Academy (KVIS) under the provision of Dr.Kanes Sumetpipat under Program for
-                food allergy warning in food allergy which has been supported by the National Science and Technology
-                Development Agency (NSTDA), in order to encourage pupils and students to learn and practice their skills
-                in developing software. Therefore, the intellectual property of this software shall belong to the
-                developer and the developer gives
-                NSTDA a permission to distribute this software as an “as is” and non-modified software for a temporary
-                and non-exclusive use without remuneration to anyone for his or her own purpose or academic purpose,
-                which are not commercial purposes. In this connection, NSTDA shall not be responsible to the user for
-                taking care, maintaining, training, or developing the efficiency of this software. Moreover, NSTDA shall
-                not be liable for any error, software efficiency and damages in connection with or arising out of the
-                use of the software.</p>
         </div>
-    </footer>
+    </section>
 </body>
 </html>

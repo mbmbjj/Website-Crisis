@@ -78,7 +78,7 @@ $allergyDisplay = implode(', ', $allergyNames);
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
-                        <h5>Homeee</h5>
+                        <h5>Home</h5>
                     </a></li>
                 <li><a href="account.php">
                         <h5>Account</h5>
