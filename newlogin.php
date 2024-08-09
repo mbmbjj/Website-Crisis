@@ -109,7 +109,7 @@
             }
         });
 
-        window.onload = checkIfLoggedIn;
+        window.onload = checkIfLoggedIn();
     </script>
 </head>
 

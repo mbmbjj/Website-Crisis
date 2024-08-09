@@ -493,7 +493,7 @@ h4.topic-small{
     border-radius: 4%;
 }
 
-#capture-button, #register-button,#login-button, #select-file-button ,#submit-button, #download-link ,#feedback-button, #jump-button, #change-camera-button{
+#capture-button, #register-button,#login-button,#logout-button, #select-file-button ,#submit-button, #download-link ,#feedback-button, #jump-button, #change-camera-button{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 20px;
