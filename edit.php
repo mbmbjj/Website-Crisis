@@ -1,33 +1,22 @@
 <?php
 session_start();
 
-// Check if the user is logged in using cookies or session
-if (!isset($_SESSION['username']) && !isset($_COOKIE['username'])) {
-    // Redirect to the login page if the user is not logged in
-    header("Location: newlogin.php");
-    exit(); // Make sure to exit after redirect
-}
-
 // Handle form submission for updating profile
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get the data from the form submission
-    $username = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
-    $allergies = isset($_POST['allergies']) ? json_decode($_POST['allergies'], true) : [];
+    $allergies = isset($_POST['allergy']) ? $_POST['allergy'] : [];
 
     // Update session variables
-    $_SESSION['username'] = $username;
     $_SESSION['email'] = $email;
     $_SESSION['allergies'] = json_encode($allergies); // Store allergies as JSON string in session
 
     // Set cookies to expire in 30 days (86400 seconds per day)
-    setcookie('username', $username, time() + (86400 * 30), "/");
     setcookie('email', $email, time() + (86400 * 30), "/");
     setcookie('allergies', json_encode($allergies), time() + (86400 * 30), "/");
 
-    // Redirect to the account page after update
-    header("Location: account.php");
+    // Optionally, redirect to avoid resubmission on page refresh
+    header("Location: edit.php");
     exit();
 }
 
@@ -49,21 +38,11 @@ $allergyMapping = array(
 );
 
 // Convert allergy values to names for pre-filling the form
-$allergyNames = [];
+$selectedValues = [];
 if ($allergies) {
     $allergyValues = json_decode($allergies, true); // Assuming allergies are stored as a JSON string in cookies
-    foreach ($allergyValues as $value) {
-        if (isset($allergyMapping[$value])) {
-            $allergyNames[] = $allergyMapping[$value];
-        }
-    }
+    $selectedValues = $allergyValues ?: []; // In case the user has no allergies
 }
-$allergyDisplay = implode(', ', $allergyNames);
-
-// Convert allergy names back to values for form pre-selection
-$selectedAllergies = array_flip($allergyMapping);
-$selectedAllergies = array_intersect_key($selectedAllergies, array_flip($allergyNames));
-$selectedValues = array_keys($selectedAllergies);
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +62,77 @@ $selectedValues = array_keys($selectedAllergies);
                 otherInput.style.display = 'none';
             }
         }
+
+        function updateUserData() {
+    const username = "<?php echo htmlspecialchars($username); ?>"; // Username obtained from PHP
+    const email = document.getElementById('email').value; 
+    const allergies = Array.from(document.querySelectorAll('input[name="allergy[]"]:checked')).map(el => el.value);
+
+    const data = {
+        username: username,
+        email: email,
+        allergies: allergies
+    };
+
+    fetch('https://tameszaza.pythonanywhere.com/api/update_user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                // Force cookie update
+                document.cookie = "email=" + email + ";path=/;expires=" + new Date(new Date().getTime() + 30*86400*1000).toUTCString();
+                document.cookie = "allergies=" + encodeURIComponent(JSON.stringify(allergies)) + ";path=/;expires=" + new Date(new Date().getTime() + 30*86400*1000).toUTCString();
+
+                alert(data.message);
+                console.log("Updated User Info:", data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+
+        function editPassword() {
+            const username = "<?php echo htmlspecialchars($username); ?>"; // Username obtained from PHP
+            const oldPassword = document.getElementById('old_password').value;
+            const newPassword = document.getElementById('new_password').value;
+
+            const data = {
+                username: username,
+                old_password: oldPassword,
+                new_password: newPassword
+            };
+
+            fetch('https://tameszaza.pythonanywhere.com/api/edit_password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        alert(data.message);
+                        console.log("Updated User Info:", data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
     </script>
 </head>
 <body>
@@ -100,37 +150,44 @@ $selectedValues = array_keys($selectedAllergies);
     </header>
     <section class="first-section" id="login">
         <h1 class="Topic">Edit Your Profile</h1>
+        <h2>Username: <?php echo htmlspecialchars($username); ?></h2> <!-- Display username at the top -->
+
         <div class="input-form">
-        <form id="edit-form" method="POST" action="edit.php">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" class="input-text" value="<?php echo htmlspecialchars($username); ?>" required><br><br>
+        <form id="edit-form" method="POST" action="edit.php" onsubmit="updateUserData(); return false;">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" class="input-text" value="<?php echo htmlspecialchars($email); ?>" required><br><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" class="input-text" value="<?php echo htmlspecialchars($email); ?>" required><br><br>
+    <label>Allergies (select all that apply):</label><br>
+    <div id="checkbox-group">
+        <?php
+        foreach ($allergyMapping as $value => $name) {
+            echo '<div class="checkbox-item">';
+            echo '<input type="checkbox" id="' . $value . '" name="allergy[]" value="' . $value . '"' . (in_array($value, $selectedValues) ? ' checked' : '') . '>';
+            echo '<label for="' . $value . '">' . $name . '</label>';
+            echo '</div>';
+        }
+        ?>
+    </div>
+    <button type="submit" id="update-button">Update Profile</button>
+</form>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" class="input-text" required><br><br>
+        </div>
+    </section>
 
-            <label>Allergies (select all that apply):</label><br>
-            <div id="checkbox-group">
-                <?php
-                foreach ($allergyMapping as $value => $name) {
-                    echo '<div class="checkbox-item">';
-                    echo '<input type="checkbox" id="' . $value . '" name="allergy[]" value="' . $value . '"' . (in_array($value, $selectedValues) ? ' checked' : '') . '>';
-                    echo '<label for="' . $value . '">' . $name . '</label>';
-                    echo '</div>';
-                }
-                ?>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="other" name="allergy[]" value="other" onclick="showOtherAnswerInput()" <?php echo in_array('other', $selectedValues) ? 'checked' : ''; ?>>
-                    <label for="other">Other</label>
-                </div>
-            </div>
-            <div id="other-input" style="<?php echo in_array('other', $selectedValues) ? 'display:block;' : 'display:none;'; ?>">
-                <label for="other-answer">Please specify:</label>
-                <input type="text" id="other-answer" name="other-answer" class="input-text" value="<?php echo isset($_POST['other-answer']) ? htmlspecialchars($_POST['other-answer']) : ''; ?>"><br><br>
-            </div>
-            <button type="submit" id="update-button">Update Profile</button>
+    <section class="second-section" id="password-change">
+        <h1 class="Topic">Change Your Password</h1>
+        <div class="input-form">
+        <form id="password-form" onsubmit="return false;">
+            <label for="old_password">Old Password:</label>
+            <input type="password" id="old_password" name="old_password" class="input-text" required><br><br>
+
+            <label for="new_password">New Password:</label>
+            <input type="password" id="new_password" name="new_password" class="input-text" required><br><br>
+
+            <label for="confirm_password">Confirm New Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="input-text" required><br><br>
+
+            <button type="submit" id="password-update-button" onclick="if(document.getElementById('new_password').value === document.getElementById('confirm_password').value) { editPassword(); } else { alert('Passwords do not match!'); }">Change Password</button>
         </form>
         </div>
     </section>
