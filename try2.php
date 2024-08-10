@@ -613,7 +613,6 @@ function compareAllergies(resultSet) {
 
 
 
-
 function checkAllergies(resultSet) {
     const matchingAllergies = compareAllergies(resultSet);
     
@@ -663,8 +662,21 @@ function checkAllergies(resultSet) {
     } else {
         console.error('Element with ID matchAller not found.');
     }
-}
 
+    // Display the appropriate message based on matching allergies
+    const message = matchingAllergies.length === 0 ? "Can eat  " : "Cannot eat  ";
+    const messageElement = document.createElement('p');
+    messageElement.textContent = message;
+
+    // Style the message
+    messageElement.style.color = "red";
+    messageElement.style.marginTop = "10px"
+    messageElement.style.fontSize = "40px"; // You can adjust the font size as needed
+    messageElement.style.fontWeight = "bold";
+    messageElement.style.textAlign = "center";
+
+    matchAller.appendChild(messageElement);
+}
     
     
     </script>
