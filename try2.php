@@ -246,32 +246,53 @@
     });
 
     async function fetchDetections(imageId, retryCount = 10, delay = 1000) {
-        while (retryCount > 0) {
-            try {
-                const detectionsResponse = await fetch(
-                    `https://tameszaza.pythonanywhere.com/detections/${imageId}`);
-                if (detectionsResponse.ok) {
+    while (retryCount > 0) {
+        try {
+            const detectionsResponse = await fetch(
+                `https://tameszaza.pythonanywhere.com/detections/${imageId}`
+            );
+
+            const rawText = await detectionsResponse.text(); // Get raw response as text
+            console.log('Raw Response:', rawText); // Log the raw response
+            console.log('Raw Response Length:', rawText.length);
+            console.log('First character (ASCII):', rawText.charCodeAt(0));
+            console.log('Last character (ASCII):', rawText.charCodeAt(rawText.length - 1));
+
+            if (detectionsResponse.ok) {
+                try {
+                    const cleanedText = rawText.trim();
+                    const detections = JSON.parse(cleanedText);
+                    console.log('Parsed Detections:', detections);
+
+                    // Update UI
                     submitButton.style.display = 'block';
                     submitText.style.display = 'none';
                     loading.style.opacity = '0';
-                    const detections = await detectionsResponse.json();
-                    return detections;
-                } else if (detectionsResponse.status === 404) {
-                    console.log(`Detections not found yet, retrying in ${delay}ms...`);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    retryCount--;
-                } else {
-                    throw new Error('Failed to fetch detections');
-                }
-            } catch (error) {
-                console.error('Fetch error:', error);
-                retryCount--;
-                await new Promise(resolve => setTimeout(resolve, delay));
-            }
-        }
-        throw new Error('Failed to fetch detections after multiple attempts');
 
+                    return detections;
+                } catch (e) {
+                    console.error('Failed to parse JSON:', rawText);
+                    throw e; // Re-throw the error to handle it in the outer catch block
+                }
+            } else if (detectionsResponse.status === 404) {
+                console.log(`Detections not found yet, retrying in ${delay}ms...`);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                retryCount--;
+            } else {
+                console.error(`Unexpected status code: ${detectionsResponse.status}`);
+                throw new Error('Failed to fetch detections');
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            retryCount--;
+            await new Promise(resolve => setTimeout(resolve, delay));
+        }
     }
+    throw new Error('Failed to fetch detections after multiple attempts');
+}
+
+
+
 
     submitButton.addEventListener('click', async () => {
         submitButton.style.display = 'none';
