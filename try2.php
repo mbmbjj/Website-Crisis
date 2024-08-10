@@ -67,28 +67,32 @@
                         <i class="fa fa-spinner"></i>
                     </div>
                     <p class='output' id='submit-text'>Processing</p>
-                    <p class='output' id='foutput'></p>
+                    <!--<p class='output' id='foutput'></p>
                     <ul id="detectedItems"></ul>
                     <p class='output' id='soutput'></p>
                     <ul id="detectedAller"></ul>
                     <p class='output' id='toutput'></p>
-                    <ul id="matchAller"></ul>`
+                    <ul id="matchAller"></ul>-->
                     <p class='describtion'>Becareful the scaning result can be wrong!!</p>
 
                 </div>
                 <div id="side-text-right">2. Tap the capture button <div>
-                        
+                <div id="resultModal" class="modal">
+                    <div class="modal-content">
+                    <span id="close">&times;</span>
+                        <!--<h2>Detected Food</h2>-->
+                        <p class='output' id='foutput'></p>
+                        <ul id="detectedItems"></ul>
+                        <p class='output' id='soutput'></p>
+                        <ul id="detectedAller"></ul>
+                        <p class='output' id='toutput'></p>
+                        <ul id="matchAller"></ul>                        
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="popup-container" id="popup-container">
-            <div class="popup-box">
-                <h1>Hello</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <button id="close-btn" onclick="closeForm()">OK</button>
-            </div>
-        </div>
+        
     </section>
     <footer>
         <h2>contact us</h2>
@@ -323,6 +327,8 @@
                 }
 
                 displayAllergens(detections);
+                document.getElementById('resultModal').style.display = 'block';
+
             } catch (error) {
                 console.error('Failed to fetch detections:', error);
                 submitButton.style.display = 'block';
@@ -337,7 +343,17 @@
             loading.style.opacity = '0';
         }
     });
+    // Close the modal
+    document.getElementById('close').addEventListener('click', () => {
+        document.getElementById('resultModal').style.display = 'none';
+    });
 
+    // Close the modal if the user clicks outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === document.getElementById('resultModal')) {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+    })
 
     changeCameraButton.addEventListener('click', () => {
         if (videoDevices.length > 1) {

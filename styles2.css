@@ -527,40 +527,7 @@ button, #capture-button,#update-button, #register-button,#login-button,#logout-b
     display: none;
     border-radius: 4%;
 }
-.popup-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    text-align: center;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-.popup-container.active {
-    opacity: 1;
-    pointer-events: all;
-}
-.popup-box {
-    width: 50%;
-    background: #f2f2f2;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border-radius: 6px;
-    padding: 30px;
-    align-items: center;
-}
-.popup h1 {
-    color: #333;
-    line-height: 1;
-}
-.popup p {
-    color: #333;
-    margin-bottom: 0;
-}
+
 #submit-text{
     display: none;
 }
@@ -585,34 +552,40 @@ button, #capture-button,#update-button, #register-button,#login-button,#logout-b
 span.tab-space{
     padding-left: 1em;
 }
-#modal {
+
+.modal {
     display: none;
     position: fixed;
-    z-index: 1001;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-}
-#modal-content {
+    padding-top: 60px;
+  }
+  
+  .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 7% auto; /* Adjust margin for vertical centering */
+    padding: 10px; /* Reduce padding for a smaller modal */
     border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
+    width: 50%; /* Adjust width to make the modal smaller */
+    border-radius: 10px;
+    font-size: 0.9em;
 }
-.modal-button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+  
+#close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+#close:hover,
+#close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
-    background: palevioletred;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-}
+  }
