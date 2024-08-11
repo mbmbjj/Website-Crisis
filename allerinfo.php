@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<header>
+    <header>
         <div class="top-container">
             <ul class="myUL">
                 <li><a href="try2.php">
@@ -256,15 +256,24 @@
 
         <br /><br />
     </section>
-    <section>
-        <div class="bottom">
-            <h4>เอกสารอ้างอิง</h4>
-            <p class="ref">
-                เอกสารให้ความรู้ "Food allergy&anaphylaxis training program" <br />
-                จัดทำโดย ศูนย์ความเป็นเลิศทางด้านโรคภูมิเเพ้ โรคหืดและะระบบทางเดินหายใจ
-                เเละคณะกรรมการดูเเลผู้ป่วยด้านโภชนบำบัด
-                โรงพยาบาลธรรมศาสตร์เฉลิมพระเกียรติ
-            </p>
+    <section class="bottom">
+        
+            <div class="column-white ref">
+                <h4>เอกสารอ้างอิง</h4>
+                <p class="ref">
+                    เอกสารให้ความรู้ "Food allergy&anaphylaxis training program" <br />
+                    จัดทำโดย ศูนย์ความเป็นเลิศทางด้านโรคภูมิเเพ้ โรคหืดและะระบบทางเดินหายใจ
+                    เเละคณะกรรมการดูเเลผู้ป่วยด้านโภชนบำบัด
+                    โรงพยาบาลธรรมศาสตร์เฉลิมพระเกียรติ
+                </p>
+            </div>
+        
+        <div class="column-white">
+            <img src="images/ส่วนประกอบอาหารเสี่ยงในเครื่องปรุง_-removebg-preview.png" alt="Image of First member" class="round-border scan">
+            </div>
+        <div class="column-white">
+            
+            <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png" alt="Image of First member" class="round-border scan">
         </div>
     </section>
     <footer>
