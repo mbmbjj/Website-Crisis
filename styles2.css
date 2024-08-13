@@ -256,7 +256,7 @@ ul.myUL {
 }
 li {
     display: inline-block;
-    margin-right: 10%;
+    margin-right: 7%;
 }
 li:last-child {
     margin-right: 0;
@@ -603,3 +603,10 @@ span.tab-space{
     text-decoration: none;
     cursor: pointer;
   }
+.myUL{
+    font-size: 18px;
+    height: 50px !important;
+}
+li a{
+    margin-top: 1.5% !important;
+}
