@@ -256,6 +256,9 @@ ul.myUL {
 }
 li {
     display: inline-block;
+    margin-right: 3%;
+}
+.myUL li{
     margin-right: 7%;
 }
 li:last-child {
