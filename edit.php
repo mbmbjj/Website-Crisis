@@ -144,7 +144,7 @@ if ($allergies) {
                 <li><a href="aboutus.php"><h5>About Us</h5></a></li>
                 <li><a href="allerinfo.php"><h5>Learn more</h5></a></li>
                 <li><a href="abt.php"><h5>Details</h5></a></li>
-                <li><a href="file\NSC_26p23e0039_Report_Final01.pdf" download="Allergy_paper.pdf"><h5>Paper</h5></a></li>
+                <li><a href="images\26p23e0039_รายงานฉบับสมบูรณ์ 4.pdf" download="Allergy_paper.pdf">
             </ul>
         </div>
     </header>
