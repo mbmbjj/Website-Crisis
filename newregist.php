@@ -28,7 +28,9 @@
             alert(data.error);
         } else {
             alert(data.message);
+            setTimeout(() => {
             window.location.href = "newlogin.php"; // Redirect after successful registration
+        }, 5000);
         }
     })
     .catch(error => {

@@ -269,12 +269,12 @@
             </div>
         
         <div class="column-white">
-            <img src="images/ส่วนประกอบอาหารเสี่ยงในเครื่องปรุง_-removebg-preview.png" alt="Image of First member" class="round-border scan">
+            <img src="images/ส่วนประกอบอาหารเสี่ยงในเครื่องปรุง_-removebg-preview.png" alt="Image of First member" class="round-border scan" href="https://cdn.me-qr.com/pdf/1b27d2c1-2c14-4660-84f3-e2a7beab5e7d.pdf">
             <p>อาหารเสี่ยงในเครื่องปรุง</p>
             </div>
         <div class="column-white">
             
-            <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png" alt="Image of First member" class="round-border scan">
+            <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png" alt="Image of First member" class="round-border scan" href="https://cdn.me-qr.com/pdf/d69958a8-d4e5-4c50-b7aa-6f770e78b4a4.pdf">
             <p>รายละเอียดอาหารเสี่ยง 7 หมวด</p>
         </div>
     </section>
