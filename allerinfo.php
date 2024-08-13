@@ -275,7 +275,7 @@
         <div class="column-white">
             
             <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png" alt="Image of First member" class="round-border scan">
-            <p>รายละเอียดสำหรับอาหารเสี่ยง 7 หมวด</p>
+            <p>รายละเอียดอาหารเสี่ยง 7 หมวด</p>
         </div>
     </section>
     <footer>
