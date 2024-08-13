@@ -3,6 +3,7 @@
 <head>
 <title>Food Scanner</title>
 <link rel="stylesheet" href="styles2.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
@@ -14,7 +15,8 @@
                            .map(checkbox => checkbox.value);
 
     const data = { username, email, password, allergies };
-
+    const loading = document.getElementById('loading');
+    loading.style.opacity = '0';
     fetch('https://tameszaza.pythonanywhere.com/api/register', {
         method: 'POST',
         headers: {
@@ -28,6 +30,7 @@
             alert(data.error);
         } else {
             alert(data.message);
+            loading.style.opacity = '1';
             setTimeout(() => {
             window.location.href = "newlogin.php"; // Redirect after successful registration
         }, 5000);
@@ -37,6 +40,7 @@
         console.error('Error:', error);
     });
 }
+
 
     </script>
 </head>
@@ -118,7 +122,11 @@
                 <input type="text" id="other-answer" name="other-answer" class="input-text"><br><br>
             </div>
             <button type="submit" id="register-button">Register</button>
-        </form>
+        </form></div>
+        <div id="loading">
+                        <i class="fa fa-spinner">
+                        </i>
+                    </div>
     </section>
     <section id="thick-area"></section>
     <footer>
