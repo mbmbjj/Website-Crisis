@@ -566,6 +566,13 @@
             listItem.textContent = "Shelled nut"
             detectedAller.appendChild(listItem);
         }
+        if(resultSet.size===0)
+        {
+            listItem = document.createElement('li');
+            listItem.textContent = "No allery group"
+            detectedAller.appendChild(listItem);
+        }
+
         checkAllergies(resultSet);
     }
 

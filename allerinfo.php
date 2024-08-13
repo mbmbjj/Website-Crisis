@@ -270,10 +270,12 @@
         
         <div class="column-white">
             <img src="images/ส่วนประกอบอาหารเสี่ยงในเครื่องปรุง_-removebg-preview.png" alt="Image of First member" class="round-border scan">
+            <p>การแพ้อาหารในเครื่องปรุง</p>
             </div>
         <div class="column-white">
             
             <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png" alt="Image of First member" class="round-border scan">
+            <p>คำแนะนำสำหรับผู้แพ้อาหาร</p>
         </div>
     </section>
     <footer>
