@@ -256,7 +256,7 @@ ul.myUL {
 }
 li {
     display: inline-block;
-    margin-right: 4%;
+    margin-right: 10%;
 }
 li:last-child {
     margin-right: 0;
