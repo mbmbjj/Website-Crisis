@@ -1,4 +1,4 @@
-<?php
+<li?php
 session_start();
 
 // Handle form submission for updating profile
@@ -145,6 +145,8 @@ if ($allergies) {
                 <li><a href="allerinfo.php"><h5>Learn more</h5></a></li>
                 <li><a href="abt.php"><h5>Details</h5></a></li>
                 <li><a href="images\26p23e0039_รายงานฉบับสมบูรณ์ 4.pdf" download="Allergy_paper.pdf">
+                    <h5>Paper</h5>
+                    </a></li>
             </ul>
         </div>
     </header>

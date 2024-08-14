@@ -61,7 +61,7 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
                         <h5>Details</h5>
                     </a></li>
                 <li><a href="images\26p23e0039_รายงานฉบับสมบูรณ์ 4.pdf" download="Allergy_paper.pdf">
-                        <h5>Paper</h5>
+                        <h5>Paper</h5>  
                     </a></li>
             </ul>
         </div>
