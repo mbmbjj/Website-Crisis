@@ -278,6 +278,20 @@
             <p>รายละเอียดอาหารเสี่ยง 7 หมวด</p>
         </div>
     </section>
+    <section>
+    <form id="allergenSearchForm">
+    <label for="foodNameInput">Enter Food Name:</label>
+    <input type="text" id="foodNameInput" name="foodName" required>
+    <button type="submit" id="searchButton">Search</button>
+</form>
+
+<div id="allergenResults">
+    <h3>Potential allergy group</h3>
+    <ul id="allergenList"></ul>
+</div>
+
+
+    </section>
     <footer>
         <h2>contact us</h2>
         <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
@@ -298,6 +312,51 @@
                 use of the software.</p>
         </div>
     </footer>
+    <script>
+document.getElementById('allergenSearchForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const foodName = document.getElementById('foodNameInput').value;
+    
+    if (!foodName) {
+        alert('Please enter a food name.');
+        return;
+    }
+
+    const response = await fetch(`https://tameszaza.pythonanywhere.com/search_allergens?food=${encodeURIComponent(foodName)}`);
+    
+    if (response.ok) {
+        const data = await response.json();
+        const allergenList = document.getElementById('allergenList');
+        allergenList.innerHTML = '';
+
+        // Display the food image
+        const foodImage = document.createElement('img');
+        foodImage.src = data.image;
+        foodImage.alt = data.name;
+        foodImage.style.width = '250px';
+        document.getElementById('allergenResults').prepend(foodImage);
+
+        // Display the allergen information
+        if (data.allergens.length === 0) {
+            const messageItem = document.createElement('li');
+            messageItem.textContent = "No allergens found for this food.";
+            allergenList.appendChild(messageItem);
+        } else {
+            data.allergens.forEach(allergen => {
+                const listItem = document.createElement('li');
+                listItem.textContent = allergen;
+                allergenList.appendChild(listItem);
+            });
+        }
+    } else {
+        alert('Failed to fetch allergen information.');
+        console.error('Search failed:', response.statusText);
+    }
+});
+
+
+    </script>
 </body>
 
 </html>
