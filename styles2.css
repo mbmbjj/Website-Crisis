@@ -22,6 +22,84 @@ header {
     left: 0;
     z-index: 1000;
 }/* Loading */
+/* Form Styling */
+img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
+    display: none;
+}
+
+#allergenSearchForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: moccasin;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 50%;
+    margin: auto;
+}
+
+#foodNameInput {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex: 1;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    background-color: rgb(153, 102, 47);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+#searchButton:hover {
+    background-color: rgb(130, 87, 40);
+}
+
+/* Results Styling */
+#allergenResults {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff8eb;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin: auto;
+}
+
+#allergenResults h3 {
+    font-size: 24px;
+    color: rgb(153, 102, 47);
+    margin-bottom: 20px;
+}
+
+#allergenList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#allergenList li {
+    display: inline-block;
+    background-color: moccasin;
+    color: rgb(58, 44, 21);
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
 /* Loading */
 #loading {
     display: flex;

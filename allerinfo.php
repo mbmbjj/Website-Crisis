@@ -331,11 +331,11 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
         allergenList.innerHTML = '';
 
         // Display the food image
-        const foodImage = document.createElement('img');
-        foodImage.src = data.image;
-        foodImage.alt = data.name;
-        foodImage.style.width = '250px';
-        document.getElementById('allergenResults').prepend(foodImage);
+        // const foodImage = document.createElement('img');
+        // foodImage.src = data.image;
+        // foodImage.alt = data.name;
+        // foodImage.style.width = '250px';
+        // document.getElementById('allergenResults').prepend(foodImage);
 
         // Display the allergen information
         if (data.allergens.length === 0) {
