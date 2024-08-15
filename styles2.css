@@ -58,6 +58,7 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-size: 16px;
+    margin-right: 20px;
 }
 
 #searchButton:hover {
@@ -86,6 +87,7 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-left : 10px;
 }
 
 #allergenList li {
