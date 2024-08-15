@@ -566,12 +566,12 @@
             listItem.textContent = "Shelled nut"
             detectedAller.appendChild(listItem);
         }
-        if(resultSet.size===0)
-        {
-            listItem = document.createElement('li');
-            listItem.textContent = "No allery group"
-            detectedAller.appendChild(listItem);
-        }
+        if (![1, 2, 3, 4, 5, 6, 7, 8].some(value => resultSet.has(value))) {
+    listItem = document.createElement('li');
+    listItem.textContent = "No allergies";
+    detectedAller.appendChild(listItem);
+}
+
 
         checkAllergies(resultSet);
     }
@@ -626,42 +626,42 @@ function checkAllergies(resultSet) {
     if (matchAller) { // Ensure matchAller is not null
         matchAller.innerHTML = ''; // Clear previous allergens
 
-        if (matchingAllergies.includes(1)) {
+        if (matchingAllergies.includes(0)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Soy";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(2)) {
+        if (matchingAllergies.includes(1)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Cow milk";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(3)) {
+        if (matchingAllergies.includes(2)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Wheat";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(4)) {
+        if (matchingAllergies.includes(3)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Egg";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(5)) {
+        if (matchingAllergies.includes(4)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Fish";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(6)) {
+        if (matchingAllergies.includes(5)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Seafood";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(7)) {
+        if (matchingAllergies.includes(6)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Peanut";
             matchAller.appendChild(listItem);
         }
-        if (matchingAllergies.includes(8)) {
+        if (matchingAllergies.includes(7)) {
             const listItem = document.createElement('li');
             listItem.textContent = "Shelled nut";
             matchAller.appendChild(listItem);
