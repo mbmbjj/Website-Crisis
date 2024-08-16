@@ -99,7 +99,7 @@
     </section>
 
     <section class = "example">
-        <div class="column-white">
+        <div class="column-white infotxt">
             <div class="topic">
                 <h4 class="topic-small">1. ปลา</h4>
             </div>
@@ -123,7 +123,7 @@
                 </ul>
             </div>
         </div>
-        <div class="column-white">
+        <div class="column-white infotxt">
 
             <div class="topic">
                 <h4 class="topic-small">2. อาหารทะเล</h4>
@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        <div class="column-white">
+        <div class="column-white infotxt">
 
             <div class="topic">
 
@@ -180,7 +180,7 @@
             </div>
         </div>
 
-        <div class="column-white">
+        <div class="column-white infotxt">
 
             <div class="topic">
                 <h4 class="topic-small">4. แป้งสาลี</h4>
@@ -216,7 +216,7 @@
         </div>
     </section>
     <section class="example" >
-        <div class="column-white">
+        <div class="column-white infotxt">
 
             <div class="topic">
                 <h4 class="topic-small">5. ถั่วลิสง</h4>
@@ -241,7 +241,7 @@
             </div>
         </div>
 
-        <div class="column-white">
+        <div class="column-white infotxt">
 
             <div class="topic">
                 <h4 class="topic-small">6. ถั่วเหลือง</h4>
@@ -265,7 +265,7 @@
             </div>
         </div>
 
-        <div class="column-white">
+        <div class="column-white infotxt">
 
             <div class="topic">
                 <h4 class="topic-small">7. นมวัว</h4>
