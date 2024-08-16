@@ -25,8 +25,8 @@
                 <li><a href="abt.php">
                         <h5>Details</h5>
                     </a></li>
-                    <li><a href="images\26p23e0039_รายงานฉบับสมบูรณ์ 4.pdf" download="Allergy_paper.pdf">
-                    <h5>Paper</h5>
+                <li><a href="images\26p23e0039_รายงานฉบับสมบูรณ์ 4.pdf" download="Allergy_paper.pdf">
+                        <h5>Paper</h5>
                     </a></li>
             </ul>
         </div>
@@ -98,7 +98,7 @@
         </div>
     </section>
 
-    <section>
+    <section class = "example">
         <div class="column-white">
             <div class="topic">
                 <h4 class="topic-small">1. ปลา</h4>
@@ -111,8 +111,14 @@
                     <li>เกี๊ยวปลา</li>
                     <li>ปลาเส้น</li>
                     <li>ปูอัด</li>
-                    <li><b>ฉลากระบุคำว่า</b> ปลา(Fish)</li>
-                    <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงน้ำปลา</li>
+                    <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยง น้ำปลา</li>
+                    <li><b>ฉลากระบุคำว่า</b>
+                        <ul>
+                            <li>ปลา(Fish)</li>
+                        </ul>
+                    </li>
+
+
 
                 </ul>
             </div>
@@ -154,10 +160,18 @@
                     <li>ขนมเบเกอรี่</li>
                     <li>บะหมี่</li>
                     <!-- <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของแป้งสาลี</li> -->
-                    <li>
 
-                        <b>ฉลากระบุคำว่า</b> <br>egg, egg yolk,<br> egg white,<br>
-                        โอวัลบูมิน<br>(ovalbumin),<br>โอโวมูคอยด์<br>(ovomucoid)
+                    <li>
+                        <b>ฉลากระบุคำว่า</b>
+                        <ul>
+                            <li>egg</li>
+                            <li>egg yolk</li>
+                            <li>egg white</li>
+                            <li>โอวัลบูมิน (ovalbumin)</li>
+                            <li>โอโวมูคอยด์ (ovomucoid)</li>
+                        </ul>
+                    </li>
+
                     </li>
 
 
@@ -183,14 +197,25 @@
                     <li><b>ในรายที่แพ้รุนแรง </b> หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของแป้งสาลี</li>
 
                     <li>
-                        <b>ฉลากระบุคำว่า</b> <br>แป้งสาลี, <br>แป้งข้าวสาลี (wheat) ,<br>กลูเตน(gluten)
-                        ,<br>Flour(แป้งฟราว์) ,<br>แป้ง spelt ,<br>มอล์ต(malt),<br> Barley(บาเล่ย์)
-                        ,<br>Rye(ไรย์),<br> oat (โอ๊ด)
+                        <b>ฉลากระบุคำว่า</b>
+                        <ul>
+                            <li>แป้งสาลี (Wheat)</li>
+                            <li>แป้งข้าวสาลี (Wheat flour)</li>
+                            <li>กลูเตน (Gluten)</li>
+                            <li>Flour (แป้งฟราว์)</li>
+                            <li>แป้ง spelt</li>
+                            <li>มอล์ต (Malt)</li>
+                            <li>Barley (บาเล่ย์)</li>
+                            <li>Rye (ไรย์)</li>
+                            <li>Oat (โอ๊ด)</li>
+                        </ul>
                     </li>
+
                 </ul>
             </div>
         </div>
-
+    </section>
+    <section class="example" >
         <div class="column-white">
 
             <div class="topic">
@@ -204,8 +229,14 @@
                     <li>ส้มตำใส่ถั่วลิสง ๆ</li>
                     <!-- <li><b>ในรายที่แพ้รุนแรง </b> หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของถั่วลิสง</li> -->
                     <li>
-                        <b>ฉลากระบุคำว่า</b><br>ถั่วลิสง (peanut),<br> nuts,<br> mixed nuts
+                        <b>ฉลากระบุคำว่า</b>
+                        <ul>
+                            <li>ถั่วลิสง (Peanut)</li>
+                            <li>nuts</li>
+                            <li>mixed nuts</li>
+                        </ul>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -221,11 +252,15 @@
                     <li>นมถั่วเหลือง</li>
                     <li>เต้าหู้ถั่วเหลือง</li>
                     <li>อาหารที่มีถั่วเหลืองอื่น ๆ</li>
-                    <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของ <br>ถั่วเหลือง</li>
+                    <li><b>ในรายที่แพ้รุนแรง </b>หลีกเลี่ยงซอสปรุงรสที่มีส่วนผสมของถั่วเหลือง</li>
                     <li>
-                        <b>ฉลากระบุคำว่า</b><br> Soy , Soybean ซึ่งแปลว่า
-                        ว่ามีส่วนประกอบของถั่วเหลือง
+                        <b>ฉลากระบุคำว่า</b>
+                        <ul>
+                            <li>Soy</li>
+                            <li>Soybean</li>
+                        </ul>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -247,9 +282,15 @@
                     <li>ชีส</li>
                     <li>อาหารที่มีนมวัวอื่นๆ</li>
                     <li>
-                        <b>ฉลากระบุคำว่า</b><br> นมผง ,<br>นมวัว <br>(Cow’s milk) ,<br>เคซีน(casein) ,<br>เวย์
-                        (whey)
+                        <b>ฉลากระบุคำว่า</b>
+                        <ul>
+                            <li>นมผง</li>
+                            <li>นมวัว (Cow’s milk)</li>
+                            <li>เคซีน (Casein)</li>
+                            <li>เวย์ (Whey)</li>
+                        </ul>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -257,24 +298,27 @@
         <br /><br />
     </section>
     <section class="bottom">
-        
-            <div class="column-white ref">
-                <h4>เอกสารอ้างอิง</h4>
-                <p class="ref">
-                    เอกสารให้ความรู้ "Food allergy&anaphylaxis training program" <br />
-                    จัดทำโดย ศูนย์ความเป็นเลิศทางด้านโรคภูมิเเพ้ โรคหืดและะระบบทางเดินหายใจ
-                    เเละคณะกรรมการดูเเลผู้ป่วยด้านโภชนบำบัด
-                    โรงพยาบาลธรรมศาสตร์เฉลิมพระเกียรติ
-                </p>
-            </div>
-        
+
+        <div class="column-white ref">
+            <h4>เอกสารอ้างอิง</h4>
+            <p class="ref">
+                เอกสารให้ความรู้ "Food allergy&anaphylaxis training program" <br />
+                จัดทำโดย ศูนย์ความเป็นเลิศทางด้านโรคภูมิเเพ้ โรคหืดและะระบบทางเดินหายใจ
+                เเละคณะกรรมการดูเเลผู้ป่วยด้านโภชนบำบัด
+                โรงพยาบาลธรรมศาสตร์เฉลิมพระเกียรติ
+            </p>
+        </div>
+
         <div class="column-white">
-            <img src="images/ส่วนประกอบอาหารเสี่ยงในเครื่องปรุง_-removebg-preview.png" alt="Image of First member" class="round-border scan" href="https://cdn.me-qr.com/pdf/1b27d2c1-2c14-4660-84f3-e2a7beab5e7d.pdf">
+            <img src="images/ส่วนประกอบอาหารเสี่ยงในเครื่องปรุง_-removebg-preview.png" alt="Image of First member"
+                class="round-border scan" href="https://cdn.me-qr.com/pdf/1b27d2c1-2c14-4660-84f3-e2a7beab5e7d.pdf">
             <p>อาหารเสี่ยงในเครื่องปรุง</p>
-            </div>
+        </div>
         <div class="column-white">
-            
-            <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png" alt="Image of First member" class="round-border scan" href="https://cdn.me-qr.com/pdf/d69958a8-d4e5-4c50-b7aa-6f770e78b4a4.pdf">
+
+            <img src="images/QR_code_คำเเนะนำรายละเอียดเกี่ยวกับอาหารเสี่ย-removebg-preview.png"
+                alt="Image of First member" class="round-border scan"
+                href="https://cdn.me-qr.com/pdf/d69958a8-d4e5-4c50-b7aa-6f770e78b4a4.pdf">
             <p>รายละเอียดอาหารเสี่ยง 7 หมวด</p>
         </div>
     </section>
@@ -298,7 +342,7 @@
                 use of the software.</p>
         </div>
     </footer>
-   
+
 </body>
 
 </html>

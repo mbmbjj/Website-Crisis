@@ -53,6 +53,7 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     padding-bottom: 10px
 }
 
+  
 #searchButton {
     padding: 10px 20px;
     background-color: rgb(153, 102, 47);
@@ -695,3 +696,66 @@ span.tab-space{
 li a{
     margin-top: 1.5% !important;
 }
+.example ul ul li {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    list-style-type: disc !important; /* Changes the bullet point to a black dot */
+    color: black !important; /* Ensures the bullet and text are black */
+}
+.example ul ul {
+    box-shadow: none !important;
+    background-color: transparent !important; /* Remove the background color if not needed */
+    padding: 0 !important; /* Remove extra padding */
+    border-radius: 0 !important; /* Remove border radius if needed */
+}
+.example {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to a new line if needed */
+    justify-content: space-between; /* Evenly distributes space between columns */
+}
+
+.example > .column-white {
+    flex: 1; /* Ensures all columns take up equal width */
+    margin: 10px; /* Adds some space between columns */
+    padding: 20px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Includes padding and border in the element's width */
+    background-color: moccasin; /* Ensure background color consistency */
+    min-width: 200px; /* Prevents columns from getting too narrow */
+}
+
+.allerinfo ul {
+    margin: 0;
+    padding: 15px;
+    list-style-type: disc;
+    list-style-position: inside;
+    background-color: moccasin;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    line-height: 1.5;
+    word-wrap: break-word;
+    box-shadow: none !important; /* Removes the shadow */
+}
+
+.allerinfo {
+    padding: 0;
+    margin: 0;
+    background-color: moccasin;
+    border-radius: 5px;
+    box-shadow: none !important; /* Removes the shadow */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+.allerinfo li {
+    margin-bottom: 10px; /* Adds space between list items */
+    list-style-position: inside;
+}
+
+
+
+
