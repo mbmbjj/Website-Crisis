@@ -94,6 +94,24 @@
         </div>
         
     </section>
+    <section class="banner" id="search-allergy"><h1 class="Topic">Search allergy</h1></section>
+    <section class="no-padding">
+    
+    <div class='column-white'>
+    <form id="allergenSearchForm">
+    <label for="foodNameInput">Enter Food Name:</label>
+    <input type="text" id="foodNameInput" name="foodName" required>
+    <button type="submit" id="searchButton">Search</button>
+</m>
+</div>
+<div class='column-white'>
+<div id="allergenResults">
+    <h3>Potential allergy group</h3>
+    <ul id="allergenList"></ul>
+</div>
+</div>
+
+    </section>
     <footer>
         <h2>contact us</h2>
         <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
@@ -694,6 +712,50 @@ function checkAllergies(resultSet) {
 }
     
     
+    </script>
+
+<script>
+document.getElementById('allergenSearchForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const foodName = document.getElementById('foodNameInput').value;
+    
+    if (!foodName) {
+        alert('Please enter a food name.');
+        return;
+    }
+
+    const response = await fetch(`https://tameszaza.pythonanywhere.com/search_allergens?food=${encodeURIComponent(foodName)}`);
+    
+    if (response.ok) {
+        const data = await response.json();
+        const allergenList = document.getElementById('allergenList');
+        allergenList.innerHTML = '';
+
+        // Display the corrected food name
+        const allergenResults = document.getElementById('allergenResults');
+        allergenResults.querySelector('h3').textContent = `Potential allergy group for ${data.name}`;
+
+        // Display the allergen information
+        if (data.allergens.length === 0) {
+            const messageItem = document.createElement('li');
+            messageItem.textContent = "No allergens found for this food.";
+            allergenList.appendChild(messageItem);
+        } else {
+            data.allergens.forEach(allergen => {
+                const listItem = document.createElement('li');
+                listItem.textContent = allergen;
+                allergenList.appendChild(listItem);
+            });
+        }
+    } else {
+        alert('Failed to fetch allergen information.');
+        console.error('Search failed:', response.statusText);
+    }
+});
+
+
+
     </script>
 </body>
 
