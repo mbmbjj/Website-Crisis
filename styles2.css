@@ -45,7 +45,9 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
 }
 .no-padding{
     padding-top: 0;
+    padding-bottom: 200px;
 }
+
 #allergenSearchForm label{
     white-space: nowrap;
 }
@@ -154,6 +156,7 @@ h1{
     padding: 10px;          /* Optional: padding inside each column */
     box-sizing: border-box;   /* Center text inside columns if needed */
 }
+
 .column {
     border-radius: 6px;
     display: flex;
@@ -402,6 +405,7 @@ section.flex-hori{
 }
 section.two {
     background: moccasin;
+    padding-bottom:100px;
 }
 .banner {
     align-items: center;
