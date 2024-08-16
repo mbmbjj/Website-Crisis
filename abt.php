@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles2.css">
 </head>
 
-<body>
+<>
 <header>
         <div class="top-container">
             <ul class="myUL">
@@ -32,7 +32,7 @@
         </div>
     </header>
     <section class="first">
-        <h1 class="Topic" id="what-is">What is <br> Food Scanning Programme For Food Allergies</hๅ>
+        <h1 class="Topic" id="what-is">What is <br> Food Scanning Programme For Food Allergies</h1>
     </section>
     <section class="flex-hori">
         <div class="column-white" id="what-is-text"><img src="images\Asset 3@4x.png" alt="Flow" class="round-border">
@@ -98,8 +98,47 @@
             </ul>
         </div>
     </section>
+    <section class="flex-hori">
+        
+        <div class="column-white" id="what-is-text">
+            
+        <h3>Function: Search Allergies</h3>
+            <p class="about-text" id="what-is-dess">
+                <span class="tab-space"></span>ฟังก์ชันที่ผู้ใช้งานสามารถกรอกชื่อเมนูอาหาร จะแสดง
+                ข้อมูลว่าผู้แพ้อาหารกลุ่มใดบ้าง ที่ไม่สามารถรับประทานเมนูนี้ได้ หากได้ล็อกอินบัญชีผู้ใช้แล้วผู้ใช้แพ้เป็นหนึ่งในกลุ่มผู้แพ้ที่ควรหลีกเลี่ยงอาหารนี้
+                ระบบจะมีการเน้นย้ำ ตัวอย่างการค้นหาดังภาพ ในกรณีนี้ผู้ใช้มีการแพ้ที่ไม่ตรงกับส่วนประกอบที่มีในเมนูที่เสริช จึงแสดงข้อมูลปกติ
+                ซึ่งประเภทอาหารที่แพ้ได้ในส่วนนี้จะเป็นข้อมูลที่ละเอียดมากยิ่งขึ้น 
+                <br>โดยมีClass การแพ้ถึง 30 Classes ดังนี้
+            </p>
+            <ul id="class-ul">
+                <li>diary</li>
+                <li>gluten</li>
+                <li>wheat</li>
+                <li>egg</li>
+                <li>milk</li>
+                <li>peanut</li>
+                <li>tree nut</li>
+                <li>soy</li>
+                <li>fish</li>
+                <li>shellfish</li>
+                <li>pork</li>
+                <li>red meat</li>
+                <li>crustacean</li>
+                <li>celery</li>
+                <li>mustard</li>
+                <li>sesame</li>
+                <li>lupine</li>
+                <li>mollusk</li>
+                <li>alcohol</li>
+                <li>sulphite</li>
+            </ul>
+        </div>
+        <div class="column-white" id="what-is-text"><img src="images\search.jpg" alt="Flow" class="round-border">
+        </div>
+    </section>
+    
     <section class="banner" id="development">
-        <h1>In development things</h1>
+        <h1>Undergoing Development</h1>
 
     </section>
     <section>
