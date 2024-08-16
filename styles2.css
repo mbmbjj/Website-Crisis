@@ -760,6 +760,11 @@ li a{
     list-style-position: inside;
 }
 
+.allerinfo ul ul {
+    padding-left: 20px !important; /* Adds space before the nested list items */
+    margin-left: 0 !important; /* Ensures no extra margin */
+    list-style-position: inside !important; /* Keeps the bullets inside the list item */
+}
 
 
 
