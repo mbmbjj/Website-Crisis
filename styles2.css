@@ -42,6 +42,9 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     margin-right: 10px;
     font-size: 16px;
 }
+#search-allergy, #search-allergy .Topic{
+    padding-bottom: 10px
+}
 
 #searchButton {
     padding: 10px 20px;

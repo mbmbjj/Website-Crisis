@@ -278,7 +278,7 @@
             <p>รายละเอียดอาหารเสี่ยง 7 หมวด</p>
         </div>
     </section>
-    <section class="banner"><h1 class="Topic">Search allergy</h1></section>
+    <section class="banner" id="search-allergy"><h1 class="Topic">Search allergy</h1></section>
     <section>
     
     <div class='column-white'>
