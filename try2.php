@@ -666,6 +666,11 @@ function checkAllergies(resultSet) {
             listItem.textContent = "Shelled nut";
             matchAller.appendChild(listItem);
         }
+        if (![1, 2, 3, 4, 5, 6, 7, 8].some(value => matchingAllergies.includes(value))) {
+    listItem = document.createElement('li');
+    listItem.textContent = " No allergies";
+    matchAller.appendChild(listItem);
+}
     } else {
         console.error('Element with ID matchAller not found.');
     }
