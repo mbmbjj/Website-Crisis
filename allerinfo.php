@@ -334,12 +334,9 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
         const allergenList = document.getElementById('allergenList');
         allergenList.innerHTML = '';
 
-        // Display the food image
-        // const foodImage = document.createElement('img');
-        // foodImage.src = data.image;
-        // foodImage.alt = data.name;
-        // foodImage.style.width = '250px';
-        // document.getElementById('allergenResults').prepend(foodImage);
+        // Display the corrected food name
+        const allergenResults = document.getElementById('allergenResults');
+        allergenResults.querySelector('h3').textContent = `Potential allergy group for ${data.name}`;
 
         // Display the allergen information
         if (data.allergens.length === 0) {
@@ -358,6 +355,7 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
         console.error('Search failed:', response.statusText);
     }
 });
+
 
 
     </script>
