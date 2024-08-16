@@ -597,8 +597,11 @@ function compareAllergies(resultSet) {
     console.log("Stored Answers (raw cookie value):", storedAnswers);
 
     if (storedAnswers) {
+        // Decode the URL-encoded cookie value before parsing
+        const decodedAnswers = decodeURIComponent(storedAnswers);
+
         // Check if storedAnswers is already an array or a string
-        const allergyStrings = Array.isArray(storedAnswers) ? storedAnswers : JSON.parse(storedAnswers);
+        const allergyStrings = Array.isArray(decodedAnswers) ? decodedAnswers : JSON.parse(decodedAnswers);
         const allergyIntegers = allergyStrings.map(value => {
             const parsedValue = Number(value);
             console.log(`Parsed Value: ${value} -> ${parsedValue}`);
