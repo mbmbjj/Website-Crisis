@@ -27,13 +27,13 @@ $allergies = isset($_SESSION['allergies']) ? $_SESSION['allergies'] : (isset($_C
 
 // Define an array to map allergy values to their names
 $allergyMapping = array(
-    '1' => 'Egg',
-    '2' => 'Fish',
-    '3' => 'Peanut',
-    '4' => 'Milk',
-    '5' => 'Seafood',
-    '6' => 'Soy',
-    '7' => 'Wheat',
+    '1' => 'Soy',
+    '2' => 'Cow milk',
+    '3' => 'Wheat',
+    '4' => 'Egg',
+    '5' => 'Fish',
+    '6' => 'Seafood',
+    '7' => 'Peanut',
     'other' => 'Other'
 );
 

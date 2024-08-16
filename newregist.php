@@ -41,6 +41,16 @@
     });
 }
 
+function showOtherAnswerInput() {
+        var otherCheckbox = document.getElementById('other');
+        var otherInputDiv = document.getElementById('other-input');
+        
+        if (otherCheckbox.checked) {
+            otherInputDiv.style.display = 'block';
+        } else {
+            otherInputDiv.style.display = 'none';
+        }
+    }
 
     </script>
 </head>
@@ -84,39 +94,40 @@
 
             <label>Allergies (select all that apply):</label><br>
             <div id="checkbox-group">
-                <div class="checkbox-item">
-                    <input type="checkbox" id="egg" name="allergy" value="1">
-                    <label for="egg">Egg</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="fish" name="allergy" value="2">
-                    <label for="fish">Fish</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="peanut" name="allergy" value="3">
-                    <label for="peanut">Peanut</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="milk" name="allergy" value="4">
-                    <label for="milk">Milk</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="seafood" name="allergy" value="5">
-                    <label for="seafood">Seafood</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="soy" name="allergy" value="6">
-                    <label for="soy">Soy</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="wheat" name="allergy" value="7">
-                    <label for="wheat">Wheat</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="other" name="allergy" value="other" onclick="showOtherAnswerInput()">
-                    <label for="other">Other</label>
-                </div>
-            </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="soy" name="allergy" value="1">
+        <label for="soy">Soy</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="milk" name="allergy" value="2">
+        <label for="milk">Cow milk</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="wheat" name="allergy" value="3">
+        <label for="wheat">Wheat</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="egg" name="allergy" value="4">
+        <label for="egg">Egg</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="fish" name="allergy" value="5">
+        <label for="fish">Fish</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="seafood" name="allergy" value="6">
+        <label for="seafood">Seafood</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="peanut" name="allergy" value="7">
+        <label for="peanut">Peanut</label>
+    </div>
+    <div class="checkbox-item">
+        <input type="checkbox" id="other" name="allergy" value="other" onclick="showOtherAnswerInput()">
+        <label for="other">Other</label>
+    </div>
+</div>
+
             <div id="other-input" style="display:none;">
                 <label for="other-answer">Please specify:</label>
                 <input type="text" id="other-answer" name="other-answer" class="input-text"><br><br>
