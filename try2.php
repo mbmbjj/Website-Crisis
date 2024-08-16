@@ -736,7 +736,38 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
         const allergenResults = document.getElementById('allergenResults');
         allergenResults.querySelector('h3').textContent = `Potential allergy group for ${data.name}`;
 
-        // Display the allergen information
+        // Retrieve user's allergies from cookies (in integer list format)
+        const userAllergies = getCookie('allergies');
+        const userAllergyList = userAllergies ? JSON.parse(decodeURIComponent(userAllergies)) : [];
+
+        // Mapping of possible API results to corresponding integer values
+        const allergenMap = {
+            "Dairy": 2,        // Maps to cow's milk allergy
+            "Gluten": 3,       // Maps to wheat allergy
+            "Wheat": 3,        // Maps to wheat allergy
+            "Egg": 4,          // Maps to egg allergy
+            "Milk": 2,         // Maps to cow's milk allergy
+            "Peanut": 7,       // Maps to peanut allergy
+            "Tree Nut": 8,     // Maps to shelled nut allergy
+            "Soy": 1,          // Maps to soy allergy
+            "Fish": 5,         // Maps to fish allergy
+            "Shellfish": 6,    // Maps to sea food allergy
+            "Pork": null,      // Not directly mapped
+            "Red Meat": null,  // Not directly mapped
+            "Crustacean": 6,   // Maps to sea food allergy
+            "Celery": null,    // Not directly mapped
+            "Mustard": null,   // Not directly mapped
+            "Sesame": null,    // Not directly mapped
+            "Lupine": null,    // Not directly mapped
+            "Mollusk": 6,      // Maps to sea food allergy
+            "Alcohol": null,   // Not directly mapped
+            "Sulphite": null   // Not directly mapped
+        };
+
+        // Convert user allergy list to integers
+        const userAllergyIntList = userAllergyList.map(Number);
+
+        // Display the allergen information and highlight matching allergies
         if (data.allergens.length === 0) {
             const messageItem = document.createElement('li');
             messageItem.textContent = "No allergens found for this food.";
@@ -745,6 +776,13 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
             data.allergens.forEach(allergen => {
                 const listItem = document.createElement('li');
                 listItem.textContent = allergen;
+
+                // Map the API allergen to the corresponding integer
+                const allergenId = allergenMap[allergen];
+                if (allergenId !== null && userAllergyIntList.includes(allergenId)) {
+                    listItem.style.color = 'red'; // Highlight allergen in red
+                }
+
                 allergenList.appendChild(listItem);
             });
         }
@@ -753,8 +791,6 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
         console.error('Search failed:', response.statusText);
     }
 });
-
-
 
     </script>
 </body>
