@@ -98,6 +98,7 @@
             </ul>
         </div>
     </section>
+    <section style="height:200px;"></section>
     <section class="flex-hori">
         
         <div class="column-white" id="what-is-text">
