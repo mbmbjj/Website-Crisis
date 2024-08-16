@@ -278,18 +278,22 @@
             <p>รายละเอียดอาหารเสี่ยง 7 หมวด</p>
         </div>
     </section>
+    <section class="banner"><h1 class="Topic">Search allergy</h1></section>
     <section>
+    
+    <div class='column-white'>
     <form id="allergenSearchForm">
     <label for="foodNameInput">Enter Food Name:</label>
     <input type="text" id="foodNameInput" name="foodName" required>
     <button type="submit" id="searchButton">Search</button>
-</form>
-
+</m>
+</div>
+<div class='column-white'>
 <div id="allergenResults">
     <h3>Potential allergy group</h3>
     <ul id="allergenList"></ul>
 </div>
-
+</div>
 
     </section>
     <footer>
