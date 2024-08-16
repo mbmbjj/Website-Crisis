@@ -279,7 +279,7 @@
         </div>
     </section>
     <section class="banner" id="search-allergy"><h1 class="Topic">Search allergy</h1></section>
-    <section>
+    <section class="no-padding">
     
     <div class='column-white'>
     <form id="allergenSearchForm">

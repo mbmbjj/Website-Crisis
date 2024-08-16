@@ -43,6 +43,9 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     margin-right: 10px;
     font-size: 16px;
 }
+.no-padding{
+    padding-top: 0;
+}
 #allergenSearchForm label{
     white-space: nowrap;
 }
