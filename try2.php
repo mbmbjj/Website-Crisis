@@ -312,76 +312,81 @@
 
 
 
-    submitButton.addEventListener('click', async () => {
-        submitButton.style.display = 'none';
-        submitText.style.display = 'block';
-        loading.style.opacity = '1';
-        const formData = new FormData();
-        const file = fileInput.files[0];
-        if (!file) {
-            alert('No file selected.');
-            submitButton.style.display = 'block';
-            submitText.style.display = 'none';
-            loading.style.opacity = '0';
-            return;
-        }
+submitButton.addEventListener('click', async () => {
+    submitButton.style.display = 'none';
+    submitText.style.display = 'block';
+    loading.style.opacity = '1';
+    const formData = new FormData();
+    const file = fileInput.files[0];
+    if (!file) {
+        alert('No file selected.');
+        submitButton.style.display = 'block';
+        submitText.style.display = 'none';
+        loading.style.opacity = '0';
+        return;
+    }
 
-        formData.append('file', file);
+    formData.append('file', file);
 
-        const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            const imageUrl = data.image_url;
-            const imageId = data.id; // Capture the unique identifier
-
-            console.log('Image URL:', imageUrl); // Debug output
-            uploadedPhoto.src =
-                `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
-            uploadedPhoto.style.display = 'block';
-
-            try {
-                const detections = await fetchDetections(imageId);
-                foutput.textContent = "Detected Items";
-                soutput.textContent = "Allergy Group";
-                toutput.textContent = "Match Group";
-                console.log('Detections:', detections); // Debug output
-                detectedItemsList.innerHTML = '';
-                if (detections.length === 0) {
-                    const messageItem = document.createElement('li');
-                    messageItem.textContent = "Cannot detect any ingredient";
-                    detectedItemsList.appendChild(messageItem);
-                } else {
-                    detections.forEach(item => {
-                        console.log('Adding item:', item); // Debug output for each item
-                        if (item != 'other ingredients') {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = item;
-                            detectedItemsList.appendChild(listItem);
-                        }
-                    });
-                }
-
-                displayAllergens(detections);
-                document.getElementById('resultModal').style.display = 'block';
-
-            } catch (error) {
-                console.error('Failed to fetch detections:', error);
-                submitButton.style.display = 'block';
-                submitText.style.display = 'none';
-                loading.style.opacity = '0';
-            }
-        } else {
-            alert('Upload failed');
-            console.error('Upload failed');
-            submitButton.style.display = 'block';
-            submitText.style.display = 'none';
-            loading.style.opacity = '0';
-        }
+    const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
+        method: 'POST',
+        body: formData
     });
+
+    if (response.ok) {
+        const data = await response.json();
+        const imageUrl = data.image_url;
+        const imageId = data.id; // Capture the unique identifier
+
+        console.log('Image URL:', imageUrl); // Debug output
+        uploadedPhoto.src = `https://tameszaza.pythonanywhere.com${imageUrl}`; // Ensure the correct URL is used
+        uploadedPhoto.style.display = 'block';
+
+        try {
+            const detections = await fetchDetections(imageId);
+            foutput.textContent = "Detected Items";
+            soutput.textContent = "Allergy Group";
+            toutput.textContent = "Match Group";
+            console.log('Detections:', detections); // Debug output
+
+            const foodComponents = detections["food_component"];
+            const allergyGroup = detections["Allergy group"];
+
+            // Display detected food components
+            detectedItemsList.innerHTML = '';
+            if (!foodComponents || foodComponents.length === 0) {
+                const messageItem = document.createElement('li');
+                messageItem.textContent = "Cannot detect any ingredient";
+                detectedItemsList.appendChild(messageItem);
+            } else {
+                foodComponents.forEach(component => {
+                    const name = component["component_name"];
+                    console.log('Adding item:', name); // Debug output for each item
+                    const listItem = document.createElement('li');
+                    listItem.textContent = name;
+                    detectedItemsList.appendChild(listItem);
+                });
+            }
+
+            // Display allergens from the allergy group
+            displayAllergensFromGroup(allergyGroup);
+            document.getElementById('resultModal').style.display = 'block';
+
+        } catch (error) {
+            console.error('Failed to fetch detections:', error);
+            submitButton.style.display = 'block';
+            submitText.style.display = 'none';
+            loading.style.opacity = '0';
+        }
+    } else {
+        alert('Upload failed');
+        console.error('Upload failed');
+        submitButton.style.display = 'block';
+        submitText.style.display = 'none';
+        loading.style.opacity = '0';
+    }
+});
+
     // Close the modal
     document.getElementById('close').addEventListener('click', () => {
         document.getElementById('resultModal').style.display = 'none';
@@ -434,165 +439,34 @@
         return dataTransfer.files;
     }
 
-    const allergenMap = {
-        'No': 0,
-        'Soy': 1,
-        'cow\'s milk': 2,
-        'wheat': 3,
-        'egg': 4,
-        'fish': 5,
-        'sea food': 6,
-        'peanut': 7,
-        'shelled nut': 8
-    };
+    //=====================================================
 
-    const data = [
-        ['background', 'No'],
-        ['candy', 'cow\'s milk'],
-        ['egg tart', 'cow\'s milk+wheat+egg'],
-        ['french fries', 'No'],
-        ['chocolate', 'cow\'s milk'],
-        ['biscuit', 'cow\'s milk+wheat'],
-        ['popcorn', 'cow\'s milk'],
-        ['pudding', 'cow\'s milk+wheat'],
-        ['ice cream', 'cow\'s milk+egg'],
-        ['cheese butter', 'cow\'s milk'],
-        ['cake', 'cow\'s milk+wheat+egg'],
-        ['wine', 'No'],
-        ['milkshake', 'cow\'s milk+egg'],
-        ['coffee', 'No'],
-        ['juice', 'No'],
-        ['milk', 'cow\'s milk+Soy'],
-        ['tea', 'No'],
-        ['almond', 'peanut'],
-        ['red beans', 'shelled nut'],
-        ['cashew', 'peanut'],
-        ['dried cranberries', 'No'],
-        ['soy', 'Soy'],
-        ['walnut', 'peanut'],
-        ['peanut', 'peanut'],
-        ['egg', 'egg'],
-        ['Fruit', 'No'],
-        ['Meat', 'No'],
-        ['sausage', 'cow\'s milk+wheat'],
-        ['sauce', 'No'],
-        ['crab', 'sea food'],
-        ['fish', 'fish'],
-        ['shellfish', 'sea food'],
-        ['shrimp', 'sea food'],
-        ['soup', 'cow\'s milk+wheat'],
-        ['bread', 'wheat+cow\'s milk'],
-        ['corn', 'No'],
-        ['hamburg', 'cow\'s milk+wheat+egg'],
-        ['pizza', 'wheat+cow\'s milk'],
-        ['hanamaki baozi', 'wheat'],
-        ['wonton dumplings', 'wheat+egg'],
-        ['pasta', 'cow\'s milk+wheat+egg'],
-        ['noodles', 'wheat+egg'],
-        ['rice', 'No'],
-        ['pie', 'cow\'s milk+wheat+egg'],
-        ['tofu', 'Soy'],
-        ['Vegetable', 'No'],
-        ['Mushroom', 'No'],
-        ['salad', 'No'],
-        ['other ingredients', 'No']
-    ];
+    function displayAllergensFromGroup(allergyGroup) {
+    detectedAller.innerHTML = ''; // Clear previous allergens
 
-    function createMultiValueMap(data, allergenMap) {
-        const multiValueMap = new Map();
-
-        data.forEach(([key, valueString]) => {
-            const values = valueString.split('+').map(value => allergenMap[value.trim().toLowerCase()]);
-            multiValueMap.set(key.toLowerCase(), values);
-        });
-
-        return multiValueMap;
+    let hasAllergens = false;
+    for (const [allergen, isPresent] of Object.entries(allergyGroup)) {
+        if (isPresent) {
+            hasAllergens = true;
+            const listItem = document.createElement('li');
+            listItem.textContent = allergen.replace('_', ' '); // Replace underscores with spaces
+            detectedAller.appendChild(listItem);
+        }
     }
 
-    const multiValueMap = createMultiValueMap(data, allergenMap);
-
-    const fruits = ['apple', 'avocado', 'banana', 'blueberry', 'cherry', 'date', 'fig', 'grape', 'kiwi', 'lemon',
-        'mango', 'melon', 'olives', 'orange', 'peach', 'pear', 'pineapple', 'raspberry', 'strawberry', 'watermelon'
-    ];
-    const vegetables = ['French beans', 'asparagus', 'bamboo shoots', 'bean sprouts', 'broccoli', 'cabbage', 'carrot',
-        'cauliflower', 'celery stick', 'cilantro mint', 'cucumber', 'eggplant', 'garlic', 'ginger', 'green beans',
-        'kelp', 'lettuce', 'okra', 'onion', 'pepper', 'potato', 'pumpkin', 'rape', 'seaweed', 'snow peas',
-        'spring onion', 'tomato', 'white radish'
-    ];
-
-    const specificNames = {};
-
-    fruits.forEach(fruit => specificNames[fruit.toLowerCase()] = 'fruit');
-    vegetables.forEach(vegetable => specificNames[vegetable.toLowerCase()] = 'vegetable');
-
-    function replaceItems(detectedItems, specificNames) {
-        return detectedItems.map(item => specificNames[item.toLowerCase()] || item);
+    if (!hasAllergens) {
+        const listItem = document.createElement('li');
+        listItem.textContent = "No allergens detected";
+        detectedAller.appendChild(listItem);
     }
 
-    function displayAllergens(detections) {
-        const resultSet = new Set();
-        const updatedDetectedItems = replaceItems(detections, specificNames);
-
-        updatedDetectedItems.forEach(item => {
-            const values = multiValueMap.get(item.toLowerCase());
-            if (values) {
-                values.forEach(value => resultSet.add(value));
-            } else {
-                console.log(`${item} not found in multiValueMap`);
-            }
-        });
-
-        detectedAller.innerHTML = ''; // Clear previous allergens
-
-        if (resultSet.has(1)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Soy"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(2)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Cow milk"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(3)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Wheat"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(4)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Egg"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(5)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Fish"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(6)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Seafood"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(7)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Peanut"
-            detectedAller.appendChild(listItem);
-        }
-        if (resultSet.has(8)) {
-            listItem = document.createElement('li');
-            listItem.textContent = "Shelled nut"
-            detectedAller.appendChild(listItem);
-        }
-        if (![1, 2, 3, 4, 5, 6, 7, 8].some(value => resultSet.has(value))) {
-    listItem = document.createElement('li');
-    listItem.textContent = "No allergies";
-    detectedAller.appendChild(listItem);
+    // Now compare with user's known allergies
+    checkAllergies(allergyGroup);
 }
 
+    
 
-        checkAllergies(resultSet);
-    }
+
 
     //==================================================
 
@@ -641,75 +515,81 @@ function compareAllergies(resultSet) {
 
 
 
-function checkAllergies(resultSet) {
-    const matchingAllergies = compareAllergies(resultSet);
-    
-    if (matchAller) { // Ensure matchAller is not null
-        matchAller.innerHTML = ''; // Clear previous allergens
+function checkAllergies(allergyGroup) {
+    const storedAllergies = getCookie('allergies');
+    console.log("Stored Allergies (raw cookie value):", storedAllergies);
 
-        if (matchingAllergies.includes(1)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Soy";
-            matchAller.appendChild(listItem);
+    const matchAller = document.getElementById('matchAller');
+    matchAller.innerHTML = ''; // Clear previous content
+
+    if (storedAllergies) {
+        const decodedAllergies = decodeURIComponent(storedAllergies);
+        const userAllergies = JSON.parse(decodedAllergies).map(Number); // Should be an array of allergen IDs
+
+        // Mapping of allergen names to IDs (as per your system)
+        const allergenNameToId = {
+            "Soy": 1,
+            "Cow_milk": 2,
+            "Wheat": 3,
+            "Egg": 4,
+            "Fish": 5,
+            "Seafood": 6,
+            "Peanut": 7,
+            "Shelled_nut": 8
+        };
+
+        let matchingAllergies = [];
+
+        for (const [allergenName, isPresent] of Object.entries(allergyGroup)) {
+            if (isPresent) {
+                const allergenId = allergenNameToId[allergenName];
+                if (userAllergies.includes(allergenId)) {
+                    matchingAllergies.push(allergenName);
+                }
+            }
         }
-        if (matchingAllergies.includes(2)) {
+
+        // Display matching allergies
+        if (matchingAllergies.length > 0) {
+            matchingAllergies.forEach(allergen => {
+                const listItem = document.createElement('li');
+                listItem.textContent = allergen.replace('_', ' ');
+                matchAller.appendChild(listItem);
+            });
+
+            const messageElement = document.createElement('p');
+            messageElement.textContent = "Cannot eat";
+            // Style the message
+            messageElement.style.color = "red";
+            messageElement.style.marginTop = "10px";
+            messageElement.style.fontSize = "40px";
+            messageElement.style.fontWeight = "bold";
+            messageElement.style.textAlign = "center";
+            matchAller.appendChild(messageElement);
+
+        } else {
             const listItem = document.createElement('li');
-            listItem.textContent = "Cow milk";
+            listItem.textContent = "No matching allergies";
             matchAller.appendChild(listItem);
+
+            const messageElement = document.createElement('p');
+            messageElement.textContent = "Can eat";
+            // Style the message
+            messageElement.style.color = "green";
+            messageElement.style.marginTop = "10px";
+            messageElement.style.fontSize = "40px";
+            messageElement.style.fontWeight = "bold";
+            messageElement.style.textAlign = "center";
+            matchAller.appendChild(messageElement);
         }
-        if (matchingAllergies.includes(3)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Wheat";
-            matchAller.appendChild(listItem);
-        }
-        if (matchingAllergies.includes(4)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Egg";
-            matchAller.appendChild(listItem);
-        }
-        if (matchingAllergies.includes(5)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Fish";
-            matchAller.appendChild(listItem);
-        }
-        if (matchingAllergies.includes(6)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Seafood";
-            matchAller.appendChild(listItem);
-        }
-        if (matchingAllergies.includes(7)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Peanut";
-            matchAller.appendChild(listItem);
-        }
-        if (matchingAllergies.includes(8)) {
-            const listItem = document.createElement('li');
-            listItem.textContent = "Shelled nut";
-            matchAller.appendChild(listItem);
-        }
-        if (![1, 2, 3, 4, 5, 6, 7, 8].some(value => matchingAllergies.includes(value))) {
-    listItem = document.createElement('li');
-    listItem.textContent = " No allergies";
-    matchAller.appendChild(listItem);
-}
     } else {
-        console.error('Element with ID matchAller not found.');
+        console.log('No allergies stored in cookies.');
+        const listItem = document.createElement('li');
+        listItem.textContent = "No known allergies";
+        matchAller.appendChild(listItem);
     }
-
-    // Display the appropriate message based on matching allergies
-    const message = matchingAllergies.length === 0 ? "Can eat  " : "Cannot eat  ";
-    const messageElement = document.createElement('p');
-    messageElement.textContent = message;
-
-    // Style the message
-    messageElement.style.color = "red";
-    messageElement.style.marginTop = "10px"
-    messageElement.style.fontSize = "40px"; // You can adjust the font size as needed
-    messageElement.style.fontWeight = "bold";
-    messageElement.style.textAlign = "center";
-
-    matchAller.appendChild(messageElement);
 }
+
     
     
     </script>
@@ -740,29 +620,7 @@ document.getElementById('allergenSearchForm').addEventListener('submit', async f
         const userAllergies = getCookie('allergies');
         const userAllergyList = userAllergies ? JSON.parse(decodeURIComponent(userAllergies)) : [];
 
-        // Mapping of possible API results to corresponding integer values
-        const allergenMap = {
-            "Dairy": 2,        // Maps to cow's milk allergy
-            "Gluten": 3,       // Maps to wheat allergy
-            "Wheat": 3,        // Maps to wheat allergy
-            "Egg": 4,          // Maps to egg allergy
-            "Milk": 2,         // Maps to cow's milk allergy
-            "Peanut": 7,       // Maps to peanut allergy
-            "Tree Nut": 8,     // Maps to shelled nut allergy
-            "Soy": 1,          // Maps to soy allergy
-            "Fish": 5,         // Maps to fish allergy
-            "Shellfish": 6,    // Maps to sea food allergy
-            "Pork": null,      // Not directly mapped
-            "Red Meat": null,  // Not directly mapped
-            "Crustacean": 6,   // Maps to sea food allergy
-            "Celery": null,    // Not directly mapped
-            "Mustard": null,   // Not directly mapped
-            "Sesame": null,    // Not directly mapped
-            "Lupine": null,    // Not directly mapped
-            "Mollusk": 6,      // Maps to sea food allergy
-            "Alcohol": null,   // Not directly mapped
-            "Sulphite": null   // Not directly mapped
-        };
+        
 
         // Convert user allergy list to integers
         const userAllergyIntList = userAllergyList.map(Number);
