@@ -263,7 +263,7 @@
         }
     });
 
-    async function fetchDetections(imageId, retryCount = 10, delay = 1000) {
+    async function fetchDetections(imageId, retryCount = 30, delay = 1000) {
     while (retryCount > 0) {
         try {
             const detectionsResponse = await fetch(

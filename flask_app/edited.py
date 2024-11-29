@@ -298,13 +298,18 @@ def serve_processed_file(filename):
     return send_from_directory(PROCESSED_FOLDER, filename)
 
 def process_image(image_path, unique_id):
-    detected_class = set()
     def upload_to_gemini(path, mime_type=None):
         """Uploads the given file to Gemini."""
         file = genai.upload_file(path, mime_type=mime_type)
         print(f"Uploaded file '{file.display_name}' as: {file.uri}")
         return file
-
+    def delete_file_from_gemini(file_uri):
+        """Deletes the given file from Gemini."""
+        try:
+            genai.delete_file(name=file_uri)
+            print(f"Deleted file from Gemini: {file_uri}")
+        except Exception as e:
+            print(f"Failed to delete file: {e}")
     # Determine mime type based on file extension
     ext = os.path.splitext(image_path)[1].lower()
     if ext == '.jpg' or ext == '.jpeg':
@@ -454,7 +459,9 @@ def process_image(image_path, unique_id):
 
     # Update detection_results
     detection_results[unique_id] = detection_result
-
+    delete_file_from_gemini(uploaded_file.uri)
+    for file in files:
+        delete_file_from_gemini(file.uri)
     return processed_image_path
 
 
