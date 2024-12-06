@@ -32,7 +32,7 @@
             </ul>
         </div>
     </header>
-    <section id='first-section'>
+    <!--<section id='first-section'>
         <div class='column' id='title'>
             <h1 class="Topic"><em>Food Scanning Programme<br><br> For Food Allergies</em></h1>
             <p class='describtion'>"Quickly identify allergens in your diet."</p>
@@ -42,7 +42,7 @@
         <div class="imgcontainer">
             <img src="images\croissantsandcaviar_food_photographer-10.png" class="resize" />
         </div>
-    </section>
+    </section>-->
     <section class="two" id='scan'>
         <div class="container">
             <h1 id="highlight"><em>FEATURES</em></h1>
@@ -149,7 +149,7 @@
     const soutput = document.getElementById("soutput");
     const toutput = document.getElementById("toutput");
     const changeCameraButton = document.getElementById('change-camera-button');
-    const tryNowButton = document.getElementById('jump-button');
+    //const tryNowButton = document.getElementById('jump-button');
     const submitText = document.getElementById("submit-text");
     loading.style.opacity = '0';
     let currentStream;
@@ -193,7 +193,7 @@
         currentStream = stream;
         video.srcObject = stream;
     }
-    tryNowButton.addEventListener('click', () => {
+    /*tryNowButton.addEventListener('click', () => {
         fetch('https://tameszaza.pythonanywhere.com/delete_all', {
                 method: 'POST',
                 headers: {
@@ -230,7 +230,7 @@
                 }
             })
             .catch(error => console.error('Error:', error));
-    })
+    })*/
 
     captureButton.addEventListener('click', () => {
         canvas.width = video.videoWidth;
@@ -244,6 +244,9 @@
         const blob = dataURLToBlob(dataUrl);
         const fileList = createFileList(blob);
         fileInput.files = fileList;
+
+        //Auto submit
+        submitFile(fileInput.files[0]);
     });
 
     selectFileButton.addEventListener('click', () => {
@@ -312,21 +315,23 @@
 
 
 
-submitButton.addEventListener('click', async () => {
-    submitButton.style.display = 'none';
-    submitText.style.display = 'block';
-    loading.style.opacity = '1';
-    const formData = new FormData();
-    const file = fileInput.files[0];
-    if (!file) {
+    submitButton.addEventListener('click', async () => {
+        submitFile(fileInput.files[0]);
+    });
+
+    async function submitFile(file) {
+        if (!file) {
         alert('No file selected.');
         submitButton.style.display = 'block';
         submitText.style.display = 'none';
         loading.style.opacity = '0';
         return;
     }
-
-    formData.append('file', file);
+        submitButton.style.display = 'none';
+        submitText.style.display = 'block';
+        loading.style.opacity = '1';
+        const formData = new FormData();
+        formData.append('file', file);
 
     const response = await fetch('https://tameszaza.pythonanywhere.com/upload', {
         method: 'POST',
@@ -385,7 +390,7 @@ submitButton.addEventListener('click', async () => {
         submitText.style.display = 'none';
         loading.style.opacity = '0';
     }
-});
+    }
 
     // Close the modal
     document.getElementById('close').addEventListener('click', () => {
@@ -397,7 +402,7 @@ submitButton.addEventListener('click', async () => {
         if (event.target === document.getElementById('resultModal')) {
             document.getElementById('resultModal').style.display = 'none';
         }
-    })
+    });
 
     changeCameraButton.addEventListener('click', () => {
         if (videoDevices.length > 1) {
