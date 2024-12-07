@@ -678,7 +678,7 @@ span.tab-space{
     width: 50%; /* Adjust width to make the modal smaller */
     border-radius: 10px;
     font-size: 0.9em;
-    text-align: left;
+    
 }
 #modal-photo-container {
     display: flex;
