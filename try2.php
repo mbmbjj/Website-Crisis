@@ -81,13 +81,17 @@
                     <div class="modal-content">
                     <span id="close">&times;</span>
                         <!--<h2>Detected Food</h2>-->
-                        <p class='output' id='foutput'></p>
-                        <ul id="detectedItems"></ul>
-                        <p class='output' id='soutput'></p>
-                        <ul id="detectedAller"></ul>
-                        <p class='output' id='toutput'></p>
-                        <ul id="matchAller"></ul>                        
+                            <p class='output' id='foutput'></p>
+                            <ul id="detectedItems"></ul>
+                            <p class='output' id='soutput'></p>
+                            <ul id="detectedAller"></ul>
+                            <p class='output' id='toutput'></p>
+                            <ul id="matchAller"></ul> 
+                        <div id="modal-photo-container" style="display: none;">
+                            <img id="modal-photo" alt="Labeled Photo">
+                        </div>                     
                     </div>
+                    
                     </div>
                 </div>
             </div>
@@ -376,6 +380,10 @@
             // Display allergens from the allergy group
             displayAllergensFromGroup(allergyGroup);
             document.getElementById('resultModal').style.display = 'block';
+            const modalPhoto = document.getElementById('modal-photo'); // Ensure this ID is in your HTML
+            modalPhoto.src = `https://tameszaza.pythonanywhere.com${imageUrl}`;
+            modalPhoto.alt = "Labeled Photo"; // Add an alternative text for accessibility
+            document.getElementById('modal-photo-container').style.display = 'block';
 
         } catch (error) {
             console.error('Failed to fetch detections:', error);
