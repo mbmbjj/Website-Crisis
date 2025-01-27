@@ -109,11 +109,18 @@
 </m>
 </div>
 <div class='column-white'>
-<div id="allergenResults">
-    <h3>Potential allergy group</h3>
+  <div id="allergenResults">
+    <h3>Food components</h3>
     <ul id="allergenList"></ul>
+  </div>
 </div>
+
+<!-- New container for allergens -->
+<div class='column-white' style="margin-top:1em;">
+  <p style="font-weight:bold;">Detected Allergens:</p>
+  <ul id="detectedAllergensList"></ul>
 </div>
+
 
     </section>
     <footer>
@@ -608,60 +615,121 @@ function checkAllergies(allergyGroup) {
     </script>
 
 <script>
-document.getElementById('allergenSearchForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-    
-    const foodName = document.getElementById('foodNameInput').value;
-    
-    if (!foodName) {
-        alert('Please enter a food name.');
-        return;
+  
+  document.getElementById('allergenSearchForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  
+  const foodName = document.getElementById('foodNameInput').value.trim();
+  if (!foodName) {
+    alert('Please enter a food name.');
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `https://tameszaza.pythonanywhere.com/search_allergens?food=${encodeURIComponent(foodName)}`
+    );
+    if (!response.ok) {
+      alert('Failed to fetch allergen information.');
+      return;
     }
 
-    const response = await fetch(`https://tameszaza.pythonanywhere.com/search_allergens?food=${encodeURIComponent(foodName)}`);
-    
-    if (response.ok) {
-        const data = await response.json();
-        const allergenList = document.getElementById('allergenList');
-        allergenList.innerHTML = '';
+    const data = await response.json();
+    console.log("Gemini response:", data);
 
-        // Display the corrected food name
-        const allergenResults = document.getElementById('allergenResults');
-        allergenResults.querySelector('h3').textContent = `Potential allergy group for ${data.name}`;
+    // 1) Update the heading with the corrected name
+    const allergenResults = document.getElementById('allergenResults');
+    allergenResults.querySelector('h3').textContent = 
+      `Food components for ${data["corrected name"] || foodName}`;
 
-        // Retrieve user's allergies from cookies (in integer list format)
-        const userAllergies = getCookie('allergies');
-        const userAllergyList = userAllergies ? JSON.parse(decodeURIComponent(userAllergies)) : [];
+    // 2) Display the "food_component" items in <ul id="allergenList">
+    const allergenList = document.getElementById('allergenList');
+    allergenList.innerHTML = '';  // Clear old items
 
-        
-
-        // Convert user allergy list to integers
-        const userAllergyIntList = userAllergyList.map(Number);
-
-        // Display the allergen information and highlight matching allergies
-        if (data.allergens.length === 0) {
-            const messageItem = document.createElement('li');
-            messageItem.textContent = "No allergens found for this food.";
-            allergenList.appendChild(messageItem);
-        } else {
-            data.allergens.forEach(allergen => {
-                const listItem = document.createElement('li');
-                listItem.textContent = allergen;
-
-                // Map the API allergen to the corresponding integer
-                const allergenId = allergenMap[allergen];
-                if (allergenId !== null && userAllergyIntList.includes(allergenId)) {
-                    listItem.style.color = 'red'; // Highlight allergen in red
-                }
-
-                allergenList.appendChild(listItem);
-            });
-        }
+    if (data.food_component && Array.isArray(data.food_component)) {
+      data.food_component.forEach(comp => {
+        const li = document.createElement('li');
+        li.textContent = comp.component_name;
+        // Minimal inline styling (or let your old CSS handle it)
+        li.style.display = 'inline-block';
+        li.style.margin = '4px';
+        li.style.padding = '6px 10px';
+        li.style.backgroundColor = '#f7dec0'; 
+        allergenList.appendChild(li);
+      });
     } else {
-        alert('Failed to fetch allergen information.');
-        console.error('Search failed:', response.statusText);
+      const li = document.createElement('li');
+      li.textContent = "No food components detected.";
+      allergenList.appendChild(li);
     }
+
+    // 3) Show only the true allergens in <ul id="detectedAllergensList">
+    const detectedAllergensList = document.getElementById('detectedAllergensList');
+    detectedAllergensList.innerHTML = '';
+
+    // Get user’s saved allergies from cookie (if you use that approach)
+    const storedAllergies = getCookie('allergies'); 
+    // E.g. '["2","4"]'
+    const userAllergies = storedAllergies ? JSON.parse(storedAllergies).map(Number) : [];
+
+    // Map your known allergen names to numeric IDs 
+    const allergenNameToId = {
+      "Soy": 1,
+      "Cow_milk": 2,
+      "Wheat": 3,
+      "Egg": 4,
+      "Fish": 5,
+      "Seafood": 6,
+      "Peanut": 7,
+      "Shelled_nut": 8
+    };
+
+    if (data.Allergy_group) {
+      // Loop each allergen; if it's true, list it
+      for (const [allergenName, isPresent] of Object.entries(data.Allergy_group)) {
+        if (isPresent) {
+          // Create a new <li> for this allergen
+          const li = document.createElement('li');
+          li.textContent = allergenName.replace('_', ' ');
+
+          // Check if the user has this allergen
+          const allergenId = allergenNameToId[allergenName];
+          if (userAllergies.includes(allergenId)) {
+            // The user is allergic => highlight in red
+            li.style.backgroundColor = 'red';
+            li.style.color = 'white';
+          } else {
+            // Otherwise use a neutral style
+            li.style.backgroundColor = '#f5f5f5';
+          }
+
+          li.style.display = 'inline-block';
+          li.style.margin = '4px';
+          li.style.padding = '6px 10px';
+          detectedAllergensList.appendChild(li);
+        }
+      }
+    }
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while searching for allergens.');
+  }
 });
+
+// Helper function to read cookies
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(nameEQ) === 0) {
+      return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+  }
+  return null;
+}
+
 
     </script>
 </body>
