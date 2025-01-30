@@ -657,6 +657,7 @@ span.tab-space{
     padding-left: 1em;
 }
 
+
 .modal {
     display: none;
     position: fixed;
@@ -668,31 +669,67 @@ span.tab-space{
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     background-color: #fefefe;
-    margin: 7% auto; /* Adjust margin for vertical centering */
-    padding: 10px; /* Reduce padding for a smaller modal */
+    margin: 7% auto;
+    padding: 20px;
     border: 1px solid #888;
-    width: 50%; /* Adjust width to make the modal smaller */
+    width: 60%;
     border-radius: 10px;
-    font-size: 0.9em;
-    
+    font-size: 1em;
 }
-#modal-photo-container {
+
+/* FLEXBOX for left-aligned photo */
+.modal-body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px; /* Add space between information and photo */
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between image and text */
 }
+
+/* Align photo to the left */
+#modal-photo-container {
+    flex: 0.8; /* Ensures it takes equal space */
+    display: flex;
+    justify-content: center; /* Centers image horizontally */
+    align-items: center; /* Centers image vertically */
+    text-align: center; /* Ensure inline elements like <img> are centered */
+    height: 100%; /* Ensure full height usage */
+    align-self: center;
+    margin-left: 20px;
+}
+
 #modal-photo {
     max-width: 100%;
-    max-height: 100px; /* Limit photo height */
-    border-radius: 5px; /* Optional: rounded corners */
-    object-fit: contain; /* Ensure the image fits without distortion */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for a polished look */
+    border-radius: 5px;
+    object-fit: contain; /* Prevents distortion */
+    display: block; /* Fix for centering inline elements */
 }
+
+
+/* Ensure text takes the rest of the space */
+.modal-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* Improve text formatting */
+.output {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#detectedAller {
+    color: red;
+    font-weight: bold;
+}
+
+
 #close {
     color: #aaa;
     float: right;
