@@ -116,6 +116,30 @@ $allergyDisplay = implode(', ', $allergyNames);
         }
 
     </script>
+    <script>
+    function deleteFolder(folder) {
+        return fetch('http://tameszaza.pythonanywhere.com/delete_all', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ folder: folder })
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.error('Error deleting', folder, ':', error);
+        });
+    }
+
+    function deleteBothAndEdit() {
+        Promise.all([
+            deleteFolder('uploads'),
+            deleteFolder('processed')
+        ]).then(() => {
+            window.location.href = 'edit.php'; // Redirect after both deletions
+        });
+    }
+</script>
 </head>
 <body>
     <header>
@@ -148,7 +172,7 @@ $allergyDisplay = implode(', ', $allergyNames);
         <h1>Welcome, <?php echo $username; ?><br></h1>
         <p>Email: <?php echo $email; ?><br></p>
         <p>Allergies: <?php echo htmlspecialchars($allergyDisplay); ?><br></p>
-        <button onclick="window.location.href='edit.php';" id="logout-button">Edit</button>
+        <button onclick="deleteBothAndEdit()" id="logout-button">Edit</button>
         <button onclick="logout()" id="logout-button">Logout</button>
         
         </div>
@@ -157,7 +181,7 @@ $allergyDisplay = implode(', ', $allergyNames);
     
     <footer>
         <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
+        <p>Email: inewgenprojectstorage@gmail.com<br>Tel: 0929989812</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
             <p>Agreement

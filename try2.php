@@ -125,8 +125,8 @@
         </div>
 
         <!-- New container for allergens -->
-        <div class='column-white' style="margin-top:1em;">
-            <p style="font-weight:bold;">Detected Allergens:</p>
+        <div class='column-white' style="margin-top:1em;" id="allergenResults2">
+            <h3>Detected Allergens:</h3>
             <ul id="detectedAllergensList"></ul>
         </div>
 
@@ -134,7 +134,7 @@
     </section>
     <footer>
         <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
+        <p>Email: inewgenprojectstorage@gmail.com<br>Tel: 0929989812</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
             <p>Agreement
@@ -276,15 +276,54 @@
         fileInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedPhoto.src = e.target.result;
-                    uploadedPhoto.style.display = 'block';
-                    capturedPhoto.style.display = 'none';
-                }
-                reader.readAsDataURL(file);
+                compressImage(file, (compressedFile) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedPhoto.src = e.target.result;
+                        uploadedPhoto.style.display = 'block';
+                        capturedPhoto.style.display = 'none';
+                    };
+                    reader.readAsDataURL(compressedFile);
+
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(compressedFile);
+                    event.target.files = dataTransfer.files;
+                });
             }
         });
+
+        function compressImage(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const maxWidth = 1920;
+                    const maxHeight = 1080;
+                    const srcWidth = img.width;
+                    const srcHeight = img.height;
+
+                    const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+                    const newWidth = Math.floor(srcWidth * ratio);
+                    const newHeight = Math.floor(srcHeight * ratio);
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = newWidth;
+                    canvas.height = newHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, srcWidth, srcHeight, 0, 0, newWidth, newHeight);
+
+                    canvas.toBlob(function(blob) {
+                        const compressedFile = new File([blob], file.name, {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        callback(compressedFile);
+                    }, 'image/jpeg', 0.7);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
 
         async function fetchDetections(imageId, retryCount = 30, delay = 1000) {
             while (retryCount > 0) {
@@ -701,11 +740,13 @@
                             const allergenId = allergenNameToId[allergenName];
                             if (userAllergies.includes(allergenId)) {
                                 // The user is allergic => highlight in red
-                                li.style.backgroundColor = 'red';
-                                li.style.color = 'white';
+                                li.style.backgroundColor = 'rgb(247, 222, 192)';
+                                li.style.color = 'red';
                             } else {
                                 // Otherwise use a neutral style
-                                li.style.backgroundColor = '#f5f5f5';
+                                li.style.backgroundColor = 'rgb(247, 222, 192)';
+                                li.style.color = 'rgb(58, 44, 21)';
+                                
                             }
 
                             li.style.display = 'inline-block';

@@ -159,7 +159,7 @@
     
     <footer>
         <h2>contact us</h2>
-        <p>Email: nscprojectstorage@gmail.com<br>Tel: 0929989812</p>
+        <p>Email: inewgenprojectstorage@gmail.com<br>Tel: 0929989812</p>
         <div id="disclaimer">
             <h2>Disclaimer</h2>
             <p>Agreement

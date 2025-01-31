@@ -82,7 +82,7 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     margin: auto;
 }
 
-#allergenResults h3 {
+#allergenResults h3, #allergenResults2 h3 {
     font-size: 24px;
     color: rgb(153, 102, 47);
     margin-bottom: 20px;
@@ -99,6 +99,16 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     display: inline-block;
     background-color: moccasin;
     color: rgb(58, 44, 21);
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+#detectedAllergensList li {
+    display: inline-block;
+    background-color: moccasin;
     padding: 10px 15px;
     border-radius: 5px;
     margin: 5px;
