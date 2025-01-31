@@ -84,7 +84,13 @@
         <div class="modal-body">
             <!-- Move Photo Container to the Left -->
             <div id="modal-photo-container">
+                <div id="img-header">
+                    
+                </div>
                 <img id="modal-photo" alt="Labeled Photo">
+                <div id="img-tail">
+
+                </div>
             </div>
 
             <!-- Text Content on the Right -->
@@ -348,6 +354,7 @@
                             submitButton.style.display = 'block';
                             submitText.style.display = 'none';
                             loading.style.opacity = '0';
+                            updateModalInfo(detections);
 
                             return detections;
                         } catch (e) {
@@ -372,7 +379,25 @@
         }
 
 
+        function updateModalInfo(detections) {
+    const imgHeader = document.getElementById('img-header');
+    const imgTail = document.getElementById('img-tail');
 
+    // Set header with food name (left) and calories (right)
+    imgHeader.innerHTML = `
+        <div style="display: flex; justify-content: space-between; font-weight: bold; padding: 10px; font-size: 18px;">
+            <span>${detections.food_name || 'Unknown Food'}</span>
+            <span>${detections.Kcal ? detections.Kcal + ' kcal' : 'Unknown Calories'}</span>
+        </div>
+    `;
+
+    // Set tail with food description
+    imgTail.innerHTML = `
+        <div style="padding: 10px; font-size: 14px;color:rgba(0,0,0,0.4)">
+            ${detections.food_description || 'No description available'}
+        </div>
+    `;
+}
 
         submitButton.addEventListener('click', async () => {
             submitFile(fileInput.files[0]);
