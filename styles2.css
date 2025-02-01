@@ -34,6 +34,12 @@ img.unwanted-class { /* Replace .unwanted-class with the actual class or ID */
     margin-bottom: 20px;
     margin: auto;
 }
+@media (max-width: 768px), (max-aspect-ratio: 4/3){
+    #search{
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 #foodNameInput {
     margin-left: 10px;
@@ -662,6 +668,7 @@ button, #capture-button,#update-button, #register-button,#login-button,#logout-b
 .about-text {
     padding: 20px;
     text-align: left !important;
+    
 }
 span.tab-space{
     padding-left: 1em;
@@ -690,9 +697,35 @@ span.tab-space{
     border-radius: 10px;
     font-size: 1em;
 }
+.modal-content {
+    width: 90%; /* Use more screen space on mobile */
+    max-width: 40em; /* Prevent it from being too large */
+}
+#detected-food-name {
+    text-align:left;
+}
+#kcal {
+    text-align: right;
+}
+@media (max-width: 768px), (max-aspect-ratio: 4/3) {
+    .modal-body {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+    }
 
+    #modal-photo-container {
+        width: 100%;
+        margin-left: 0;
+    }
+    #modal-photo {
+        max-height: 30em;/* Fix for centering inline elements */
+        align-self: center  ;
+    }
+}
 /* FLEXBOX for left-aligned photo */
 .modal-body {
+    flex-wrap: nowrap;
     display: flex;
     align-items: flex-start; /* Align items to the top */
     gap: 20px; /* Space between image and text */
@@ -714,12 +747,13 @@ span.tab-space{
     max-width: 100%;
     border-radius: 5px;
     object-fit: contain; /* Prevents distortion */
-    display: block; /* Fix for centering inline elements */
+    align-self: center;/* Fix for centering inline elements */
 }
 
 
 /* Ensure text takes the rest of the space */
 .modal-text {
+    align-self: center;
     flex: 1;
     display: flex;
     flex-direction: column;

@@ -114,7 +114,7 @@
     <section class="banner" id="search-allergy">
         <h1 class="Topic">Search allergy</h1>
     </section>
-    <section class="no-padding">
+    <section class="no-padding" id="search">
 
         <div class='column-white'>
             <form id="allergenSearchForm">
@@ -219,44 +219,7 @@
             currentStream = stream;
             video.srcObject = stream;
         }
-        /*tryNowButton.addEventListener('click', () => {
-            fetch('https://tameszaza.pythonanywhere.com/delete_all', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        folder: 'processed'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        console.log(data.message);
-                    } else {
-                        alert(data.error);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            fetch('https://tameszaza.pythonanywhere.com/delete_all', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        folder: 'uploads'
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        console.log(data.message);
-                    } else {
-                        alert(data.error);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        })*/
+        
 
         captureButton.addEventListener('click', () => {
             canvas.width = video.videoWidth;
@@ -282,7 +245,9 @@
         fileInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
+                console.log(`Original file size: ${file.size} bytes (${(file.size / 1024).toFixed(2)} KB)`);
                 compressImage(file, (compressedFile) => {
+                    console.log(`Compressed file size: ${compressedFile.size} bytes (${(compressedFile.size / 1024).toFixed(2)} KB)`);
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         uploadedPhoto.src = e.target.result;
@@ -308,7 +273,7 @@
                     const srcWidth = img.width;
                     const srcHeight = img.height;
 
-                    const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+                    const ratio = Math.min(1, Math.min(maxWidth / srcWidth, maxHeight / srcHeight));
                     const newWidth = Math.floor(srcWidth * ratio);
                     const newHeight = Math.floor(srcHeight * ratio);
 
@@ -386,14 +351,14 @@
     // Set header with food name (left) and calories (right)
     imgHeader.innerHTML = `
         <div style="display: flex; justify-content: space-between; font-weight: bold; padding: 10px; font-size: 18px;">
-            <span>${detections.food_name || 'Unknown Food'}</span>
-            <span>${detections.Kcal ? detections.Kcal + ' kcal' : 'Unknown Calories'}</span>
+            <span id='detected-food-name'>${detections.food_name || 'Unknown Food'}</span>
+            <span id='kcal'>${detections.Kcal ? detections.Kcal + ' kcal' : 'Unknown Calories'}</span>
         </div>
     `;
 
     // Set tail with food description
     imgTail.innerHTML = `
-        <div style="padding: 10px; font-size: 14px;color:rgba(0,0,0,0.4)">
+        <div id="desctiption" style="padding: 0.5em; font-size: 14px;color:rgba(0,0,0,0.4)">
             ${detections.food_description || 'No description available'}
         </div>
     `;
