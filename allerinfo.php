@@ -82,13 +82,27 @@
         </div>
 
         <div class="column-white">
-            <h4 class="topic-small">การรักษา</h4>
-            <p class="infotxt">
-                เน้นหลีกเลี่ยงอาหารที่แพ้จนแพทย์ประเมินว่าสามารถรับประทานได้
-                หากมีอาการแพ้ จะใช้ยาแก้แพ้ในรูปรับประทานและหากมีอาการแพ้รุนแรง
-                ทางแพทย์จะมีการฉีดยาแก้แพ้และยากู้ชีพ(Adrenaline)ตามการประเมินของแพทย์
-            </p>
-        </div>
+    <h4 class="topic-small">การรักษา</h4>
+    <p class="infotxt">
+        วิธีการรักษาหลักของการแพ้อาหารคือการ <b>หลีกเลี่ยงอาหารที่แพ้</b> จนกว่าแพทย์จะประเมินว่าสามารถรับประทานได้อย่างปลอดภัย  
+    
+        หากมีอาการแพ้อาหาร สามารถรักษาตามระดับความรุนแรงได้ดังนี้:
+        <br style="margin-bottom: 10px;">
+        <b>อาการแพ้เล็กน้อยถึงปานกลาง:</b>  
+            ใช้ยาแก้แพ้ (<i>Antihistamines</i>) เช่น Cetirizine หรือ Loratadine เพื่อลดอาการคัน ผื่น หรือบวม
+            
+        <b>อาการแพ้รุนแรง (<i>Anaphylaxis</i>):</b>  
+            ต้องฉีดยา Epinephrine (EpiPen) ทันที และรีบนำส่งโรงพยาบาล
+        <b>หากเกิดภาวะช็อก:</b>  
+            ให้ผู้ป่วยนอนราบ ยกขาสูง และรีบโทรแจ้งหน่วยแพทย์ฉุกเฉิน (โทร. <b >1669</b> ในประเทศไทย)
+   
+            <br style="margin-bottom: 15px;">
+        <b>ข้อแนะนำเพิ่มเติม:</b>  
+        ควรพก <b>Epinephrine auto-injector</b> ติดตัวเสมอหากมีประวัติแพ้รุนแรง  
+        หลีกเลี่ยงอาหารที่แพ้อย่างเคร่งครัด และอ่านฉลากอาหารทุกครั้งก่อนรับประทาน  
+    </p>
+</div>
+
     </section>
     <section class="infointro">
         <div class="infointro">
@@ -98,7 +112,7 @@
         </div>
     </section>
 
-    <section class = "example">
+    <section class="example">
         <div class="column-white infotxt">
             <div class="topic">
                 <h4 class="topic-small">1. ปลา</h4>
@@ -215,7 +229,7 @@
             </div>
         </div>
     </section>
-    <section class="example" >
+    <section class="example">
         <div class="column-white infotxt">
 
             <div class="topic">

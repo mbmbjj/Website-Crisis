@@ -71,7 +71,7 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
         <h1>Our Team</h1>
     </section>
     <section>
-        <div class="column">
+        <!-- <div class="column">
             <div class="member">
                 <img src="images/S__18669690.jpg" alt="Image of First member" class="round-border">
                 <h2>อดุลย์วิชญ์ ขจิตตานนท์</h2>
@@ -87,7 +87,7 @@ $rating_value = isset($_POST['rating']) ? $_POST['rating'] : 5;
                     Tel: 0929989812
                 </p>
             </div>
-        </div>
+        </div> -->
         <div class="column">
             <div class="member">
                 <img src="images/138281.jpg" alt="Image of First member" class="round-border">

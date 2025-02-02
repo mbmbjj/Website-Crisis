@@ -45,7 +45,7 @@
     </section>-->
     <section class="two" id='scan'>
         <div class="container">
-            <h1 id="highlight"><em>FEATURES</em></h1>
+            <h1 id="highlight"><em>Food Allergens Warning Program</em></h1>
             <div class="camera-row">
                 <div id="side-text-left">1. Create an Account (optional)</div>
                 <div id="camera-container">
@@ -77,34 +77,34 @@
 
                 </div>
                 <div id="side-text-right">2. Tap the capture button <div>
-                <div id="resultModal" class="modal">
-    <div class="modal-content">
-        <span id="close">&times;</span>
+                        <div id="resultModal" class="modal">
+                            <div class="modal-content">
+                                <span id="close">&times;</span>
 
-        <div class="modal-body">
-            <!-- Move Photo Container to the Left -->
-            <div id="modal-photo-container">
-                <div id="img-header">
-                    
-                </div>
-                <img id="modal-photo" alt="Labeled Photo">
-                <div id="img-tail">
+                                <div class="modal-body">
+                                    <!-- Move Photo Container to the Left -->
+                                    <div id="modal-photo-container">
+                                        <div id="img-header">
 
-                </div>
-            </div>
+                                        </div>
+                                        <img id="modal-photo" alt="Labeled Photo">
+                                        <div id="img-tail">
 
-            <!-- Text Content on the Right -->
-            <div class="modal-text">
-                <p class='output' id='foutput'><strong>Detected Items</strong></p>
-                <ul id="detectedItems"></ul>
-                <p class='output' id='soutput'><strong>Allergy Group</strong></p>
-                <ul id="detectedAller"></ul>
-                <p class='output' id='toutput'><strong>Match Group</strong></p>
-                <ul id="matchAller"></ul>
-            </div>
-        </div>
-    </div>
-</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text Content on the Right -->
+                                    <div class="modal-text">
+                                        <p class='output' id='foutput'><strong>Detected Items</strong></p>
+                                        <ul id="detectedItems"></ul>
+                                        <p class='output' id='soutput'><strong>Allergy Group</strong></p>
+                                        <ul id="detectedAller"></ul>
+                                        <p class='output' id='toutput'><strong>Match Group</strong></p>
+                                        <ul id="matchAller"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div>
@@ -219,7 +219,7 @@
             currentStream = stream;
             video.srcObject = stream;
         }
-        
+
 
         captureButton.addEventListener('click', () => {
             canvas.width = video.videoWidth;
@@ -345,24 +345,24 @@
 
 
         function updateModalInfo(detections) {
-    const imgHeader = document.getElementById('img-header');
-    const imgTail = document.getElementById('img-tail');
+            const imgHeader = document.getElementById('img-header');
+            const imgTail = document.getElementById('img-tail');
 
-    // Set header with food name (left) and calories (right)
-    imgHeader.innerHTML = `
+            // Set header with food name (left) and calories (right)
+            imgHeader.innerHTML = `
         <div style="display: flex; justify-content: space-between; font-weight: bold; padding: 10px; font-size: 18px;">
             <span id='detected-food-name'>${detections.food_name || 'Unknown Food'}</span>
             <span id='kcal'>${detections.Kcal ? detections.Kcal + ' kcal' : 'Unknown Calories'}</span>
         </div>
     `;
 
-    // Set tail with food description
-    imgTail.innerHTML = `
+            // Set tail with food description
+            imgTail.innerHTML = `
         <div id="desctiption" style="padding: 0.5em; font-size: 14px;color:rgba(0,0,0,0.4)">
             ${detections.food_description || 'No description available'}
         </div>
     `;
-}
+        }
 
         submitButton.addEventListener('click', async () => {
             submitFile(fileInput.files[0]);
@@ -616,15 +616,22 @@
                     });
 
                     const messageElement = document.createElement('p');
-                    messageElement.textContent = "Cannot eat";
+
+                    const linkElement = document.createElement('a');
+                    linkElement.href = "allerinfo.php";
+                    linkElement.textContent = "Cannot eat";
+                    linkElement.style.color = "red";
+                    linkElement.style.textDecoration = "none"; // Prevent underline
+                    linkElement.style.cursor = "pointer"; // Keep default pointer behavior
+
                     // Style the message
-                    messageElement.style.color = "red";
                     messageElement.style.marginTop = "10px";
                     messageElement.style.fontSize = "40px";
                     messageElement.style.fontWeight = "bold";
                     messageElement.style.textAlign = "center";
-                    matchAller.appendChild(messageElement);
 
+                    messageElement.appendChild(linkElement);
+                    matchAller.appendChild(messageElement);
                 } else {
                     const listItem = document.createElement('li');
                     listItem.textContent = "No matching allergies";
@@ -647,9 +654,8 @@
                 matchAller.appendChild(listItem);
             }
         }
-    </script>
 
-    <script>
+
         document.getElementById('allergenSearchForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -736,7 +742,7 @@
                                 // Otherwise use a neutral style
                                 li.style.backgroundColor = 'rgb(247, 222, 192)';
                                 li.style.color = 'rgb(58, 44, 21)';
-                                
+
                             }
 
                             li.style.display = 'inline-block';
